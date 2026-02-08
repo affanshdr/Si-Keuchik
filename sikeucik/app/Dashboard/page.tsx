@@ -32,24 +32,33 @@ export default function Page() {
         </div>
 
         {/* Placeholder Image */}
+      <div className="relative">
         <div className="w-60 h-60 bg-gray-300 rounded-xl" />
         <Image
-          src="img/Doc1.png"
+          src="/images/Doc1.png"
           alt="Tumpukan buku"
           className="absolute bottom-0 right-10 w-56 h-auto"
-          width= {40}
-          height={40}
+          width= {244}
+          height={244}
         />
+      </div>
       </section>
-
+      
       {/* PERSYARATAN */}
       <section className="max-w-5xl mx-auto px-6 py-10">
         <h2 className="text-center font-semibold text-lg mb-6">
           Persyaratan Umum
         </h2>
-
+          
         <div className="bg-white border border-teal-200 rounded-2xl shadow-sm p-6 flex flex-col md:flex-row items-center gap-8">
           <div className="w-32 h-32 bg-gray-200 rounded-lg" />
+          <Image
+          src="/images/Doc1.png"
+          alt="Tumpukan buku"
+          className="absolute bottom-0 right-10 w-56 h-auto"
+          width= {244}
+          height={244}
+        />
 
           <ul className="list-disc text-gray-600 space-y-2">
             <li>Foto KTP (yang masih berlaku)</li>
@@ -169,5 +178,6 @@ export default function Page() {
         </div>
       </footer>
     </main>
+    
   );
 }

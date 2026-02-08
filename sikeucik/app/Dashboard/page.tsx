@@ -1,4 +1,3 @@
-"use client"
 
 import Image from "next/image";
 import Link from "next/link";
@@ -35,12 +34,12 @@ export default function Page() {
         {/* Placeholder Image */}
         <div className="w-60 h-60 bg-gray-300 rounded-xl" />
         <Image
-         src="../img/Doc1.png"
+          src="img/Doc1.png"
           alt="Tumpukan buku"
           className="absolute bottom-0 right-10 w-56 h-auto"
           width= {40}
           height={40}
-        ></Image>
+        />
       </section>
 
       {/* PERSYARATAN */}

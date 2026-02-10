@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiMail, FiLock, FiEye, FiEyeOff, FiAlertCircle } from "react-icons/fi";
-import Navbar from "../../components/Navbar";
+import Navbar from "@/components/Navbar";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");

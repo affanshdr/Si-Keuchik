@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { useRouter, useSearchParams, useParams } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import NavbarAdmin from '../../../../components/NavbarAdmin';
 
 export default function EditDataWarga() {
@@ -11,7 +11,6 @@ export default function EditDataWarga() {
   const [formData, setFormData] = useState({
     nama_lengkap: '',
     no_nik: '',
-    no_kk: '',
     alamat: ''
   });
 
@@ -24,9 +23,8 @@ export default function EditDataWarga() {
         .then(res => res.json())
         .then(data => {
           setFormData({
-            nama_lengkap: data.nama || '',
+            nama_lengkap: data.nama_lengkap || '',
             no_nik: data.no_nik || '',
-            no_kk: data.no_kk || '',
             alamat: data.alamat || ''
           });
         })
@@ -42,16 +40,12 @@ export default function EditDataWarga() {
     setError('');
 
     try {
-      if (!formData.nama_lengkap || !formData.no_nik || !formData.no_kk || !formData.alamat) {
+      if (!formData.nama_lengkap || !formData.no_nik || !formData.alamat) {
         throw new Error('Semua field harus diisi');
       }
 
       if (!/^\d{16}$/.test(formData.no_nik)) {
         throw new Error('NIK harus 16 digit angka');
-      }
-
-      if (!/^\d{16}$/.test(formData.no_kk)) {
-        throw new Error('No KK harus 16 digit angka');
       }
 
       const response = await fetch(`/api/data-warga/${id}`, {
@@ -95,10 +89,27 @@ export default function EditDataWarga() {
 
           <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
             <div className="space-y-4">
-              <InputField label="Nama Lengkap" name="nama_lengkap" value={formData.nama_lengkap} onChange={handleChange} />
-              <InputField label="NIK" name="no_nik" value={formData.no_nik} onChange={handleChange} maxLength={16} pattern="\d{16}" title="NIK harus 16 digit angka" />
-              <InputField label="No. KK" name="no_kk" value={formData.no_kk} onChange={handleChange} maxLength={16} pattern="\d{16}" title="No KK harus 16 digit angka" />
-              <InputField label="Alamat" name="alamat" value={formData.alamat} onChange={handleChange} />
+              <InputField 
+                label="Nama Lengkap" 
+                name="nama_lengkap" 
+                value={formData.nama_lengkap} 
+                onChange={handleChange} 
+              />
+              <InputField 
+                label="NIK" 
+                name="no_nik" 
+                value={formData.no_nik} 
+                onChange={handleChange} 
+                maxLength={16} 
+                pattern="\d{16}" 
+                title="NIK harus 16 digit angka" 
+              />
+              <InputField 
+                label="Alamat" 
+                name="alamat" 
+                value={formData.alamat} 
+                onChange={handleChange} 
+              />
             </div>
 
             <div className="mt-6 flex justify-end space-x-3">
@@ -149,7 +160,7 @@ function InputField({
         type="text"
         name={name}
         placeholder={`Masukkan ${label.toLowerCase()} ...`}
-        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FFD233] focus:border-[#FFD233] outline-none transition text-gray-600"
+        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FFD233] focus:border-[#FFD233] outline-none transition text-gray-800"
         value={value}
         onChange={onChange}
         required

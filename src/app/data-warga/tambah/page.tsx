@@ -7,7 +7,6 @@ interface WargaData {
   id: number;
   nama_lengkap: string;
   no_nik: string;
-  no_kk: string;
   alamat: string;
 }
 
@@ -16,7 +15,6 @@ export default function TambahDataWarga() {
   const [formData, setFormData] = useState({
     nama_lengkap: '',
     no_nik: '',
-    no_kk: '',
     alamat: ''
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -29,16 +27,12 @@ export default function TambahDataWarga() {
     
     try {
       // Validasi
-      if (!formData.nama_lengkap || !formData.no_nik || !formData.no_kk || !formData.alamat) {
+      if (!formData.nama_lengkap || !formData.no_nik || !formData.alamat) {
         throw new Error('Semua field harus diisi');
       }
       
       if (!/^\d{16}$/.test(formData.no_nik)) {
         throw new Error('NIK harus 16 digit angka');
-      }
-      
-      if (!/^\d{16}$/.test(formData.no_kk)) {
-        throw new Error('No KK harus 16 digit angka');
       }
 
       // Kirim data ke API
@@ -113,25 +107,9 @@ export default function TambahDataWarga() {
                   title="NIK harus 16 digit angka"
                 />
               </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">No. KK</label>
-                <input
-                  type="text"
-                  name="no_kk"
-                  placeholder="Masukkan No. KK (16 digit) ..."
-                  className="w-full p-3 border text-gray-800 border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FFD233] focus:border-[#FFD233] outline-none transition"
-                  value={formData.no_kk}
-                  onChange={handleChange}
-                  required
-                  maxLength={16}
-                  pattern="\d{16}"
-                  title="No KK harus 16 digit angka"
-                />
-              </div>
 
               <div>
-                <label className="block text-sm text-gray-800 font-medium  mb-1">Alamat</label>
+                <label className="block text-sm text-gray-800 font-medium mb-1">Alamat</label>
                 <input
                   type="text"
                   name="alamat"

@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import NavbarAdmin from "@/components/NavbarAdmin";
 import ModalForm from "@/components/ModalForm";
-import ModalConfirm from "@/components/ModalConfirm"; // 👈 Import modal confirm
+import ModalConfirm from "@/components/ModalConfirm";
 
 interface Warga {
   id: number;
@@ -14,8 +14,8 @@ interface Warga {
 export default function DataWarga() {
   const [wargaData, setWargaData] = useState<Warga[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // 👈 State modal delete
-  const [wargaToDelete, setWargaToDelete] = useState<Warga | null>(null); // 👈 Warga yang mau dihapus
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [wargaToDelete, setWargaToDelete] = useState<Warga | null>(null);
   const [modalMode, setModalMode] = useState<'tambah' | 'edit'>('tambah');
   const [selectedWarga, setSelectedWarga] = useState<Warga | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -98,13 +98,11 @@ export default function DataWarga() {
     }
   };
 
-  // 👇 Fungsi untuk buka modal konfirmasi delete
   const openDeleteModal = (warga: Warga) => {
     setWargaToDelete(warga);
     setIsDeleteModalOpen(true);
   };
 
-  // 👇 Fungsi untuk execute delete
   const handleDeleteConfirm = async () => {
     if (!wargaToDelete) return;
     
@@ -122,6 +120,7 @@ export default function DataWarga() {
       }
 
       setWargaData(wargaData.filter((warga) => warga.id !== wargaToDelete.id));
+      setIsDeleteModalOpen(false);
 
     } catch (error) {
       console.error("Delete error:", error);
@@ -138,7 +137,7 @@ export default function DataWarga() {
   return (
     <div
       style={{ fontFamily: "var(--font-poppins)" }}
-      className="min-h-screen bg-gradient-to-br from-yellow-50 to-white font-sans flex"
+      className="min-h-screen bg-gray-50 font-sans flex"
     >
       <NavbarAdmin currentPath="/data-warga" />
 
@@ -147,7 +146,7 @@ export default function DataWarga() {
           <h2 className="text-2xl font-bold text-gray-800 mr-4">Data Warga</h2>
           <button
             onClick={openTambahModal}
-            className="bg-[#FFD233] hover:bg-[#E6BD2E] text-gray-800 font-medium py-2 px-4 rounded-lg transition-colors flex items-center"
+            className="bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-4 rounded-lg transition-colors flex items-center"
           >
             <span className="mr-1">+</span> Tambah Data
           </button>
@@ -164,7 +163,7 @@ export default function DataWarga() {
             <input
               type="text"
               placeholder="Cari Data Warga"
-              className="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FFD233] focus:border-[#FFD233] bg-white outline-none transition text-gray-800"
+              className="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 bg-white outline-none transition text-gray-800"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -188,13 +187,13 @@ export default function DataWarga() {
 
         {isLoading ? (
           <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#FFD233]"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-teal-600"></div>
           </div>
         ) : (
           <div className="bg-white rounded-lg shadow overflow-hidden">
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-[#FFE08A]">
+                <thead className="bg-gray-300">
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">
                       Nama
@@ -212,7 +211,7 @@ export default function DataWarga() {
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {filteredData.map((warga) => (
-                    <tr key={warga.id} className="hover:bg-[#FFF5D9]">
+                    <tr key={warga.id} className="hover:bg-gray-50">
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {warga.nama_lengkap}
                       </td>
@@ -226,14 +225,14 @@ export default function DataWarga() {
                         <div className="flex gap-3">
                           <button
                             onClick={() => openEditModal(warga)}
-                            className="px-5 py-2 bg-gradient-to-r from-blue-400 to-blue-500 text-white rounded-full hover:from-blue-500 hover:to-blue-600 transition-colors"
+                            className="px-5 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors"
                           >
                             Edit
                           </button>
 
                           <button
-                            onClick={() => openDeleteModal(warga)} // 👈 Ubah jadi buka modal
-                            className="px-5 py-2 bg-gradient-to-r from-red-400 to-red-500 text-white rounded-full hover:from-red-500 hover:to-red-600 transition-colors"
+                            onClick={() => openDeleteModal(warga)}
+                            className="px-5 py-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors"
                           >
                             Hapus
                           </button>
@@ -259,7 +258,7 @@ export default function DataWarga() {
             <label className="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
             <input
               type="text"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FFD233] focus:border-[#FFD233] outline-none transition text-gray-800"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none transition text-gray-800"
               value={formData.nama_lengkap}
               onChange={(e) => setFormData({...formData, nama_lengkap: e.target.value})}
               required
@@ -270,7 +269,7 @@ export default function DataWarga() {
             <label className="block text-sm font-medium text-gray-700 mb-1">NIK</label>
             <input
               type="text"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FFD233] focus:border-[#FFD233] outline-none transition text-gray-800"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none transition text-gray-800"
               value={formData.no_nik}
               onChange={(e) => setFormData({...formData, no_nik: e.target.value})}
               maxLength={16}
@@ -284,7 +283,7 @@ export default function DataWarga() {
             <label className="block text-sm font-medium text-gray-700 mb-1">Alamat</label>
             <input
               type="text"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#FFD233] focus:border-[#FFD233] outline-none transition text-gray-800"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none transition text-gray-800"
               value={formData.alamat}
               onChange={(e) => setFormData({...formData, alamat: e.target.value})}
               required
@@ -301,7 +300,7 @@ export default function DataWarga() {
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-[#FFD233] hover:bg-[#E6BD2E] text-gray-800 font-medium rounded-lg transition-colors"
+              className="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white font-medium rounded-lg transition-colors"
             >
               Simpan
             </button>
@@ -309,7 +308,7 @@ export default function DataWarga() {
         </form>
       </ModalForm>
 
-      {/* 👇 MODAL KONFIRMASI HAPUS */}
+      {/* MODAL KONFIRMASI HAPUS */}
       <ModalConfirm
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}

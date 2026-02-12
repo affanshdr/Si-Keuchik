@@ -213,7 +213,7 @@ export default function PengajuanMasukPage() {
   };
 
   return (
-    <div className="flex min-h-screen bg-yellow-100">
+    <div className="flex min-h-screen bg-gray-50">
       <NavbarAdmin currentPath="/Admin-Dashboard" />
 
       <main
@@ -227,7 +227,7 @@ export default function PengajuanMasukPage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Cari Nama / Nomor Surat / NIK..."
-              className="w-full pl-4 pr-10 py-3 border bg-white border-gray-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:outline-none text-gray-800"
+              className="w-full pl-4 pr-10 py-3 border bg-white border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500 focus:outline-none text-gray-800"
             />
             <FiSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
           </div>
@@ -304,7 +304,7 @@ export default function PengajuanMasukPage() {
 
           {isLoading ? (
             <div className="flex justify-center items-center h-64">
-              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-teal-600"></div>
             </div>
           ) : filteredData.length === 0 ? (
             <div className="p-8 text-center text-gray-800">
@@ -315,7 +315,7 @@ export default function PengajuanMasukPage() {
             <div className="overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
               <table className="min-w-full bg-white">
                 <thead>
-                  <tr className="bg-gray-50 border-b border-gray-200">
+                  <tr className="bg-gray-100 border-b border-gray-200">
                     <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">
                       No Tracking
                     </th>
@@ -390,7 +390,7 @@ export default function PengajuanMasukPage() {
                       <td className="py-3 px-4 text-sm">
                         <button
                           onClick={() => viewDocuments(item)}
-                          className="text-blue-600 hover:text-blue-800 font-medium"
+                          className="text-teal-600 hover:text-teal-700 font-medium"
                         >
                           Lihat
                         </button>
@@ -415,7 +415,7 @@ export default function PengajuanMasukPage() {
                           <div className="flex gap-2">
                             <button
                               onClick={() => handleProses(item.id)}
-                              className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md text-sm font-medium transition-colors"
+                              className="bg-teal-600 hover:bg-teal-700 text-white px-3 py-1 rounded-md text-sm font-medium transition-colors"
                             >
                               Proses
                             </button>
@@ -506,7 +506,7 @@ export default function PengajuanMasukPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {selectedPengajuan.fileKTP && (
-                  <div className="border border-gray-400 rounded-lg p-4">
+                  <div className="border border-gray-300 rounded-lg p-4">
                     <h4 className="font-medium mb-2 text-gray-700">KTP</h4>
                     {selectedPengajuan.fileKTP.startsWith("/uploads/") ? (
                       <img
@@ -525,7 +525,7 @@ export default function PengajuanMasukPage() {
                 )}
 
                 {selectedPengajuan.fileKK && (
-                  <div className="border border-gray-400 rounded-lg p-4">
+                  <div className="border border-gray-300 rounded-lg p-4">
                     <h4 className="font-medium mb-2 text-gray-700">Kartu Keluarga</h4>
                     {selectedPengajuan.fileKK.startsWith("/uploads/") ? (
                       <img
@@ -544,7 +544,7 @@ export default function PengajuanMasukPage() {
                 )}
 
                 {selectedPengajuan.filePengantarRT && (
-                  <div className="border border-gray-400 rounded-lg p-4">
+                  <div className="border border-gray-300 rounded-lg p-4">
                     <h4 className="font-medium mb-2 text-gray-700">Surat Pengantar RT/RW</h4>
                     {selectedPengajuan.filePengantarRT.endsWith(".pdf") ? (
                       <iframe
@@ -577,7 +577,7 @@ export default function PengajuanMasukPage() {
                 )}
 
                 {selectedPengajuan.filePermohonan && (
-                  <div className="border border-gray-400 rounded-lg p-4">
+                  <div className="border border-gray-300 rounded-lg p-4">
                     <h4 className="font-medium mb-2 text-gray-700">Surat Permohonan</h4>
                     {selectedPengajuan.filePermohonan.endsWith(".pdf") ? (
                       <iframe
@@ -611,7 +611,7 @@ export default function PengajuanMasukPage() {
 
                 {selectedPengajuan.jenisSurat === "Keterangan Usaha" &&
                   selectedPengajuan.fileIzinUsaha && (
-                    <div className="border border-gray-400 rounded-lg p-4">
+                    <div className="border border-gray-300 rounded-lg p-4">
                       <h4 className="font-medium mb-2 text-gray-700">Izin Usaha</h4>
                       {selectedPengajuan.fileIzinUsaha.endsWith(".pdf") ? (
                         <iframe
@@ -645,7 +645,7 @@ export default function PengajuanMasukPage() {
 
                 {selectedPengajuan.jenisSurat === "Keterangan Kurang Mampu" &&
                   selectedPengajuan.filePernyataan && (
-                    <div className="border border-gray-400 rounded-lg p-4">
+                    <div className="border border-gray-300 rounded-lg p-4">
                       <h4 className="font-medium mb-2 text-gray-700">
                         Pernyataan Tidak Mampu
                       </h4>

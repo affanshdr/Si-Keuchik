@@ -53,11 +53,11 @@ export default function Page() {
         <div className="bg-white border border-teal-200 rounded-2xl shadow-sm p-6 flex flex-col md:flex-row items-center gap-8">
           <div className="w-32 h-32 bg-gray-200 rounded-lg" />
           <Image
-          src="/images/Doc1.png"
+          src="/images/Doc2.png"
           alt="Tumpukan buku"
-          className="absolute bottom-0 right-10 w-56 h-auto"
-          width= {244}
-          height={244}
+          className="absolute bottom-2 left-80 w-48 "
+          width= {60}
+          height={60}
         />
 
           <ul className="list-disc text-gray-600 space-y-2">

@@ -1,4 +1,4 @@
-import { Search } from "lucide-react";
+// import { Search } from "lucide-react";
 
 export default function Page() {
   return (
@@ -32,15 +32,14 @@ export default function Page() {
             />
 
             <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-teal-100 p-2 rounded-full">
-              <Search size={18} className="text-teal-700" />
+              {/* <Search size={18} className="text-teal-700" /> */}
             </button>
           </div>
         </div>
 
         {/* Placeholder Image */}
         <div className="w-64 h-48 bg-gray-300 rounded-xl" />
-      </section>
-
+          
       {/* TABLE */}
       <section className="max-w-5xl mx-auto px-6 pb-16">
         <h2 className="text-center font-semibold text-xl mb-8">

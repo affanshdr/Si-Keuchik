@@ -163,8 +163,7 @@ exports.Prisma.WargaScalarFieldEnum = {
   no_nik: 'no_nik',
   no_kk: 'no_kk',
   alamat: 'alamat',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.AdminScalarFieldEnum = {

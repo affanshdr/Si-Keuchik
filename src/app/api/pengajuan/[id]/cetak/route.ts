@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { PrismaClient } from '@/generated/prisma';
 import puppeteer from 'puppeteer';
 
+//api/pengajuan/[id]/cetak
+
 const prisma = new PrismaClient();
 
 export async function GET(
@@ -18,6 +20,8 @@ export async function GET(
       return NextResponse.json({ error: 'Data tidak ditemukan' }, { status: 404 });
     }
 
+
+    
     const warga: any = {
       nama_lengkap: pengajuan.nama_lengkap,
       no_nik: pengajuan.no_nik,

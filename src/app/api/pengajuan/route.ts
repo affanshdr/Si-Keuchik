@@ -1,7 +1,6 @@
 import { PrismaClient } from "@/generated/prisma";
 import { NextResponse } from "next/server";
-import fs from "fs/promises";
-import path from "path";
+import { supabase } from "../../../../lib/supabase"; // Import Supabase client
 import { v4 as uuidv4 } from "uuid";
 
 const prisma = new PrismaClient();
@@ -34,7 +33,6 @@ async function generateNomorPengajuan(jenisSurat: string): Promise<string> {
 
   const prefix = prefixes[jenisSurat] || "SRT";
 
-  // Cari nomor urut terakhir dari database
   const lastPengajuan = await prisma.pengajuanSurat.findFirst({
     where: {
       jenis_surat: jenisSurat,
@@ -47,7 +45,6 @@ async function generateNomorPengajuan(jenisSurat: string): Promise<string> {
     },
   });
 
-  // Ekstrak nomor urut terakhir
   let nextNumber = 1;
   if (lastPengajuan?.no_pengajuan) {
     const lastNumber = parseInt(lastPengajuan.no_pengajuan.split("_")[1]);
@@ -59,18 +56,34 @@ async function generateNomorPengajuan(jenisSurat: string): Promise<string> {
   return `${prefix}_${String(nextNumber).padStart(4, "0")}`;
 }
 
-async function processFile(file: File): Promise<string> {
-  const uploadDir = path.join(process.cwd(), "public/uploads");
-  await fs.mkdir(uploadDir, { recursive: true });
-
+// 🔥 FUNGSI BARU: Upload ke Supabase Storage
+async function uploadToSupabase(file: File, folder: string): Promise<string> {
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
+  
   const ext = file.name.split(".").pop();
   const filename = `${uuidv4()}.${ext}`;
-  const filepath = path.join(uploadDir, filename);
+  const filepath = `${folder}/${filename}`;
 
-  await fs.writeFile(filepath, buffer);
-  return `/uploads/${filename}`;
+  const { data, error } = await supabase.storage
+    .from('pengajuan-surat')
+    .upload(filepath, buffer, {
+      contentType: file.type,
+      upsert: false
+    });
+
+  if (error) {
+    console.error("Upload error:", error);
+    throw new Error(`Gagal upload ${file.name}: ${error.message}`);
+  }
+
+  // ✅ PERBAIKAN: Dapatkan URL publik dengan benar
+  const { data: urlData } = supabase.storage
+    .from('pengajuan-surat')
+    .getPublicUrl(filepath);
+
+  // Pastikan mengembalikan URL lengkap
+  return urlData.publicUrl; // Ini harusnya URL lengkap
 }
 
 // Main API handlers
@@ -90,10 +103,13 @@ export async function POST(request: Request) {
       "Pas Foto": formData.get("Pas Foto") as File | null,
     };
 
+    // 🔥 Upload files ke Supabase Storage
     const processedFiles: Record<string, string> = {};
     for (const [key, file] of Object.entries(fileFields)) {
       if (file && file.size > 0) {
-        processedFiles[key] = await processFile(file);
+        // Folder berdasarkan jenis file
+        const folder = key.toLowerCase().replace(/\s+/g, '-').replace(/\//g, '-');
+        processedFiles[key] = await uploadToSupabase(file, folder);
       }
     }
 
@@ -113,7 +129,7 @@ export async function POST(request: Request) {
     // Generate document number
     const no_pengajuan = await generateNomorPengajuan(formFields.jenis_surat);
 
-    // Save to database
+    // Save to database (URL Supabase disimpan)
     const pengajuan = await prisma.pengajuanSurat.create({
       data: {
         no_pengajuan,
@@ -148,6 +164,7 @@ export async function POST(request: Request) {
   } catch (error: any) {
     console.error("Error:", error);
     return NextResponse.json(
+      
       {
         success: false,
         error: error.message,
@@ -195,9 +212,7 @@ export async function GET(request: Request) {
           file_pernyataan_tm: true,
           file_rekening_listrik: true,
           file_pas_foto: true,
-          
         }
-        
       }),
       prisma.pengajuanSurat.count({ where: whereClause }),
     ]);

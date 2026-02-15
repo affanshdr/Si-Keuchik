@@ -4573,7 +4573,6 @@ export namespace Prisma {
     no_kk: string | null
     alamat: string | null
     createdAt: Date | null
-    updatedAt: Date | null
   }
 
   export type WargaMaxAggregateOutputType = {
@@ -4583,7 +4582,6 @@ export namespace Prisma {
     no_kk: string | null
     alamat: string | null
     createdAt: Date | null
-    updatedAt: Date | null
   }
 
   export type WargaCountAggregateOutputType = {
@@ -4593,7 +4591,6 @@ export namespace Prisma {
     no_kk: number
     alamat: number
     createdAt: number
-    updatedAt: number
     _all: number
   }
 
@@ -4613,7 +4610,6 @@ export namespace Prisma {
     no_kk?: true
     alamat?: true
     createdAt?: true
-    updatedAt?: true
   }
 
   export type WargaMaxAggregateInputType = {
@@ -4623,7 +4619,6 @@ export namespace Prisma {
     no_kk?: true
     alamat?: true
     createdAt?: true
-    updatedAt?: true
   }
 
   export type WargaCountAggregateInputType = {
@@ -4633,7 +4628,6 @@ export namespace Prisma {
     no_kk?: true
     alamat?: true
     createdAt?: true
-    updatedAt?: true
     _all?: true
   }
 
@@ -4730,7 +4724,6 @@ export namespace Prisma {
     no_kk: string
     alamat: string
     createdAt: Date
-    updatedAt: Date
     _count: WargaCountAggregateOutputType | null
     _avg: WargaAvgAggregateOutputType | null
     _sum: WargaSumAggregateOutputType | null
@@ -4759,7 +4752,6 @@ export namespace Prisma {
     no_kk?: boolean
     alamat?: boolean
     createdAt?: boolean
-    updatedAt?: boolean
   }, ExtArgs["result"]["warga"]>
 
   export type WargaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4769,7 +4761,6 @@ export namespace Prisma {
     no_kk?: boolean
     alamat?: boolean
     createdAt?: boolean
-    updatedAt?: boolean
   }, ExtArgs["result"]["warga"]>
 
   export type WargaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4779,7 +4770,6 @@ export namespace Prisma {
     no_kk?: boolean
     alamat?: boolean
     createdAt?: boolean
-    updatedAt?: boolean
   }, ExtArgs["result"]["warga"]>
 
   export type WargaSelectScalar = {
@@ -4789,10 +4779,9 @@ export namespace Prisma {
     no_kk?: boolean
     alamat?: boolean
     createdAt?: boolean
-    updatedAt?: boolean
   }
 
-  export type WargaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nama_lengkap" | "no_nik" | "no_kk" | "alamat" | "createdAt" | "updatedAt", ExtArgs["result"]["warga"]>
+  export type WargaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nama_lengkap" | "no_nik" | "no_kk" | "alamat" | "createdAt", ExtArgs["result"]["warga"]>
 
   export type $WargaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Warga"
@@ -4804,7 +4793,6 @@ export namespace Prisma {
       no_kk: string
       alamat: string
       createdAt: Date
-      updatedAt: Date
     }, ExtArgs["result"]["warga"]>
     composites: {}
   }
@@ -5234,7 +5222,6 @@ export namespace Prisma {
     readonly no_kk: FieldRef<"Warga", 'String'>
     readonly alamat: FieldRef<"Warga", 'String'>
     readonly createdAt: FieldRef<"Warga", 'DateTime'>
-    readonly updatedAt: FieldRef<"Warga", 'DateTime'>
   }
     
 
@@ -7686,8 +7673,7 @@ export namespace Prisma {
     no_nik: 'no_nik',
     no_kk: 'no_kk',
     alamat: 'alamat',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    createdAt: 'createdAt'
   };
 
   export type WargaScalarFieldEnum = (typeof WargaScalarFieldEnum)[keyof typeof WargaScalarFieldEnum]
@@ -8035,7 +8021,6 @@ export namespace Prisma {
     no_kk?: StringFilter<"Warga"> | string
     alamat?: StringFilter<"Warga"> | string
     createdAt?: DateTimeFilter<"Warga"> | Date | string
-    updatedAt?: DateTimeFilter<"Warga"> | Date | string
   }
 
   export type WargaOrderByWithRelationInput = {
@@ -8045,7 +8030,6 @@ export namespace Prisma {
     no_kk?: SortOrder
     alamat?: SortOrder
     createdAt?: SortOrder
-    updatedAt?: SortOrder
   }
 
   export type WargaWhereUniqueInput = Prisma.AtLeast<{
@@ -8058,7 +8042,6 @@ export namespace Prisma {
     no_kk?: StringFilter<"Warga"> | string
     alamat?: StringFilter<"Warga"> | string
     createdAt?: DateTimeFilter<"Warga"> | Date | string
-    updatedAt?: DateTimeFilter<"Warga"> | Date | string
   }, "id" | "no_nik">
 
   export type WargaOrderByWithAggregationInput = {
@@ -8068,7 +8051,6 @@ export namespace Prisma {
     no_kk?: SortOrder
     alamat?: SortOrder
     createdAt?: SortOrder
-    updatedAt?: SortOrder
     _count?: WargaCountOrderByAggregateInput
     _avg?: WargaAvgOrderByAggregateInput
     _max?: WargaMaxOrderByAggregateInput
@@ -8086,7 +8068,6 @@ export namespace Prisma {
     no_kk?: StringWithAggregatesFilter<"Warga"> | string
     alamat?: StringWithAggregatesFilter<"Warga"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Warga"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Warga"> | Date | string
   }
 
   export type AdminWhereInput = {
@@ -8441,7 +8422,6 @@ export namespace Prisma {
     no_kk: string
     alamat: string
     createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type WargaUncheckedCreateInput = {
@@ -8451,7 +8431,6 @@ export namespace Prisma {
     no_kk: string
     alamat: string
     createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type WargaUpdateInput = {
@@ -8460,7 +8439,6 @@ export namespace Prisma {
     no_kk?: StringFieldUpdateOperationsInput | string
     alamat?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type WargaUncheckedUpdateInput = {
@@ -8470,7 +8448,6 @@ export namespace Prisma {
     no_kk?: StringFieldUpdateOperationsInput | string
     alamat?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type WargaCreateManyInput = {
@@ -8480,7 +8457,6 @@ export namespace Prisma {
     no_kk: string
     alamat: string
     createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type WargaUpdateManyMutationInput = {
@@ -8489,7 +8465,6 @@ export namespace Prisma {
     no_kk?: StringFieldUpdateOperationsInput | string
     alamat?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type WargaUncheckedUpdateManyInput = {
@@ -8499,7 +8474,6 @@ export namespace Prisma {
     no_kk?: StringFieldUpdateOperationsInput | string
     alamat?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AdminCreateInput = {
@@ -8869,7 +8843,6 @@ export namespace Prisma {
     no_kk?: SortOrder
     alamat?: SortOrder
     createdAt?: SortOrder
-    updatedAt?: SortOrder
   }
 
   export type WargaAvgOrderByAggregateInput = {
@@ -8883,7 +8856,6 @@ export namespace Prisma {
     no_kk?: SortOrder
     alamat?: SortOrder
     createdAt?: SortOrder
-    updatedAt?: SortOrder
   }
 
   export type WargaMinOrderByAggregateInput = {
@@ -8893,7 +8865,6 @@ export namespace Prisma {
     no_kk?: SortOrder
     alamat?: SortOrder
     createdAt?: SortOrder
-    updatedAt?: SortOrder
   }
 
   export type WargaSumOrderByAggregateInput = {

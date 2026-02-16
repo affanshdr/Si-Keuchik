@@ -9,43 +9,7 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-model User {
-  id    Int    @id @default(autoincrement())
-  name  String
-  email String @unique
-}
-
-model TemplateSurat {
-  id             String   @id @default(cuid())
-  judul          String
-  terakhirDiubah DateTime
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-}
-
-model PengajuanSurat {
-  id                    Int       @id @default(autoincrement())
-  nama_lengkap          String
-  no_nik                String
-  no_kk                 String
-  alamat                String
-  keterangan            String
-  jenis_surat           String
-  file_ktp              String?
-  file_kk               String?
-  file_pengantar_rtrw   String?
-  file_surat_permohonan String?
-  file_izin_usaha       String?
-  file_pas_foto         String?
-  file_pernyataan_tm    String?
-  file_rekening_listrik String?
-  status                String    @default("diajukan")
-  no_pengajuan          String?
-  tanggal_pengajuan     DateTime  @default(now())
-  tanggal_selesai       DateTime?
-  createdAt             DateTime  @default(now())
-}
-
+// Data Warga (Master Data)
 model Warga {
   id           Int      @id @default(autoincrement())
   nama_lengkap String
@@ -55,15 +19,79 @@ model Warga {
   createdAt    DateTime @default(now())
 }
 
+// Pengajuan Surat dari Warga
+model PengajuanSurat {
+  id                    Int       @id @default(autoincrement())
+  
+  // Data Pemohon (auto-fill dari Warga berdasarkan NIK)
+  nama_lengkap          String
+  no_nik                String
+  no_kk                 String
+  alamat                String
+  
+  // Jenis Surat
+  jenis_surat           String    // domisili, usaha, belum-menikah, tidak-mampu, meninggal, berkelakuan-baik
+  keterangan            String?   // Catatan/keperluan tambahan
+  
+  // Upload untuk Validasi
+  foto_ktp              String?   // Foto KTP untuk validasi oleh Keuchik
+  
+  // Data Tambahan per Jenis Surat (JSON)
+  // Contoh untuk Surat Usaha: {"jenisUsaha": "USAHA NASI AYAM GEPREK", "lokasiUsaha": "Desa Pulo Reudeup"}
+  // Contoh untuk Surat Meninggal: {"namaAlmarhum": "...", "nikAlmarhum": "...", "tanggalMeninggal": "...", "pelapor": {...}}
+  data_tambahan         Json?
+  
+  // Status Pengajuan
+  status                String    @default("diajukan")  // diajukan, diproses, selesai, ditolak
+  no_pengajuan          String?   @unique
+  catatan_penolakan     String?   // Jika ditolak, alasannya apa
+  
+  // Tracking Waktu
+  tanggal_pengajuan     DateTime  @default(now())
+  tanggal_diproses      DateTime?
+  tanggal_selesai       DateTime?
+  
+  // Surat yang Dihasilkan (setelah approved)
+  nomor_surat           String?   // Format: 68/2030/SKU/VIII/2025
+  file_surat            String?   // Path/URL ke PDF surat hasil
+  tanggal_diterbitkan   DateTime?
+  ditandatangani_oleh   String?   // Nama Keuchik/Perangkat Desa
+  
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+}
+
+// Admin/Perangkat Desa (yang login dan approve surat)
 model Admin {
-  id       Int    @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
+  nama      String
+  email     String   @unique
+  password  String
+  jabatan   String   @default("Admin")  // Keuchik, Sekretaris Desa, Kaur, Admin
+  no_hp     String?
+  createdAt DateTime @default(now())
+}
+
+// Template Surat (opsional, untuk generate PDF)
+model TemplateSurat {
+  id             String   @id @default(cuid())
+  judul          String
+  jenis_surat    String   @unique
+  terakhirDiubah DateTime
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+// Model tambahan (jika masih diperlukan)
+model User {
+  id    Int    @id @default(autoincrement())
+  name  String
   email String @unique
-  password String
 }
 
 model Testing {
-  id      Int     @id @default(autoincrement())
-  nama    String
-  status  String  @default("active")
+  id        Int      @id @default(autoincrement())
+  nama      String
+  status    String   @default("active")
   createdAt DateTime @default(now())
 }

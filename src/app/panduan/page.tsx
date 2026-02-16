@@ -15,6 +15,7 @@ const steps = [
     ],
     icon: "📝",
   },
+
   {
     number: 2,
     title: "Melihat Pengajuan",

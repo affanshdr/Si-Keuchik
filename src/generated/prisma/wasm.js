@@ -120,43 +120,6 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.UserScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  email: 'email'
-};
-
-exports.Prisma.TemplateSuratScalarFieldEnum = {
-  id: 'id',
-  judul: 'judul',
-  terakhirDiubah: 'terakhirDiubah',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.PengajuanSuratScalarFieldEnum = {
-  id: 'id',
-  nama_lengkap: 'nama_lengkap',
-  no_nik: 'no_nik',
-  no_kk: 'no_kk',
-  alamat: 'alamat',
-  keterangan: 'keterangan',
-  jenis_surat: 'jenis_surat',
-  file_ktp: 'file_ktp',
-  file_kk: 'file_kk',
-  file_pengantar_rtrw: 'file_pengantar_rtrw',
-  file_surat_permohonan: 'file_surat_permohonan',
-  file_izin_usaha: 'file_izin_usaha',
-  file_pas_foto: 'file_pas_foto',
-  file_pernyataan_tm: 'file_pernyataan_tm',
-  file_rekening_listrik: 'file_rekening_listrik',
-  status: 'status',
-  no_pengajuan: 'no_pengajuan',
-  tanggal_pengajuan: 'tanggal_pengajuan',
-  tanggal_selesai: 'tanggal_selesai',
-  createdAt: 'createdAt'
-};
-
 exports.Prisma.WargaScalarFieldEnum = {
   id: 'id',
   nama_lengkap: 'nama_lengkap',
@@ -166,10 +129,53 @@ exports.Prisma.WargaScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.PengajuanSuratScalarFieldEnum = {
+  id: 'id',
+  nama_lengkap: 'nama_lengkap',
+  no_nik: 'no_nik',
+  no_kk: 'no_kk',
+  alamat: 'alamat',
+  jenis_surat: 'jenis_surat',
+  keterangan: 'keterangan',
+  foto_ktp: 'foto_ktp',
+  data_tambahan: 'data_tambahan',
+  status: 'status',
+  no_pengajuan: 'no_pengajuan',
+  catatan_penolakan: 'catatan_penolakan',
+  tanggal_pengajuan: 'tanggal_pengajuan',
+  tanggal_diproses: 'tanggal_diproses',
+  tanggal_selesai: 'tanggal_selesai',
+  nomor_surat: 'nomor_surat',
+  file_surat: 'file_surat',
+  tanggal_diterbitkan: 'tanggal_diterbitkan',
+  ditandatangani_oleh: 'ditandatangani_oleh',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.AdminScalarFieldEnum = {
   id: 'id',
+  nama: 'nama',
   email: 'email',
-  password: 'password'
+  password: 'password',
+  jabatan: 'jabatan',
+  no_hp: 'no_hp',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.TemplateSuratScalarFieldEnum = {
+  id: 'id',
+  judul: 'judul',
+  jenis_surat: 'jenis_surat',
+  terakhirDiubah: 'terakhirDiubah',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email'
 };
 
 exports.Prisma.TestingScalarFieldEnum = {
@@ -184,9 +190,20 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 
 exports.Prisma.NullsOrder = {
@@ -196,11 +213,11 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
-  User: 'User',
-  TemplateSurat: 'TemplateSurat',
-  PengajuanSurat: 'PengajuanSurat',
   Warga: 'Warga',
+  PengajuanSurat: 'PengajuanSurat',
   Admin: 'Admin',
+  TemplateSurat: 'TemplateSurat',
+  User: 'User',
   Testing: 'Testing'
 };
 

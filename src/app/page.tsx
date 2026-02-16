@@ -1,21 +1,9 @@
 "use client";
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-// Tipe data untuk dokumen
-type DocType = "KTP" | "KK" | "Surat Pengantar RT/RW" | "Surat Permohonan Bermaterai" | "Izin Usaha" | "Pas Foto 3X4 (latar Merah)" | "Surat Pernyataan tidak mampu dari RT/RW" | "Rekening listrik/air 3 bulan terakhir";
-
-// Interface untuk data form
-interface FormData {
-  no_kk: string;
-  no_nik: string;
-  namaLengkap: string;
-  alamat: string;
-  keterangan: string;
-}
 
 // Interface untuk data warga dari API
 interface WargaData {
@@ -27,74 +15,56 @@ interface WargaData {
 }
 
 // Jenis surat yang tersedia
-type LetterType = "surat-keterangan-domisili" | "surat-keterangan-usaha" | "surat-keterangan-belum-menikah" | "surat-keterangan-tidak-mampu";
+type LetterType =
+  | "domisili"
+  | "usaha"
+  | "belum-menikah"
+  | "tidak-mampu"
+  | "meninggal"
+  | "berkelakuan-baik";
 
-// Definisi persyaratan dokumen
-const documentRequirements: Record<LetterType, { label: string; docs: DocType[] }> = {
-  "surat-keterangan-domisili": {
-    label: "Surat Keterangan Domisili",
-    docs: ["KTP", "KK", "Surat Pengantar RT/RW", "Surat Permohonan Bermaterai"],
-  },
-  "surat-keterangan-usaha": {
-    label: "Surat Keterangan Usaha",
-    docs: ["KTP", "KK", "Surat Permohonan Bermaterai", "Surat Pengantar RT/RW", "Izin Usaha"],
-  },
-  "surat-keterangan-belum-menikah": {
-    label: "Surat Keterangan Belum Menikah",
-    docs: ["KTP", "KK", "Surat Pengantar RT/RW", "Pas Foto 3X4 (latar Merah)"],
-  },
-  "surat-keterangan-tidak-mampu": {
-    label: "Surat Keterangan Tidak Mampu",
-    docs: ["KTP", "KK", "Surat Pernyataan tidak mampu dari RT/RW", "Rekening listrik/air 3 bulan terakhir"],
-  },
+// Label jenis surat
+const letterLabels: Record<LetterType, string> = {
+  domisili: "Surat Keterangan Domisili",
+  usaha: "Surat Keterangan Usaha",
+  "belum-menikah": "Surat Keterangan Belum Menikah",
+  "tidak-mampu": "Surat Keterangan Tidak Mampu",
+  meninggal: "Surat Keterangan Meninggal",
+  "berkelakuan-baik": "Surat Keterangan Berkelakuan Baik",
 };
-
-// Deskripsi dokumen
-const documentDescriptions: Record<DocType, string> = {
-  KTP: "Foto KTP (yang masih berlaku)",
-  KK: "Foto KK (Kartu Keluarga)",
-  "Surat Pengantar RT/RW": "Surat pengantar dari RT/RW setempat",
-  "Surat Permohonan Bermaterai": "Surat permohonan bermaterai 6000",
-  "Izin Usaha": "Dokumen izin usaha jika ada",
-  "Pas Foto 3X4 (latar Merah)": "Pas foto terbaru ukuran 3x4 dengan latar belakang merah",
-  "Surat Pernyataan tidak mampu dari RT/RW": "Surat pernyataan tidak mampu dari RT/RW",
-  "Rekening listrik/air 3 bulan terakhir": "Rekening listrik/air 3 bulan terakhir",
-};
-
-// Inisialisasi state untuk file
-const initialFileState = Object.keys(documentDescriptions).reduce((acc, doc) => {
-  return { ...acc, [doc]: null };
-}, {} as Record<DocType, File | null>);
-
-// Inisialisasi state untuk preview
-const initialPreviewState = Object.keys(documentDescriptions).reduce((acc, doc) => {
-  return { ...acc, [doc]: null };
-}, {} as Record<DocType, string | null>);
 
 export default function FormPengajuanSurat() {
-  const [selectedLetter, setSelectedLetter] = useState<LetterType | "">("");
-  const [formData, setFormData] = useState<FormData>({
-    no_kk: "",
+  // State untuk wizard steps
+  const [currentStep, setCurrentStep] = useState(1);
+  const totalSteps = 4;
+
+  // State untuk form data
+  const [formData, setFormData] = useState({
     no_nik: "",
+    no_kk: "",
     namaLengkap: "",
     alamat: "",
     keterangan: "",
   });
 
-  const [selectedFiles, setSelectedFiles] = useState<Record<DocType, File | null>>(initialFileState);
-  const [previews, setPreviews] = useState<Record<DocType, string | null>>(initialPreviewState);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedLetter, setSelectedLetter] = useState<LetterType | "">("");
+  const [fotoKtp, setFotoKtp] = useState<File | null>(null);
+  const [fotoKtpPreview, setFotoKtpPreview] = useState<string | null>(null);
 
+  // State untuk data tambahan (gunakan any untuk simplicity)
+  const [dataTambahan, setDataTambahan] = useState<any>({});
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [wargaData, setWargaData] = useState<WargaData | null>(null);
+  const [nikValid, setNikValid] = useState<boolean | null>(null);
+
+  // State untuk modal
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState({
     title: "",
     message: "",
     isSuccess: false,
   });
-
-  const [wargaData, setWargaData] = useState<WargaData | null>(null);
-  const [nikValid, setNikValid] = useState<boolean | null>(null);
-  const [kkValid, setKkValid] = useState<boolean | null>(null);
 
   // Check NIK in database
   useEffect(() => {
@@ -103,16 +73,16 @@ export default function FormPengajuanSurat() {
         try {
           const response = await fetch(`/api/check?no_nik=${formData.no_nik}`);
           const data = await response.json();
-          
+
           if (!response.ok || !data.success) {
-            throw new Error(data.message || 'Gagal memeriksa NIK');
+            throw new Error(data.message || "Gagal memeriksa NIK");
           }
 
           setNikValid(data.exists);
-          
+
           if (data.exists && data.data) {
             setWargaData(data.data);
-            setFormData(prev => ({
+            setFormData((prev) => ({
               ...prev,
               namaLengkap: data.data.nama_lengkap || prev.namaLengkap,
               no_kk: data.data.no_kk || prev.no_kk,
@@ -120,9 +90,9 @@ export default function FormPengajuanSurat() {
             }));
           }
         } catch (error) {
-          console.error('Error checking NIK:', error);
+          console.error("Error checking NIK:", error);
           setNikValid(false);
-          toast.error(error instanceof Error ? error.message : 'Error checking NIK');
+          toast.error(error instanceof Error ? error.message : "Error checking NIK");
         }
       } else {
         setNikValid(null);
@@ -133,221 +103,178 @@ export default function FormPengajuanSurat() {
     return () => clearTimeout(timer);
   }, [formData.no_nik]);
 
-  // Check KK in database
-  useEffect(() => {
-    const checkKk = async () => {
-      if (formData.no_kk.length === 16) {
-        try {
-          const response = await fetch(`/api/check?no_kk=${formData.no_kk}`);
-          const data = await response.json();
-          
-          if (!response.ok || !data.success) {
-            throw new Error(data.message || 'Gagal memeriksa KK');
-          }
-
-          setKkValid(data.exists);
-          
-          if (data.exists && data.data) {
-            setWargaData(data.data);
-            setFormData(prev => ({
-              ...prev,
-              namaLengkap: data.data.nama_lengkap || prev.namaLengkap,
-              no_kk: data.data.no_kk || prev.no_kk,
-              alamat: data.data.alamat || prev.alamat,
-            }));
-          }
-        } catch (error) {
-          console.error('Error checking KK:', error);
-          setKkValid(false);
-          toast.error(error instanceof Error ? error.message : 'Error checking KK');
-        }
-      } else {
-        setKkValid(null);
+  // Handle foto KTP upload
+  const handleFotoKtpChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 2 * 1024 * 1024) {
+        toast.error("Ukuran file maksimal 2MB");
+        return;
       }
-    };
 
-    const timer = setTimeout(checkKk, 800);
-    return () => clearTimeout(timer);
-  }, [formData.no_kk]);
+      if (!file.type.startsWith("image/")) {
+        toast.error("File harus berupa gambar");
+        return;
+      }
 
-  // Fungsi untuk menampilkan modal
+      setFotoKtp(file);
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        setFotoKtpPreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removeFotoKtp = () => {
+    setFotoKtp(null);
+    setFotoKtpPreview(null);
+  };
+
+  // Handle input change
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  // Handle data tambahan change
+  const handleDataTambahanChange = (field: string, value: any) => {
+    setDataTambahan((prev: any) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  // Validation untuk setiap step
+  const canGoToNextStep = () => {
+    if (currentStep === 1) {
+      return (
+        formData.no_nik.length === 16 &&
+        formData.no_kk.length === 16 &&
+        formData.namaLengkap &&
+        formData.alamat &&
+        nikValid === true
+      );
+    }
+    if (currentStep === 2) {
+      return fotoKtp !== null;
+    }
+    if (currentStep === 3) {
+      return selectedLetter !== "";
+    }
+    return true;
+  };
+
+  // Navigation
+  const goToNextStep = () => {
+    if (canGoToNextStep() && currentStep < totalSteps) {
+      setCurrentStep(currentStep + 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const goToPrevStep = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  // Show/close modal
   const showModal = (title: string, message: string, isSuccess: boolean) => {
     setModalContent({ title, message, isSuccess });
     setIsModalOpen(true);
   };
 
-  // Fungsi untuk menutup modal
   const closeModal = () => {
     setIsModalOpen(false);
-  };
-
-  // Check if warga exists in database
-  const checkWargaExists = async (no_kk: string, no_nik: string): Promise<boolean> => {
-    try {
-      console.log('Checking if warga exists:', { no_kk, no_nik });
-      
-      const response = await fetch(`/api/check?no_kk=${no_kk}&no_nik=${no_nik}`);
-      
-      console.log('checkWargaExists response status:', response.status);
-      
-      if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
-      }
-      
-      const data = await response.json();
-      console.log('checkWargaExists response data:', data);
-      
-      return data.success && data.exists && data.is_match;
-    } catch (error) {
-      console.error('Error in checkWargaExists:', error);
-      toast.error('Gagal memverifikasi data warga');
-      return false;
+    if (modalContent.isSuccess) {
+      // Reset form
+      setFormData({
+        no_nik: "",
+        no_kk: "",
+        namaLengkap: "",
+        alamat: "",
+        keterangan: "",
+      });
+      setSelectedLetter("");
+      setFotoKtp(null);
+      setFotoKtpPreview(null);
+      setDataTambahan({});
+      setNikValid(null);
+      setCurrentStep(1);
     }
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  // Handle submit
+  const handleSubmit = async () => {
     setIsSubmitting(true);
 
     try {
+      if (!nikValid) {
+        throw new Error("NIK tidak terdaftar di sistem");
+      }
+
+      if (!fotoKtp) {
+        throw new Error("Foto KTP wajib diupload");
+      }
+
       if (!selectedLetter) {
-        throw new Error("Jenis surat belum dipilih");
+        throw new Error("Pilih jenis surat terlebih dahulu");
       }
 
-      if (formData.no_nik.length !== 16 || formData.no_kk.length !== 16) {
-        throw new Error("NIK dan Nomor KK harus 16 digit");
+      const submitData = new FormData();
+      submitData.append("jenis_surat", selectedLetter);
+      submitData.append("no_nik", formData.no_nik);
+      submitData.append("no_kk", formData.no_kk);
+      submitData.append("nama_lengkap", formData.namaLengkap);
+      submitData.append("alamat", formData.alamat);
+      submitData.append("keterangan", formData.keterangan);
+      submitData.append("foto_ktp", fotoKtp);
+
+      if (Object.keys(dataTambahan).length > 0) {
+        submitData.append("data_tambahan", JSON.stringify(dataTambahan));
       }
-
-      const missingDocs = requiredDocuments.filter((doc) => !selectedFiles[doc]);
-      if (missingDocs.length > 0) {
-        throw new Error(`Dokumen berikut masih diperlukan: ${missingDocs.join(", ")}`);
-      }
-
-      const wargaExists = await checkWargaExists(formData.no_kk, formData.no_nik);
-      if (!wargaExists) {
-        throw new Error("NIK dan Nomor KK tidak cocok dengan data warga");
-      }
-
-      const formPayload = new FormData();
-
-      formPayload.append("jenis_surat", documentRequirements[selectedLetter].label);
-      formPayload.append("no_kk", formData.no_kk);
-      formPayload.append("no_nik", formData.no_nik);
-      formPayload.append("nama_lengkap", formData.namaLengkap);
-      formPayload.append("alamat", formData.alamat);
-      formPayload.append("keterangan", formData.keterangan);
-
-      documentRequirements[selectedLetter].docs.forEach((doc) => {
-        const file = selectedFiles[doc];
-        if (file) {
-          formPayload.append(doc, file);
-        }
-      });
 
       const response = await fetch("/api/pengajuan", {
         method: "POST",
-        body: formPayload,
+        body: submitData,
       });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Gagal mengajukan surat");
-      }
 
       const result = await response.json();
 
-      showModal("Pengajuan Berhasil!", `Data pengajuan surat Anda telah berhasil dikirim dengan nomor pengajuan: ${result.data.no_pengajuan}. Silakan catat nomor ini untuk keperluan tracking.`, true);
+      if (!response.ok) {
+        throw new Error(result.message || "Gagal membuat pengajuan");
+      }
 
-      resetForm();
+      showModal(
+        "Berhasil! ✅",
+        `Pengajuan berhasil dibuat dengan nomor: ${result.nomor_pengajuan}. Silakan tunggu konfirmasi dari perangkat desa.`,
+        true
+      );
     } catch (error) {
-      showModal("Pengajuan Gagal", error instanceof Error ? error.message : "Terjadi kesalahan saat mengajukan surat", false);
+      console.error("Error submitting:", error);
+      showModal(
+        "Gagal! ❌",
+        error instanceof Error ? error.message : "Terjadi kesalahan",
+        false
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleLetterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedLetter(e.target.value as LetterType);
-  };
-
-  const validateFile = (file: File, docType: DocType): boolean => {
-    const isImage = file.type.startsWith("image/");
-    const isPDF = file.type === "application/pdf";
-    const isDoc = file.type === "application/msword" || file.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
-
-    if ((docType === "KTP" || docType === "KK" || docType === "Pas Foto 3X4 (latar Merah)") && !isImage) {
-      toast.error("Hanya file gambar yang diperbolehkan untuk KTP/KK!");
-      return false;
-    }
-
-    if ((docType.includes("Surat") || docType === "Izin Usaha") && !(isPDF || isDoc || isImage)) {
-      toast.error("Hanya file PDF, DOC, atau gambar yang diperbolehkan!");
-      return false;
-    }
-
-    if (file.size > 2 * 1024 * 1024) {
-      toast.error("Ukuran file maksimal 2MB!");
-      return false;
-    }
-
-    return true;
-  };
-
-  const handleFileChange = useCallback(
-    (docType: DocType) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files?.[0];
-      if (!file) return;
-
-      if (!validateFile(file, docType)) return;
-
-      setSelectedFiles((prev) => ({ ...prev, [docType]: file }));
-
-      if (file.type.startsWith("image/")) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          setPreviews((prev) => ({
-            ...prev,
-            [docType]: reader.result as string,
-          }));
-        };
-        reader.readAsDataURL(file);
-      } else {
-        setPreviews((prev) => ({ ...prev, [docType]: null }));
-      }
-    },
-    []
-  );
-
-  const removeFile = (docType: DocType) => {
-    setSelectedFiles((prev) => ({ ...prev, [docType]: null }));
-    setPreviews((prev) => ({ ...prev, [docType]: null }));
-  };
-
-  const resetForm = () => {
-    setSelectedLetter("");
-    setFormData({
-      no_kk: "",
-      no_nik: "",
-      namaLengkap: "",
-      alamat: "",
-      keterangan: "",
-    });
-    setSelectedFiles(initialFileState);
-    setPreviews(initialPreviewState);
-  };
-
-  const requiredDocuments = selectedLetter ? documentRequirements[selectedLetter].docs : [];
-
   return (
-    <div style={{ fontFamily: "var(--font-poppins)" }} className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-white to-blue-50">
       <Navbar />
 
-      {/* Hero Section - Responsive */}
+      <div className="container mx-auto px-4 py-8 sm:py-12">
+        {/* Header dengan penjelasan */}
+        {/* Hero Section - Responsive */}
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
@@ -392,391 +319,753 @@ export default function FormPengajuanSurat() {
         </div>
       </div>
 
-      {/* Requirements Section - Mobile Optimized */}
-      <div className="bg-gradient-to-b from-gray-50 to-white py-8 sm:py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-xl sm:text-2xl font-bold text-center text-gray-900 mb-2">
-            Persyaratan Umum
-          </h2>
-          <p className="text-center text-gray-600 text-sm sm:text-base mb-6 sm:mb-8">
-            Dokumen yang perlu disiapkan untuk mengajukan surat
-          </p>
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-              <div className="flex-shrink-0 mx-auto sm:mx-0">
-                <div className="w-24 h-24 sm:w-32 sm:h-32 bg-teal-50 rounded-2xl flex items-center justify-center">
-                  <svg className="w-12 h-12 sm:w-16 sm:h-16 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
+        {/* Form Card */}
+        <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl p-6 sm:p-8">
+          {/* Progress Bar */}
+          <div className="mb-8">
+            <div className="flex justify-between items-center mb-2">
+              {[1, 2, 3, 4].map((step) => (
+                <div key={step} className="flex items-center flex-1">
+                  <div
+                    className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all ${
+                      currentStep >= step
+                        ? "bg-teal-600 text-white"
+                        : "bg-gray-200 text-gray-500"
+                    }`}
+                  >
+                    {currentStep > step ? "✓" : step}
+                  </div>
+                  {step < 4 && (
+                    <div
+                      className={`flex-1 h-1 mx-2 transition-all ${
+                        currentStep > step ? "bg-teal-600" : "bg-gray-200"
+                      }`}
+                    />
+                  )}
                 </div>
-              </div>
-              <div className="flex-1">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Dokumen yang Diperlukan:</h3>
-                <ul className="space-y-3 text-sm sm:text-base text-gray-700">
-                  <li className="flex items-start">
-                    <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-teal-100 text-teal-600 mr-3 mt-0.5 flex-shrink-0">
-                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                    </span>
-                    <span><strong className="font-semibold">Foto KTP</strong> - Kartu Tanda Penduduk yang masih berlaku</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-teal-100 text-teal-600 mr-3 mt-0.5 flex-shrink-0">
-                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                    </span>
-                    <span><strong className="font-semibold">Foto Kartu Keluarga (KK)</strong> - Untuk verifikasi data keluarga</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-teal-100 text-teal-600 mr-3 mt-0.5 flex-shrink-0">
-                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                    </span>
-                    <span><strong className="font-semibold">Dokumen Pendukung</strong> - Sesuai jenis surat yang diajukan</span>
-                  </li>
-                </ul>
-                <div className="mt-4 p-3 bg-blue-50 border border-blue-100 rounded-lg">
-                  <p className="text-xs sm:text-sm text-blue-800">
-                    <strong>💡 Tips:</strong> Pastikan semua dokumen difoto dengan jelas dan tidak buram untuk mempercepat proses verifikasi
+              ))}
+            </div>
+            <div className="flex justify-between text-xs text-gray-600 px-2">
+              <span>Data Diri</span>
+              <span>Foto KTP</span>
+              <span>Jenis Surat</span>
+              <span>Selesai</span>
+            </div>
+          </div>
+
+          {/* Step Content */}
+          <div className="min-h-[400px]">
+            {/* STEP 1: Data Diri */}
+            {currentStep === 1 && (
+              <div className="space-y-6">
+                <div className="text-center mb-6">
+                  <h2 className="text-2xl font-bold text-gray-800 mb-2">
+                    Langkah 1: Data Diri Anda
+                  </h2>
+                  <p className="text-gray-600 text-sm">
+                    Masukkan nomor KTP (NIK) dan nomor KK Anda
                   </p>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      {/* Form Section - Mobile First Design */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-        {/* Info Section */}
-        <div className="mb-6 sm:mb-8 bg-gradient-to-r from-teal-50 to-blue-50 border border-teal-100 rounded-2xl p-6">
-          <div className="flex items-start gap-4">
-            <div className="flex-shrink-0">
-              <div className="w-10 h-10 bg-teal-600 rounded-lg flex items-center justify-center">
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-            </div>
-            <div className="flex-1">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Cara Pengajuan Surat</h3>
-              <ol className="space-y-2 text-sm text-gray-700">
-                <li className="flex items-start">
-                  <span className="font-semibold text-teal-600 mr-2">1.</span>
-                  <span>Isi data diri Anda dengan lengkap dan benar</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-semibold text-teal-600 mr-2">2.</span>
-                  <span>Pilih jenis surat yang ingin diajukan</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-semibold text-teal-600 mr-2">3.</span>
-                  <span>Upload dokumen persyaratan yang diminta</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-semibold text-teal-600 mr-2">4.</span>
-                  <span>Klik tombol "Ajukan Surat" dan simpan nomor pengajuan Anda</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-semibold text-teal-600 mr-2">5.</span>
-                  <span>Gunakan menu "Lacak Pengajuan" untuk memantau status surat Anda</span>
-                </li>
-              </ol>
-            </div>
-          </div>
-        </div>
+                {/* NIK */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Nomor KTP (NIK) - 16 Angka <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="no_nik"
+                    value={formData.no_nik}
+                    onChange={handleInputChange}
+                    maxLength={16}
+                    className={`w-full px-4 py-3 text-lg rounded-xl border-2 transition-all ${
+                      nikValid === true
+                        ? "border-green-500 bg-green-50"
+                        : nikValid === false
+                        ? "border-red-500 bg-red-50"
+                        : "border-gray-300 focus:border-teal-500"
+                    } focus:outline-none`}
+                    placeholder="Contoh: 1234567890123456"
+                  />
+                  {nikValid === true && (
+                    <p className="text-sm text-green-600 mt-1 flex items-center gap-1">
+                      <span>✓</span> NIK terdaftar
+                    </p>
+                  )}
+                  {nikValid === false && (
+                    <p className="text-sm text-red-600 mt-1 flex items-center gap-1">
+                      <span>✗</span> NIK tidak terdaftar. Silakan hubungi perangkat desa.
+                    </p>
+                  )}
+                </div>
 
-        <div className="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
-          {/* Form Header */}
-          <div className="bg-gradient-to-r from-teal-500 to-teal-600 px-6 sm:px-8 py-6 sm:py-8">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white text-center">
-              Form Pengajuan Surat
-            </h2>
-          </div>
+                {/* KK */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Nomor Kartu Keluarga (KK) - 16 Angka <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="no_kk"
+                    value={formData.no_kk}
+                    onChange={handleInputChange}
+                    maxLength={16}
+                    className="w-full px-4 py-3 text-lg rounded-xl border-2 border-gray-300 focus:border-teal-500 focus:outline-none"
+                    placeholder="Contoh: 1234567890123456"
+                  />
+                </div>
 
-          {/* Form Body */}
-          <form onSubmit={handleSubmit} className="p-4 sm:p-6 lg:p-8 space-y-6">
-            {/* Nomor Kartu Keluarga (KK) */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Nomor Kartu Keluarga (KK)
-              </label>
-              <input
-                type="text"
-                name="no_kk"
-                placeholder="Masukkan 16 digit KK"
-                className={`w-full px-4 py-3 text-gray-900 border rounded-xl focus:outline-none focus:ring-2 transition-all ${
-                  kkValid === null
-                    ? "border-gray-300 focus:ring-teal-500"
-                    : kkValid
-                    ? "border-green-500 bg-green-50 focus:ring-green-500"
-                    : "border-red-500 bg-red-50 focus:ring-red-500"
-                }`}
-                required
-                value={formData.no_kk}
-                onChange={handleInputChange}
-                maxLength={16}
-                pattern="\d{16}"
-                title="Harus 16 digit angka"
-              />
-              {formData.no_kk.length !== 16 && formData.no_kk.length > 0 && (
-                <p className="text-red-500 text-xs mt-1.5">Nomor KK harus 16 digit angka</p>
-              )}
-              {kkValid === false && formData.no_kk.length === 16 && (
-                <p className="text-red-500 text-xs mt-1.5">Nomor KK tidak terdaftar</p>
-              )}
-              {kkValid && wargaData && (
-                <p className="text-green-600 text-xs mt-1.5">✓ Nomor KK valid</p>
-              )}
-            </div>
+                {/* Nama (auto-fill) */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Nama Lengkap <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="namaLengkap"
+                    value={formData.namaLengkap}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 text-lg rounded-xl border-2 border-gray-300 focus:border-teal-500 focus:outline-none bg-gray-50"
+                    placeholder="Otomatis terisi setelah NIK valid"
+                    readOnly={nikValid === true}
+                  />
+                </div>
 
-            {/* Nomor Identitas Kependudukan (NIK) */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Nomor Identitas Kependudukan (NIK)
-              </label>
-              <input
-                type="text"
-                name="no_nik"
-                placeholder="Masukkan 16 digit NIK"
-                className={`w-full px-4 py-3 text-gray-900 border rounded-xl focus:outline-none focus:ring-2 transition-all ${
-                  nikValid === null
-                    ? "border-gray-300 focus:ring-teal-500"
-                    : nikValid
-                    ? "border-green-500 bg-green-50 focus:ring-green-500"
-                    : "border-red-500 bg-red-50 focus:ring-red-500"
-                }`}
-                required
-                value={formData.no_nik}
-                onChange={handleInputChange}
-                maxLength={16}
-                pattern="\d{16}"
-                title="Harus 16 digit angka"
-              />
-              {formData.no_nik.length !== 16 && formData.no_nik.length > 0 && (
-                <p className="text-red-500 text-xs mt-1.5">NIK harus 16 digit angka</p>
-              )}
-              {nikValid === false && formData.no_nik.length === 16 && (
-                <p className="text-red-500 text-xs mt-1.5">NIK tidak terdaftar</p>
-              )}
-              {nikValid && wargaData && (
-                <p className="text-green-600 text-xs mt-1.5">
-                  ✓ NIK terdaftar atas nama: {wargaData.nama_lengkap}
-                </p>
-              )}
-            </div>
+                {/* Alamat (auto-fill) */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Alamat Lengkap <span className="text-red-500">*</span>
+                  </label>
+                  <textarea
+                    name="alamat"
+                    value={formData.alamat}
+                    onChange={handleInputChange}
+                    rows={3}
+                    className="w-full px-4 py-3 text-lg rounded-xl border-2 border-gray-300 focus:border-teal-500 focus:outline-none bg-gray-50"
+                    placeholder="Otomatis terisi setelah NIK valid"
+                    readOnly={nikValid === true}
+                  />
+                </div>
 
-            {/* Nama Lengkap */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Nama Lengkap
-              </label>
-              <input
-                type="text"
-                name="namaLengkap"
-                placeholder="Masukkan nama lengkap yang akan dipakai dalam surat"
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 text-gray-900 transition-all"
-                required
-                value={formData.namaLengkap}
-                onChange={handleInputChange}
-              />
-            </div>
-
-            {/* Alamat Lengkap */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Alamat Lengkap
-              </label>
-              <input
-                type="text"
-                name="alamat"
-                placeholder="Masukkan alamat lengkap"
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 text-gray-900 transition-all"
-                required
-                value={formData.alamat}
-                onChange={handleInputChange}
-              />
-            </div>
-
-            {/* Jenis Surat */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Jenis Surat
-              </label>
-              <select
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 text-gray-900 transition-all bg-white"
-                required
-                value={selectedLetter}
-                onChange={handleLetterChange}
-              >
-                <option value="">Pilih jenis surat</option>
-                {Object.entries(documentRequirements).map(([value, { label }]) => (
-                  <option key={value} value={value}>
-                    {label}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* Keterangan (Optional) */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Keterangan (opsional)
-              </label>
-              <textarea
-                name="keterangan"
-                placeholder="Masukkan keterangan surat"
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 text-gray-900 transition-all min-h-[100px] resize-none"
-                value={formData.keterangan}
-                onChange={handleInputChange}
-              />
-            </div>
-
-            {/* Upload Section */}
-            {selectedLetter && (
-              <div className="space-y-6 pt-4 border-t border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-900">Unggah Berkas</h3>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                  {requiredDocuments.map((docType) => (
-                    <div key={docType} className="space-y-2">
-                      <label className="block text-sm font-medium text-gray-700">
-                        {docType}
-                        <span className="block text-xs text-gray-500 mt-0.5 font-normal">
-                          {documentDescriptions[docType]}
-                        </span>
-                      </label>
-
-                      <div className="relative">
-                        <input
-                          type="file"
-                          id={`upload-${docType}`}
-                          onChange={handleFileChange(docType)}
-                          accept={
-                            docType === "KTP" || docType === "KK" || docType === "Pas Foto 3X4 (latar Merah)"
-                              ? "image/*"
-                              : ".pdf,.doc,.docx,image/*"
-                          }
-                          className="hidden"
-                          required
-                        />
-                        <label
-                          htmlFor={`upload-${docType}`}
-                          className={`block border-2 border-dashed rounded-xl p-4 text-center cursor-pointer transition-all ${
-                            selectedFiles[docType]
-                              ? "border-teal-500 bg-teal-50"
-                              : "border-gray-300 hover:border-teal-400 hover:bg-gray-50"
-                          }`}
-                        >
-                          {selectedFiles[docType] ? (
-                            <div className="flex flex-col items-center space-y-2">
-                              <svg className="h-8 w-8 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                              </svg>
-                              <span className="text-xs sm:text-sm text-teal-700 font-medium">File terupload</span>
-                              <span className="text-xs text-gray-600 truncate max-w-full px-2">
-                                {selectedFiles[docType]?.name}
-                              </span>
-                            </div>
-                          ) : (
-                            <div className="space-y-2">
-                              <div className="inline-flex items-center justify-center w-10 h-10 bg-gray-100 rounded-lg">
-                                <svg className="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                                </svg>
-                              </div>
-                              <div>
-                                <p className="text-xs sm:text-sm text-gray-600 font-medium">Upload {docType}</p>
-                                <p className="text-xs text-gray-500 mt-1">Max 2MB</p>
-                              </div>
-                            </div>
-                          )}
-                        </label>
-
-                        {selectedFiles[docType] && (
-                          <button
-                            type="button"
-                            onClick={() => removeFile(docType)}
-                            className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors shadow-md flex items-center justify-center"
-                            title="Hapus file"
-                          >
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
-                              <path
-                                fillRule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                          </button>
-                        )}
-                      </div>
-
-                      {/* Preview untuk gambar - Mobile Optimized */}
-                      {previews[docType] && (
-                        <div className="mt-3">
-                          <p className="text-xs font-medium text-gray-700 mb-1.5">Preview:</p>
-                          <img
-                            src={previews[docType]!}
-                            alt={`Preview ${docType}`}
-                            className="w-full max-h-48 object-contain rounded-lg border border-gray-200"
-                          />
-                        </div>
-                      )}
-                    </div>
-                  ))}
+                {/* Navigation */}
+                <div className="flex justify-end pt-4">
+                  <button
+                    onClick={goToNextStep}
+                    disabled={!canGoToNextStep()}
+                    className={`px-8 py-3 rounded-xl font-semibold text-white transition-all ${
+                      canGoToNextStep()
+                        ? "bg-teal-600 hover:bg-teal-700"
+                        : "bg-gray-300 cursor-not-allowed"
+                    }`}
+                  >
+                    Lanjut ke Langkah 2 →
+                  </button>
                 </div>
               </div>
             )}
 
-            {/* Submit Button - Full Width on Mobile */}
-            <div className="pt-6">
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className={`w-full bg-teal-600 text-white py-4 rounded-xl font-semibold text-base sm:text-lg hover:bg-teal-700 transition-all shadow-md hover:shadow-lg flex items-center justify-center ${
-                  isSubmitting ? "opacity-75 cursor-not-allowed" : ""
-                }`}
-              >
-                {isSubmitting ? (
-                  <>
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Memproses...
-                  </>
-                ) : (
-                  "Ajukan Surat"
+            {/* STEP 2: Upload Foto KTP */}
+            {currentStep === 2 && (
+              <div className="space-y-6">
+                <div className="text-center mb-6">
+                  <h2 className="text-2xl font-bold text-gray-800 mb-2">
+                    Langkah 2: Upload Foto KTP
+                  </h2>
+                  <p className="text-gray-600 text-sm">
+                    Foto KTP diperlukan untuk validasi oleh perangkat desa
+                  </p>
+                </div>
+
+                <div className="max-w-md mx-auto">
+                  {!fotoKtp ? (
+                    <div className="space-y-4">
+                      {/* Opsi 1: Foto Langsung dengan Kamera */}
+                      <div>
+                        <input
+                          type="file"
+                          id="foto-kamera"
+                          onChange={handleFotoKtpChange}
+                          accept="image/*"
+                          capture="environment"
+                          className="hidden"
+                        />
+                        <label
+                          htmlFor="foto-kamera"
+                          className="block border-2 border-teal-500 bg-teal-50 rounded-xl p-6 text-center cursor-pointer hover:bg-teal-100 transition-all"
+                        >
+                          <div className="space-y-2">
+                            <div className="inline-flex items-center justify-center w-16 h-16 bg-teal-100 rounded-lg mx-auto">
+                              <svg
+                                className="w-8 h-8 text-teal-600"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+                                />
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+                                />
+                              </svg>
+                            </div>
+                            <div>
+                              <p className="text-lg text-teal-800 font-bold">
+                                📸 Foto Pakai Kamera
+                              </p>
+                              <p className="text-sm text-teal-600 mt-1">
+                                Langsung ambil foto KTP sekarang
+                              </p>
+                            </div>
+                          </div>
+                        </label>
+                      </div>
+
+                      {/* Divider */}
+                      <div className="flex items-center gap-3">
+                        <div className="flex-1 border-t border-gray-300"></div>
+                        <span className="text-sm text-gray-500">atau</span>
+                        <div className="flex-1 border-t border-gray-300"></div>
+                      </div>
+
+                      {/* Opsi 2: Pilih dari Galeri/Folder */}
+                      <div>
+                        <input
+                          type="file"
+                          id="pilih-galeri"
+                          onChange={handleFotoKtpChange}
+                          accept="image/*"
+                          className="hidden"
+                        />
+                        <label
+                          htmlFor="pilih-galeri"
+                          className="block border-2 border-gray-300 bg-white rounded-xl p-6 text-center cursor-pointer hover:border-teal-400 hover:bg-gray-50 transition-all"
+                        >
+                          <div className="space-y-2">
+                            <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-lg mx-auto">
+                              <svg
+                                className="w-8 h-8 text-gray-600"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                />
+                              </svg>
+                            </div>
+                            <div>
+                              <p className="text-lg text-gray-700 font-bold">
+                                📁 Pilih dari Galeri
+                              </p>
+                              <p className="text-sm text-gray-500 mt-1">
+                                Pilih foto KTP yang sudah ada (maks 2MB)
+                              </p>
+                            </div>
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="relative">
+                      <div className="border-2 border-teal-500 bg-teal-50 rounded-xl p-6 text-center">
+                        <div className="space-y-3">
+                          <svg
+                            className="h-16 w-16 text-teal-600 mx-auto"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                          </svg>
+                          <p className="text-lg text-teal-700 font-medium">
+                            ✅ Foto KTP Berhasil Diupload
+                          </p>
+                          <p className="text-sm text-gray-600">{fotoKtp.name}</p>
+                        </div>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={removeFotoKtp}
+                        className="absolute -top-3 -right-3 w-10 h-10 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors shadow-lg flex items-center justify-center text-xl"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Preview */}
+                  {fotoKtpPreview && (
+                    <div className="mt-4">
+                      <p className="text-sm font-medium text-gray-700 mb-2">Preview:</p>
+                      <img
+                        src={fotoKtpPreview}
+                        alt="Preview KTP"
+                        className="w-full rounded-lg border-2 border-gray-200"
+                      />
+                    </div>
+                  )}
+                </div>
+
+                {/* Navigation */}
+                <div className="flex justify-between pt-4">
+                  <button
+                    onClick={goToPrevStep}
+                    className="px-8 py-3 rounded-xl font-semibold text-gray-700 bg-gray-200 hover:bg-gray-300 transition-all"
+                  >
+                    ← Kembali
+                  </button>
+                  <button
+                    onClick={goToNextStep}
+                    disabled={!canGoToNextStep()}
+                    className={`px-8 py-3 rounded-xl font-semibold text-white transition-all ${
+                      canGoToNextStep()
+                        ? "bg-teal-600 hover:bg-teal-700"
+                        : "bg-gray-300 cursor-not-allowed"
+                    }`}
+                  >
+                    Lanjut ke Langkah 3 →
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* STEP 3: Pilih Jenis Surat */}
+            {currentStep === 3 && (
+              <div className="space-y-6">
+                <div className="text-center mb-6">
+                  <h2 className="text-2xl font-bold text-gray-800 mb-2">
+                    Langkah 3: Pilih Jenis Surat
+                  </h2>
+                  <p className="text-gray-600 text-sm">
+                    Pilih surat yang ingin Anda ajukan
+                  </p>
+                </div>
+
+                {/* Pilihan Surat dalam Card */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {Object.entries(letterLabels).map(([value, label]) => (
+                    <button
+                      key={value}
+                      onClick={() => setSelectedLetter(value as LetterType)}
+                      className={`p-4 rounded-xl border-2 text-left transition-all ${
+                        selectedLetter === value
+                          ? "border-teal-600 bg-teal-50"
+                          : "border-gray-300 hover:border-teal-400 hover:bg-gray-50"
+                      }`}
+                    >
+                      <div className="flex items-start gap-3">
+                        <div
+                          className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                            selectedLetter === value
+                              ? "border-teal-600 bg-teal-600"
+                              : "border-gray-300"
+                          }`}
+                        >
+                          {selectedLetter === value && (
+                            <svg
+                              className="w-4 h-4 text-white"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={3}
+                                d="M5 13l4 4L19 7"
+                              />
+                            </svg>
+                          )}
+                        </div>
+                        <div>
+                          <p className="font-medium text-gray-800">{label}</p>
+                        </div>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+
+                {/* Form Data Tambahan (Simpel) */}
+                {selectedLetter && (
+                  <div className="bg-gray-50 rounded-xl p-4 sm:p-6 space-y-4 mt-6">
+                    <h3 className="font-semibold text-gray-800 mb-4">
+                      Informasi Tambahan untuk {letterLabels[selectedLetter]}
+                    </h3>
+
+                    {/* SURAT USAHA */}
+                    {selectedLetter === "usaha" && (
+                      <div className="space-y-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Jenis Usaha Anda <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            value={dataTambahan.jenisUsaha || ""}
+                            onChange={(e) =>
+                              handleDataTambahanChange("jenisUsaha", e.target.value)
+                            }
+                            className="w-full px-4 py-3 rounded-xl border-2 border-gray-300 focus:border-teal-500 focus:outline-none"
+                            placeholder="Contoh: Warung Nasi, Toko Kelontong, dll"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Lokasi Usaha <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            value={dataTambahan.lokasiUsaha || ""}
+                            onChange={(e) =>
+                              handleDataTambahanChange("lokasiUsaha", e.target.value)
+                            }
+                            className="w-full px-4 py-3 rounded-xl border-2 border-gray-300 focus:border-teal-500 focus:outline-none"
+                            placeholder="Contoh: Desa Pulo Reudeup"
+                          />
+                        </div>
+                      </div>
+                    )}
+
+                    {/* SURAT MENINGGAL */}
+                    {selectedLetter === "meninggal" && (
+                      <div className="space-y-4">
+                        <p className="text-sm text-gray-600 mb-2">
+                          💡 <strong>Catatan:</strong> Data lengkap akan diminta saat verifikasi
+                          oleh perangkat desa
+                        </p>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Nama yang Meninggal <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            value={dataTambahan.namaAlmarhum || ""}
+                            onChange={(e) =>
+                              handleDataTambahanChange("namaAlmarhum", e.target.value)
+                            }
+                            className="w-full px-4 py-3 rounded-xl border-2 border-gray-300 focus:border-teal-500 focus:outline-none"
+                            placeholder="Nama lengkap"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Tanggal Meninggal <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="date"
+                            value={dataTambahan.tanggalMeninggal || ""}
+                            onChange={(e) =>
+                              handleDataTambahanChange("tanggalMeninggal", e.target.value)
+                            }
+                            className="w-full px-4 py-3 rounded-xl border-2 border-gray-300 focus:border-teal-500 focus:outline-none"
+                          />
+                        </div>
+                      </div>
+                    )}
+
+                    {/* SURAT TIDAK MAMPU */}
+                    {selectedLetter === "tidak-mampu" && (
+                      <div className="space-y-4">
+                        <p className="text-sm text-gray-600 mb-2">
+                          💡 <strong>Catatan:</strong> Untuk keperluan bantuan atau beasiswa
+                        </p>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Nama Orang Tua/Wali <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            value={dataTambahan.namaOrangTua || ""}
+                            onChange={(e) =>
+                              handleDataTambahanChange("namaOrangTua", e.target.value)
+                            }
+                            className="w-full px-4 py-3 rounded-xl border-2 border-gray-300 focus:border-teal-500 focus:outline-none"
+                            placeholder="Nama lengkap orang tua/wali"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Keperluan Surat <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            value={dataTambahan.keperluan || ""}
+                            onChange={(e) =>
+                              handleDataTambahanChange("keperluan", e.target.value)
+                            }
+                            className="w-full px-4 py-3 rounded-xl border-2 border-gray-300 focus:border-teal-500 focus:outline-none"
+                            placeholder="Contoh: Beasiswa, Bantuan pendidikan"
+                          />
+                        </div>
+                      </div>
+                    )}
+
+                    {/* SURAT BELUM MENIKAH */}
+                    {selectedLetter === "belum-menikah" && (
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Keperluan Surat <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          value={dataTambahan.keperluan || ""}
+                          onChange={(e) => handleDataTambahanChange("keperluan", e.target.value)}
+                          className="w-full px-4 py-3 rounded-xl border-2 border-gray-300 focus:border-teal-500 focus:outline-none"
+                          placeholder="Contoh: Melamar kerja, Pendaftaran CPNS"
+                        />
+                      </div>
+                    )}
+
+                    {/* SURAT DOMISILI */}
+                    {selectedLetter === "domisili" && (
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Keperluan Surat <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          value={dataTambahan.keperluan || ""}
+                          onChange={(e) => handleDataTambahanChange("keperluan", e.target.value)}
+                          className="w-full px-4 py-3 rounded-xl border-2 border-gray-300 focus:border-teal-500 focus:outline-none"
+                          placeholder="Contoh: Pembuatan SIM, Daftar sekolah"
+                        />
+                      </div>
+                    )}
+
+                    {/* SURAT BERKELAKUAN BAIK */}
+                    {selectedLetter === "berkelakuan-baik" && (
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Keperluan Surat <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          value={dataTambahan.keperluan || ""}
+                          onChange={(e) => handleDataTambahanChange("keperluan", e.target.value)}
+                          className="w-full px-4 py-3 rounded-xl border-2 border-gray-300 focus:border-teal-500 focus:outline-none"
+                          placeholder="Contoh: Melamar kerja, Pendaftaran sekolah"
+                        />
+                      </div>
+                    )}
+                  </div>
                 )}
-              </button>
-            </div>
-          </form>
+
+                {/* Keterangan Tambahan */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Catatan Tambahan (Opsional)
+                  </label>
+                  <textarea
+                    name="keterangan"
+                    value={formData.keterangan}
+                    onChange={handleInputChange}
+                    rows={3}
+                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-300 focus:border-teal-500 focus:outline-none"
+                    placeholder="Tambahkan catatan jika ada"
+                  />
+                </div>
+
+                {/* Navigation */}
+                <div className="flex justify-between pt-4">
+                  <button
+                    onClick={goToPrevStep}
+                    className="px-8 py-3 rounded-xl font-semibold text-gray-700 bg-gray-200 hover:bg-gray-300 transition-all"
+                  >
+                    ← Kembali
+                  </button>
+                  <button
+                    onClick={goToNextStep}
+                    disabled={!canGoToNextStep()}
+                    className={`px-8 py-3 rounded-xl font-semibold text-white transition-all ${
+                      canGoToNextStep()
+                        ? "bg-teal-600 hover:bg-teal-700"
+                        : "bg-gray-300 cursor-not-allowed"
+                    }`}
+                  >
+                    Lanjut ke Konfirmasi →
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* STEP 4: Konfirmasi & Submit */}
+            {currentStep === 4 && (
+              <div className="space-y-6">
+                <div className="text-center mb-6">
+                  <h2 className="text-2xl font-bold text-gray-800 mb-2">
+                    Langkah 4: Konfirmasi Data
+                  </h2>
+                  <p className="text-gray-600 text-sm">
+                    Periksa kembali data Anda sebelum mengirim
+                  </p>
+                </div>
+
+                {/* Summary */}
+                <div className="bg-gray-50 rounded-xl p-6 space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-sm text-gray-600">NIK</p>
+                      <p className="font-medium text-gray-800">{formData.no_nik}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600">Nomor KK</p>
+                      <p className="font-medium text-gray-800">{formData.no_kk}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600">Nama Lengkap</p>
+                      <p className="font-medium text-gray-800">{formData.namaLengkap}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600">Jenis Surat</p>
+                      <p className="font-medium text-gray-800">
+                        {selectedLetter ? letterLabels[selectedLetter] : "-"}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <p className="text-sm text-gray-600">Alamat</p>
+                    <p className="font-medium text-gray-800">{formData.alamat}</p>
+                  </div>
+
+                  <div>
+                    <p className="text-sm text-gray-600">Foto KTP</p>
+                    <p className="font-medium text-green-600 flex items-center gap-1">
+                      <span>✓</span> Sudah diupload
+                    </p>
+                  </div>
+                </div>
+
+                {/* Info */}
+                <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-4">
+                  <p className="text-sm text-blue-800">
+                    ℹ️ <strong>Informasi:</strong> Setelah pengajuan dikirim, perangkat desa akan
+                    memverifikasi data Anda. Anda akan dihubungi jika diperlukan informasi
+                    tambahan.
+                  </p>
+                </div>
+
+                {/* Navigation */}
+                <div className="flex justify-between pt-4">
+                  <button
+                    onClick={goToPrevStep}
+                    className="px-8 py-3 rounded-xl font-semibold text-gray-700 bg-gray-200 hover:bg-gray-300 transition-all"
+                  >
+                    ← Kembali
+                  </button>
+                  <button
+                    onClick={handleSubmit}
+                    disabled={isSubmitting}
+                    className={`px-8 py-3 rounded-xl font-semibold text-white transition-all ${
+                      isSubmitting
+                        ? "bg-gray-400 cursor-not-allowed"
+                        : "bg-teal-600 hover:bg-teal-700"
+                    } flex items-center gap-2`}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <svg
+                          className="animate-spin h-5 w-5"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          ></circle>
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                          ></path>
+                        </svg>
+                        Mengirim...
+                      </>
+                    ) : (
+                      <>
+                        <span>✓</span> Kirim Pengajuan
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Help Section */}
+        <div className="max-w-3xl mx-auto mt-8 text-center">
+          <p className="text-sm text-gray-600">
+            💬 Butuh bantuan? Hubungi perangkat desa atau datang langsung ke kantor desa
+          </p>
         </div>
       </div>
 
-      {/* Modal - Mobile Optimized */}
+      {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-xl animate-scale-up">
             <div className="flex flex-col items-center">
               {modalContent.isSuccess ? (
                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
-                  <svg className="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  <svg
+                    className="w-10 h-10 text-green-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M5 13l4 4L19 7"
+                    />
                   </svg>
                 </div>
               ) : (
                 <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4">
-                  <svg className="w-10 h-10 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                  <svg
+                    className="w-10 h-10 text-red-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
                   </svg>
                 </div>
               )}
 
-              <h3 className={`text-xl font-bold mb-3 ${modalContent.isSuccess ? "text-green-600" : "text-red-600"}`}>
+              <h3
+                className={`text-xl font-bold mb-3 ${
+                  modalContent.isSuccess ? "text-green-600" : "text-red-600"
+                }`}
+              >
                 {modalContent.title}
               </h3>
 
@@ -799,6 +1088,7 @@ export default function FormPengajuanSurat() {
         </div>
       )}
 
+
       <ToastContainer position="top-center" autoClose={3000} />
       <Footer />
 
@@ -820,9 +1110,3 @@ export default function FormPengajuanSurat() {
     </div>
   );
 }
-
-
-
-
-
-

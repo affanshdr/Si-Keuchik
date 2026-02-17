@@ -125,30 +125,27 @@ exports.Prisma.WargaScalarFieldEnum = {
   nama_lengkap: 'nama_lengkap',
   no_nik: 'no_nik',
   no_kk: 'no_kk',
+  tempat_lahir: 'tempat_lahir',
+  tanggal_lahir: 'tanggal_lahir',
+  jenis_kelamin: 'jenis_kelamin',
+  agama: 'agama',
+  pekerjaan: 'pekerjaan',
   alamat: 'alamat',
   createdAt: 'createdAt'
 };
 
 exports.Prisma.PengajuanSuratScalarFieldEnum = {
   id: 'id',
-  nama_lengkap: 'nama_lengkap',
-  no_nik: 'no_nik',
-  no_kk: 'no_kk',
-  alamat: 'alamat',
+  wargaId: 'wargaId',
   jenis_surat: 'jenis_surat',
-  keterangan: 'keterangan',
-  foto_ktp: 'foto_ktp',
   data_tambahan: 'data_tambahan',
   status: 'status',
   no_pengajuan: 'no_pengajuan',
   catatan_penolakan: 'catatan_penolakan',
-  tanggal_pengajuan: 'tanggal_pengajuan',
-  tanggal_diproses: 'tanggal_diproses',
-  tanggal_selesai: 'tanggal_selesai',
   nomor_surat: 'nomor_surat',
   file_surat: 'file_surat',
-  tanggal_diterbitkan: 'tanggal_diterbitkan',
-  ditandatangani_oleh: 'ditandatangani_oleh',
+  tanggal_pengajuan: 'tanggal_pengajuan',
+  tanggal_selesai: 'tanggal_selesai',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -160,28 +157,6 @@ exports.Prisma.AdminScalarFieldEnum = {
   password: 'password',
   jabatan: 'jabatan',
   no_hp: 'no_hp',
-  createdAt: 'createdAt'
-};
-
-exports.Prisma.TemplateSuratScalarFieldEnum = {
-  id: 'id',
-  judul: 'judul',
-  jenis_surat: 'jenis_surat',
-  terakhirDiubah: 'terakhirDiubah',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.UserScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  email: 'email'
-};
-
-exports.Prisma.TestingScalarFieldEnum = {
-  id: 'id',
-  nama: 'nama',
-  status: 'status',
   createdAt: 'createdAt'
 };
 
@@ -200,25 +175,22 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 exports.Prisma.JsonNullValueFilter = {
   DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
 };
 
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
-};
-
 
 exports.Prisma.ModelName = {
   Warga: 'Warga',
   PengajuanSurat: 'PengajuanSurat',
-  Admin: 'Admin',
-  TemplateSurat: 'TemplateSurat',
-  User: 'User',
-  Testing: 'Testing'
+  Admin: 'Admin'
 };
 
 /**

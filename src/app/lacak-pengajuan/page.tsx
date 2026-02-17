@@ -3,19 +3,24 @@ import { useState } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
+interface Warga {
+  no_kk: string;
+  alamat: string;
+}
+
 interface Pengajuan {
   id: number;
   no_pengajuan: string;
-  no_nik: string;
-  nama_lengkap: string;
   jenis_surat: string;
   status: string;
   tanggal_pengajuan: string;
-  tanggal_diproses?: string;
   tanggal_selesai?: string;
   keterangan?: string;
   catatan_penolakan?: string;
 }
+
+
+
 
 export default function LacakPengajuan() {
   const [nik, setNik] = useState("");
@@ -45,7 +50,7 @@ export default function LacakPengajuan() {
 
       if (response.ok) {
         // Filter hanya pengajuan dengan NIK yang sama persis
-        const filtered = data.data.filter((item: Pengajuan) => item.no_nik === nik);
+        const filtered = data.data.filter((item: Pengajuan) => item.warga.no_nik === nik);
         setPengajuanList(filtered);
         setFilteredList(filtered);
         setSelectedStatus("semua");
@@ -136,11 +141,13 @@ export default function LacakPengajuan() {
   const formatJenisSurat = (jenis: string) => {
     const mapping: Record<string, string> = {
       domisili: "Surat Keterangan Domisili",
+      kehilangan: "Surat Keterangan Kehilangan",
+      lanjut_usia: "Surat Keterangan Lanjut Usia",
       usaha: "Surat Keterangan Usaha",
-      "belum-menikah": "Surat Keterangan Belum Menikah",
-      "tidak-mampu": "Surat Keterangan Tidak Mampu",
+      "belum_menikah": "Surat Keterangan Belum Menikah",
+      "kurang_mampu": "Surat Keterangan Kurang Mampu",
       meninggal: "Surat Keterangan Meninggal",
-      "berkelakuan-baik": "Surat Keterangan Berkelakuan Baik",
+      "berkelakuan_baik": "Surat Keterangan Berkelakuan Baik",
     };
     return mapping[jenis] || jenis;
   };
@@ -227,7 +234,7 @@ export default function LacakPengajuan() {
                       Ditemukan {pengajuanList.length} Pengajuan
                     </p>
                     <p className="text-sm text-gray-600">
-                      NIK: {nik} - {pengajuanList[0]?.nama_lengkap}
+                      NIK: {nik} - {pengajuanList[0]?.warga.nama_lengkap}
                     </p>
                   </div>
                 </div>
@@ -465,11 +472,11 @@ export default function LacakPengajuan() {
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4">
                   <p className="text-xs text-gray-600 mb-1">Nama Pemohon</p>
-                  <p className="font-semibold text-gray-800">{selectedPengajuan.nama_lengkap}</p>
+                  <p className="font-semibold text-gray-800">{selectedPengajuan.warga.nama_lengkap}</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4">
                   <p className="text-xs text-gray-600 mb-1">NIK</p>
-                  <p className="font-semibold text-gray-800">{selectedPengajuan.no_nik}</p>
+                  <p className="font-semibold text-gray-800">{selectedPengajuan.warga.no_nik}</p>
                 </div>
               </div>
 
@@ -491,32 +498,6 @@ export default function LacakPengajuan() {
                       <p className="font-medium text-gray-800">Pengajuan Diterima</p>
                       <p className="text-sm text-gray-600">
                         {formatDate(selectedPengajuan.tanggal_pengajuan)}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <div
-                      className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
-                        selectedPengajuan.tanggal_diproses ? "bg-green-100" : "bg-gray-100"
-                      }`}
-                    >
-                      {selectedPengajuan.tanggal_diproses ? (
-                        <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                          <path
-                            fillRule="evenodd"
-                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      ) : (
-                        <div className="w-3 h-3 bg-gray-400 rounded-full"></div>
-                      )}
-                    </div>
-                    <div className="flex-1">
-                      <p className="font-medium text-gray-800">Sedang Diproses</p>
-                      <p className="text-sm text-gray-600">
-                        {formatDate(selectedPengajuan.tanggal_diproses)}
                       </p>
                     </div>
                   </div>
@@ -564,6 +545,8 @@ export default function LacakPengajuan() {
                 </div>
               )}
 
+
+
               {/* Button Close */}
               <button
                 onClick={() => setIsModalOpen(false)}
@@ -575,6 +558,9 @@ export default function LacakPengajuan() {
           </div>
         </div>
       )}
+
+
+
 
       <Footer />
     </div>

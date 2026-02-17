@@ -10,58 +10,48 @@ datasource db {
 }
 
 // Data Warga (Master Data)
+// Field yang muncul di hampir semua jenis surat
 model Warga {
-  id           Int      @id @default(autoincrement())
-  nama_lengkap String
-  no_nik       String   @unique
-  no_kk        String
-  alamat       String
-  createdAt    DateTime @default(now())
+  id            Int      @id @default(autoincrement())
+  nama_lengkap  String
+  no_nik        String   @unique
+  no_kk         String
+  tempat_lahir  String
+  tanggal_lahir String
+  jenis_kelamin String
+  agama         String? // dipakai di: kurang_mampu, lanjut_usia, berkelakuan_baik
+  pekerjaan     String
+  alamat        String
+  createdAt     DateTime @default(now())
+
+  pengajuan PengajuanSurat[]
 }
 
-// Pengajuan Surat dari Warga
+// Pengajuan Surat
+// data_tambahan (Json?) berisi field unik per jenis surat:
+//   kehilangan    -> { alasan: "KTP hilang" }
+//   usaha         -> { jenis_usaha: "Usaha Nasi Ayam Geprek" }
+//   belum_menikah -> { keperluan: "Rekrutmen Nasional PLN Group 2025" }
+//   kurang_mampu  -> { orangtua: { nama, nik, tempat_lahir, tanggal_lahir, jenis_kelamin, agama, pekerjaan, alamat } }
+//   meninggal     -> { umur, hari, tanggal, pukul, tempat, pelapor: { nama, nik, jenis_kelamin, alamat, hubungan } }
 model PengajuanSurat {
-  id Int @id @default(autoincrement())
-
-  // Data Pemohon (auto-fill dari Warga berdasarkan NIK)
-  nama_lengkap String
-  no_nik       String
-  no_kk        String
-  alamat       String
-
-  // Jenis Surat
-  jenis_surat String // domisili, usaha, belum-menikah, tidak-mampu, meninggal, berkelakuan-baik
-  keterangan  String? // Catatan/keperluan tambahan
-
-  // Upload untuk Validasi
-  foto_ktp String? // Foto KTP untuk validasi oleh Keuchik
-
-  // Data Tambahan per Jenis Surat (JSON)
-  // Contoh untuk Surat Usaha: {"jenisUsaha": "USAHA NASI AYAM GEPREK", "lokasiUsaha": "Desa Pulo Reudeup"}
-  // Contoh untuk Surat Meninggal: {"namaAlmarhum": "...", "nikAlmarhum": "...", "tanggalMeninggal": "...", "pelapor": {...}}
-  data_tambahan Json?
-
-  // Status Pengajuan
-  status            String  @default("diajukan") // diajukan, diproses, selesai, ditolak
-  no_pengajuan      String? @unique
-  catatan_penolakan String? // Jika ditolak, alasannya apa
-
-  // Tracking Waktu
+  id                Int       @id @default(autoincrement())
+  wargaId           Int
+  warga             Warga     @relation(fields: [wargaId], references: [id])
+  jenis_surat       String // domisili, kehilangan, kurang_mampu, lanjut_usia, usaha, belum_menikah, meninggal, berkelakuan_baik
+  data_tambahan     Json?
+  status            String    @default("diajukan") // diajukan, diproses, selesai, ditolak
+  no_pengajuan      String?   @unique
+  catatan_penolakan String?
+  nomor_surat       String?
+  file_surat        String?
   tanggal_pengajuan DateTime  @default(now())
-  tanggal_diproses  DateTime?
   tanggal_selesai   DateTime?
-
-  // Surat yang Dihasilkan (setelah approved)
-  nomor_surat         String? // Format: 68/2030/SKU/VIII/2025
-  file_surat          String? // Path/URL ke PDF surat hasil
-  tanggal_diterbitkan DateTime?
-  ditandatangani_oleh String? // Nama Keuchik/Perangkat Desa
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
 }
 
-// Admin/Perangkat Desa (yang login dan approve surat)
+// Admin / Perangkat Desa
 model Admin {
   id        Int      @id @default(autoincrement())
   nama      String
@@ -69,29 +59,5 @@ model Admin {
   password  String
   jabatan   String   @default("Admin") // Keuchik, Sekretaris Desa, Kaur, Admin
   no_hp     String?
-  createdAt DateTime @default(now())
-}
-
-// Template Surat (opsional, untuk generate PDF)
-model TemplateSurat {
-  id             String   @id @default(cuid())
-  judul          String
-  jenis_surat    String   @unique
-  terakhirDiubah DateTime
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-}
-
-// Model tambahan (jika masih diperlukan)
-model User {
-  id    Int    @id @default(autoincrement())
-  name  String
-  email String @unique
-}
-
-model Testing {
-  id        Int      @id @default(autoincrement())
-  nama      String
-  status    String   @default("active")
   createdAt DateTime @default(now())
 }

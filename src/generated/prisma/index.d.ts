@@ -28,21 +28,6 @@ export type PengajuanSurat = $Result.DefaultSelection<Prisma.$PengajuanSuratPayl
  * 
  */
 export type Admin = $Result.DefaultSelection<Prisma.$AdminPayload>
-/**
- * Model TemplateSurat
- * 
- */
-export type TemplateSurat = $Result.DefaultSelection<Prisma.$TemplateSuratPayload>
-/**
- * Model User
- * 
- */
-export type User = $Result.DefaultSelection<Prisma.$UserPayload>
-/**
- * Model Testing
- * 
- */
-export type Testing = $Result.DefaultSelection<Prisma.$TestingPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -198,36 +183,6 @@ export class PrismaClient<
     * ```
     */
   get admin(): Prisma.AdminDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.templateSurat`: Exposes CRUD operations for the **TemplateSurat** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more TemplateSurats
-    * const templateSurats = await prisma.templateSurat.findMany()
-    * ```
-    */
-  get templateSurat(): Prisma.TemplateSuratDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.user`: Exposes CRUD operations for the **User** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Users
-    * const users = await prisma.user.findMany()
-    * ```
-    */
-  get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.testing`: Exposes CRUD operations for the **Testing** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Testings
-    * const testings = await prisma.testing.findMany()
-    * ```
-    */
-  get testing(): Prisma.TestingDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -670,10 +625,7 @@ export namespace Prisma {
   export const ModelName: {
     Warga: 'Warga',
     PengajuanSurat: 'PengajuanSurat',
-    Admin: 'Admin',
-    TemplateSurat: 'TemplateSurat',
-    User: 'User',
-    Testing: 'Testing'
+    Admin: 'Admin'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -692,7 +644,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "warga" | "pengajuanSurat" | "admin" | "templateSurat" | "user" | "testing"
+      modelProps: "warga" | "pengajuanSurat" | "admin"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -918,228 +870,6 @@ export namespace Prisma {
           }
         }
       }
-      TemplateSurat: {
-        payload: Prisma.$TemplateSuratPayload<ExtArgs>
-        fields: Prisma.TemplateSuratFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.TemplateSuratFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TemplateSuratPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.TemplateSuratFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TemplateSuratPayload>
-          }
-          findFirst: {
-            args: Prisma.TemplateSuratFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TemplateSuratPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.TemplateSuratFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TemplateSuratPayload>
-          }
-          findMany: {
-            args: Prisma.TemplateSuratFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TemplateSuratPayload>[]
-          }
-          create: {
-            args: Prisma.TemplateSuratCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TemplateSuratPayload>
-          }
-          createMany: {
-            args: Prisma.TemplateSuratCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.TemplateSuratCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TemplateSuratPayload>[]
-          }
-          delete: {
-            args: Prisma.TemplateSuratDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TemplateSuratPayload>
-          }
-          update: {
-            args: Prisma.TemplateSuratUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TemplateSuratPayload>
-          }
-          deleteMany: {
-            args: Prisma.TemplateSuratDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.TemplateSuratUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.TemplateSuratUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TemplateSuratPayload>[]
-          }
-          upsert: {
-            args: Prisma.TemplateSuratUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TemplateSuratPayload>
-          }
-          aggregate: {
-            args: Prisma.TemplateSuratAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTemplateSurat>
-          }
-          groupBy: {
-            args: Prisma.TemplateSuratGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TemplateSuratGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.TemplateSuratCountArgs<ExtArgs>
-            result: $Utils.Optional<TemplateSuratCountAggregateOutputType> | number
-          }
-        }
-      }
-      User: {
-        payload: Prisma.$UserPayload<ExtArgs>
-        fields: Prisma.UserFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.UserFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.UserFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
-          }
-          findFirst: {
-            args: Prisma.UserFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.UserFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
-          }
-          findMany: {
-            args: Prisma.UserFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
-          }
-          create: {
-            args: Prisma.UserCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
-          }
-          createMany: {
-            args: Prisma.UserCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.UserCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
-          }
-          delete: {
-            args: Prisma.UserDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
-          }
-          update: {
-            args: Prisma.UserUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
-          }
-          deleteMany: {
-            args: Prisma.UserDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.UserUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.UserUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
-          }
-          upsert: {
-            args: Prisma.UserUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
-          }
-          aggregate: {
-            args: Prisma.UserAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateUser>
-          }
-          groupBy: {
-            args: Prisma.UserGroupByArgs<ExtArgs>
-            result: $Utils.Optional<UserGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.UserCountArgs<ExtArgs>
-            result: $Utils.Optional<UserCountAggregateOutputType> | number
-          }
-        }
-      }
-      Testing: {
-        payload: Prisma.$TestingPayload<ExtArgs>
-        fields: Prisma.TestingFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.TestingFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestingPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.TestingFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestingPayload>
-          }
-          findFirst: {
-            args: Prisma.TestingFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestingPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.TestingFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestingPayload>
-          }
-          findMany: {
-            args: Prisma.TestingFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestingPayload>[]
-          }
-          create: {
-            args: Prisma.TestingCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestingPayload>
-          }
-          createMany: {
-            args: Prisma.TestingCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.TestingCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestingPayload>[]
-          }
-          delete: {
-            args: Prisma.TestingDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestingPayload>
-          }
-          update: {
-            args: Prisma.TestingUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestingPayload>
-          }
-          deleteMany: {
-            args: Prisma.TestingDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.TestingUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.TestingUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestingPayload>[]
-          }
-          upsert: {
-            args: Prisma.TestingUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TestingPayload>
-          }
-          aggregate: {
-            args: Prisma.TestingAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTesting>
-          }
-          groupBy: {
-            args: Prisma.TestingGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TestingGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.TestingCountArgs<ExtArgs>
-            result: $Utils.Optional<TestingCountAggregateOutputType> | number
-          }
-        }
-      }
     }
   } & {
     other: {
@@ -1227,9 +957,6 @@ export namespace Prisma {
     warga?: WargaOmit
     pengajuanSurat?: PengajuanSuratOmit
     admin?: AdminOmit
-    templateSurat?: TemplateSuratOmit
-    user?: UserOmit
-    testing?: TestingOmit
   }
 
   /* Types for Logging */
@@ -1319,6 +1046,36 @@ export namespace Prisma {
    */
 
 
+  /**
+   * Count Type WargaCountOutputType
+   */
+
+  export type WargaCountOutputType = {
+    pengajuan: number
+  }
+
+  export type WargaCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    pengajuan?: boolean | WargaCountOutputTypeCountPengajuanArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * WargaCountOutputType without action
+   */
+  export type WargaCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WargaCountOutputType
+     */
+    select?: WargaCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * WargaCountOutputType without action
+   */
+  export type WargaCountOutputTypeCountPengajuanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PengajuanSuratWhereInput
+  }
+
 
   /**
    * Models
@@ -1349,6 +1106,11 @@ export namespace Prisma {
     nama_lengkap: string | null
     no_nik: string | null
     no_kk: string | null
+    tempat_lahir: string | null
+    tanggal_lahir: string | null
+    jenis_kelamin: string | null
+    agama: string | null
+    pekerjaan: string | null
     alamat: string | null
     createdAt: Date | null
   }
@@ -1358,6 +1120,11 @@ export namespace Prisma {
     nama_lengkap: string | null
     no_nik: string | null
     no_kk: string | null
+    tempat_lahir: string | null
+    tanggal_lahir: string | null
+    jenis_kelamin: string | null
+    agama: string | null
+    pekerjaan: string | null
     alamat: string | null
     createdAt: Date | null
   }
@@ -1367,6 +1134,11 @@ export namespace Prisma {
     nama_lengkap: number
     no_nik: number
     no_kk: number
+    tempat_lahir: number
+    tanggal_lahir: number
+    jenis_kelamin: number
+    agama: number
+    pekerjaan: number
     alamat: number
     createdAt: number
     _all: number
@@ -1386,6 +1158,11 @@ export namespace Prisma {
     nama_lengkap?: true
     no_nik?: true
     no_kk?: true
+    tempat_lahir?: true
+    tanggal_lahir?: true
+    jenis_kelamin?: true
+    agama?: true
+    pekerjaan?: true
     alamat?: true
     createdAt?: true
   }
@@ -1395,6 +1172,11 @@ export namespace Prisma {
     nama_lengkap?: true
     no_nik?: true
     no_kk?: true
+    tempat_lahir?: true
+    tanggal_lahir?: true
+    jenis_kelamin?: true
+    agama?: true
+    pekerjaan?: true
     alamat?: true
     createdAt?: true
   }
@@ -1404,6 +1186,11 @@ export namespace Prisma {
     nama_lengkap?: true
     no_nik?: true
     no_kk?: true
+    tempat_lahir?: true
+    tanggal_lahir?: true
+    jenis_kelamin?: true
+    agama?: true
+    pekerjaan?: true
     alamat?: true
     createdAt?: true
     _all?: true
@@ -1500,6 +1287,11 @@ export namespace Prisma {
     nama_lengkap: string
     no_nik: string
     no_kk: string
+    tempat_lahir: string
+    tanggal_lahir: string
+    jenis_kelamin: string
+    agama: string | null
+    pekerjaan: string
     alamat: string
     createdAt: Date
     _count: WargaCountAggregateOutputType | null
@@ -1528,8 +1320,15 @@ export namespace Prisma {
     nama_lengkap?: boolean
     no_nik?: boolean
     no_kk?: boolean
+    tempat_lahir?: boolean
+    tanggal_lahir?: boolean
+    jenis_kelamin?: boolean
+    agama?: boolean
+    pekerjaan?: boolean
     alamat?: boolean
     createdAt?: boolean
+    pengajuan?: boolean | Warga$pengajuanArgs<ExtArgs>
+    _count?: boolean | WargaCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["warga"]>
 
   export type WargaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1537,6 +1336,11 @@ export namespace Prisma {
     nama_lengkap?: boolean
     no_nik?: boolean
     no_kk?: boolean
+    tempat_lahir?: boolean
+    tanggal_lahir?: boolean
+    jenis_kelamin?: boolean
+    agama?: boolean
+    pekerjaan?: boolean
     alamat?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["warga"]>
@@ -1546,6 +1350,11 @@ export namespace Prisma {
     nama_lengkap?: boolean
     no_nik?: boolean
     no_kk?: boolean
+    tempat_lahir?: boolean
+    tanggal_lahir?: boolean
+    jenis_kelamin?: boolean
+    agama?: boolean
+    pekerjaan?: boolean
     alamat?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["warga"]>
@@ -1555,20 +1364,38 @@ export namespace Prisma {
     nama_lengkap?: boolean
     no_nik?: boolean
     no_kk?: boolean
+    tempat_lahir?: boolean
+    tanggal_lahir?: boolean
+    jenis_kelamin?: boolean
+    agama?: boolean
+    pekerjaan?: boolean
     alamat?: boolean
     createdAt?: boolean
   }
 
-  export type WargaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nama_lengkap" | "no_nik" | "no_kk" | "alamat" | "createdAt", ExtArgs["result"]["warga"]>
+  export type WargaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nama_lengkap" | "no_nik" | "no_kk" | "tempat_lahir" | "tanggal_lahir" | "jenis_kelamin" | "agama" | "pekerjaan" | "alamat" | "createdAt", ExtArgs["result"]["warga"]>
+  export type WargaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    pengajuan?: boolean | Warga$pengajuanArgs<ExtArgs>
+    _count?: boolean | WargaCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type WargaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type WargaIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $WargaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Warga"
-    objects: {}
+    objects: {
+      pengajuan: Prisma.$PengajuanSuratPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       nama_lengkap: string
       no_nik: string
       no_kk: string
+      tempat_lahir: string
+      tanggal_lahir: string
+      jenis_kelamin: string
+      agama: string | null
+      pekerjaan: string
       alamat: string
       createdAt: Date
     }, ExtArgs["result"]["warga"]>
@@ -1965,6 +1792,7 @@ export namespace Prisma {
    */
   export interface Prisma__WargaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    pengajuan<T extends Warga$pengajuanArgs<ExtArgs> = {}>(args?: Subset<T, Warga$pengajuanArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PengajuanSuratPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1998,6 +1826,11 @@ export namespace Prisma {
     readonly nama_lengkap: FieldRef<"Warga", 'String'>
     readonly no_nik: FieldRef<"Warga", 'String'>
     readonly no_kk: FieldRef<"Warga", 'String'>
+    readonly tempat_lahir: FieldRef<"Warga", 'String'>
+    readonly tanggal_lahir: FieldRef<"Warga", 'String'>
+    readonly jenis_kelamin: FieldRef<"Warga", 'String'>
+    readonly agama: FieldRef<"Warga", 'String'>
+    readonly pekerjaan: FieldRef<"Warga", 'String'>
     readonly alamat: FieldRef<"Warga", 'String'>
     readonly createdAt: FieldRef<"Warga", 'DateTime'>
   }
@@ -2017,6 +1850,10 @@ export namespace Prisma {
      */
     omit?: WargaOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WargaInclude<ExtArgs> | null
+    /**
      * Filter, which Warga to fetch.
      */
     where: WargaWhereUniqueInput
@@ -2035,6 +1872,10 @@ export namespace Prisma {
      */
     omit?: WargaOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WargaInclude<ExtArgs> | null
+    /**
      * Filter, which Warga to fetch.
      */
     where: WargaWhereUniqueInput
@@ -2052,6 +1893,10 @@ export namespace Prisma {
      * Omit specific fields from the Warga
      */
     omit?: WargaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WargaInclude<ExtArgs> | null
     /**
      * Filter, which Warga to fetch.
      */
@@ -2101,6 +1946,10 @@ export namespace Prisma {
      */
     omit?: WargaOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WargaInclude<ExtArgs> | null
+    /**
      * Filter, which Warga to fetch.
      */
     where?: WargaWhereInput
@@ -2149,6 +1998,10 @@ export namespace Prisma {
      */
     omit?: WargaOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WargaInclude<ExtArgs> | null
+    /**
      * Filter, which Wargas to fetch.
      */
     where?: WargaWhereInput
@@ -2191,6 +2044,10 @@ export namespace Prisma {
      * Omit specific fields from the Warga
      */
     omit?: WargaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WargaInclude<ExtArgs> | null
     /**
      * The data needed to create a Warga.
      */
@@ -2239,6 +2096,10 @@ export namespace Prisma {
      * Omit specific fields from the Warga
      */
     omit?: WargaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WargaInclude<ExtArgs> | null
     /**
      * The data needed to update a Warga.
      */
@@ -2306,6 +2167,10 @@ export namespace Prisma {
      */
     omit?: WargaOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WargaInclude<ExtArgs> | null
+    /**
      * The filter to search for the Warga to update in case it exists.
      */
     where: WargaWhereUniqueInput
@@ -2332,6 +2197,10 @@ export namespace Prisma {
      */
     omit?: WargaOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WargaInclude<ExtArgs> | null
+    /**
      * Filter which Warga to delete.
      */
     where: WargaWhereUniqueInput
@@ -2352,6 +2221,30 @@ export namespace Prisma {
   }
 
   /**
+   * Warga.pengajuan
+   */
+  export type Warga$pengajuanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PengajuanSurat
+     */
+    select?: PengajuanSuratSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PengajuanSurat
+     */
+    omit?: PengajuanSuratOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengajuanSuratInclude<ExtArgs> | null
+    where?: PengajuanSuratWhereInput
+    orderBy?: PengajuanSuratOrderByWithRelationInput | PengajuanSuratOrderByWithRelationInput[]
+    cursor?: PengajuanSuratWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PengajuanSuratScalarFieldEnum | PengajuanSuratScalarFieldEnum[]
+  }
+
+  /**
    * Warga without action
    */
   export type WargaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2363,6 +2256,10 @@ export namespace Prisma {
      * Omit specific fields from the Warga
      */
     omit?: WargaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WargaInclude<ExtArgs> | null
   }
 
 
@@ -2380,78 +2277,56 @@ export namespace Prisma {
 
   export type PengajuanSuratAvgAggregateOutputType = {
     id: number | null
+    wargaId: number | null
   }
 
   export type PengajuanSuratSumAggregateOutputType = {
     id: number | null
+    wargaId: number | null
   }
 
   export type PengajuanSuratMinAggregateOutputType = {
     id: number | null
-    nama_lengkap: string | null
-    no_nik: string | null
-    no_kk: string | null
-    alamat: string | null
+    wargaId: number | null
     jenis_surat: string | null
-    keterangan: string | null
-    foto_ktp: string | null
     status: string | null
     no_pengajuan: string | null
     catatan_penolakan: string | null
-    tanggal_pengajuan: Date | null
-    tanggal_diproses: Date | null
-    tanggal_selesai: Date | null
     nomor_surat: string | null
     file_surat: string | null
-    tanggal_diterbitkan: Date | null
-    ditandatangani_oleh: string | null
+    tanggal_pengajuan: Date | null
+    tanggal_selesai: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type PengajuanSuratMaxAggregateOutputType = {
     id: number | null
-    nama_lengkap: string | null
-    no_nik: string | null
-    no_kk: string | null
-    alamat: string | null
+    wargaId: number | null
     jenis_surat: string | null
-    keterangan: string | null
-    foto_ktp: string | null
     status: string | null
     no_pengajuan: string | null
     catatan_penolakan: string | null
-    tanggal_pengajuan: Date | null
-    tanggal_diproses: Date | null
-    tanggal_selesai: Date | null
     nomor_surat: string | null
     file_surat: string | null
-    tanggal_diterbitkan: Date | null
-    ditandatangani_oleh: string | null
+    tanggal_pengajuan: Date | null
+    tanggal_selesai: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type PengajuanSuratCountAggregateOutputType = {
     id: number
-    nama_lengkap: number
-    no_nik: number
-    no_kk: number
-    alamat: number
+    wargaId: number
     jenis_surat: number
-    keterangan: number
-    foto_ktp: number
     data_tambahan: number
     status: number
     no_pengajuan: number
     catatan_penolakan: number
-    tanggal_pengajuan: number
-    tanggal_diproses: number
-    tanggal_selesai: number
     nomor_surat: number
     file_surat: number
-    tanggal_diterbitkan: number
-    ditandatangani_oleh: number
+    tanggal_pengajuan: number
+    tanggal_selesai: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -2460,78 +2335,56 @@ export namespace Prisma {
 
   export type PengajuanSuratAvgAggregateInputType = {
     id?: true
+    wargaId?: true
   }
 
   export type PengajuanSuratSumAggregateInputType = {
     id?: true
+    wargaId?: true
   }
 
   export type PengajuanSuratMinAggregateInputType = {
     id?: true
-    nama_lengkap?: true
-    no_nik?: true
-    no_kk?: true
-    alamat?: true
+    wargaId?: true
     jenis_surat?: true
-    keterangan?: true
-    foto_ktp?: true
     status?: true
     no_pengajuan?: true
     catatan_penolakan?: true
-    tanggal_pengajuan?: true
-    tanggal_diproses?: true
-    tanggal_selesai?: true
     nomor_surat?: true
     file_surat?: true
-    tanggal_diterbitkan?: true
-    ditandatangani_oleh?: true
+    tanggal_pengajuan?: true
+    tanggal_selesai?: true
     createdAt?: true
     updatedAt?: true
   }
 
   export type PengajuanSuratMaxAggregateInputType = {
     id?: true
-    nama_lengkap?: true
-    no_nik?: true
-    no_kk?: true
-    alamat?: true
+    wargaId?: true
     jenis_surat?: true
-    keterangan?: true
-    foto_ktp?: true
     status?: true
     no_pengajuan?: true
     catatan_penolakan?: true
-    tanggal_pengajuan?: true
-    tanggal_diproses?: true
-    tanggal_selesai?: true
     nomor_surat?: true
     file_surat?: true
-    tanggal_diterbitkan?: true
-    ditandatangani_oleh?: true
+    tanggal_pengajuan?: true
+    tanggal_selesai?: true
     createdAt?: true
     updatedAt?: true
   }
 
   export type PengajuanSuratCountAggregateInputType = {
     id?: true
-    nama_lengkap?: true
-    no_nik?: true
-    no_kk?: true
-    alamat?: true
+    wargaId?: true
     jenis_surat?: true
-    keterangan?: true
-    foto_ktp?: true
     data_tambahan?: true
     status?: true
     no_pengajuan?: true
     catatan_penolakan?: true
-    tanggal_pengajuan?: true
-    tanggal_diproses?: true
-    tanggal_selesai?: true
     nomor_surat?: true
     file_surat?: true
-    tanggal_diterbitkan?: true
-    ditandatangani_oleh?: true
+    tanggal_pengajuan?: true
+    tanggal_selesai?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -2625,24 +2478,16 @@ export namespace Prisma {
 
   export type PengajuanSuratGroupByOutputType = {
     id: number
-    nama_lengkap: string
-    no_nik: string
-    no_kk: string
-    alamat: string
+    wargaId: number
     jenis_surat: string
-    keterangan: string | null
-    foto_ktp: string | null
     data_tambahan: JsonValue | null
     status: string
     no_pengajuan: string | null
     catatan_penolakan: string | null
-    tanggal_pengajuan: Date
-    tanggal_diproses: Date | null
-    tanggal_selesai: Date | null
     nomor_surat: string | null
     file_surat: string | null
-    tanggal_diterbitkan: Date | null
-    ditandatangani_oleh: string | null
+    tanggal_pengajuan: Date
+    tanggal_selesai: Date | null
     createdAt: Date
     updatedAt: Date
     _count: PengajuanSuratCountAggregateOutputType | null
@@ -2668,125 +2513,99 @@ export namespace Prisma {
 
   export type PengajuanSuratSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    nama_lengkap?: boolean
-    no_nik?: boolean
-    no_kk?: boolean
-    alamat?: boolean
+    wargaId?: boolean
     jenis_surat?: boolean
-    keterangan?: boolean
-    foto_ktp?: boolean
     data_tambahan?: boolean
     status?: boolean
     no_pengajuan?: boolean
     catatan_penolakan?: boolean
-    tanggal_pengajuan?: boolean
-    tanggal_diproses?: boolean
-    tanggal_selesai?: boolean
     nomor_surat?: boolean
     file_surat?: boolean
-    tanggal_diterbitkan?: boolean
-    ditandatangani_oleh?: boolean
+    tanggal_pengajuan?: boolean
+    tanggal_selesai?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    warga?: boolean | WargaDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["pengajuanSurat"]>
 
   export type PengajuanSuratSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    nama_lengkap?: boolean
-    no_nik?: boolean
-    no_kk?: boolean
-    alamat?: boolean
+    wargaId?: boolean
     jenis_surat?: boolean
-    keterangan?: boolean
-    foto_ktp?: boolean
     data_tambahan?: boolean
     status?: boolean
     no_pengajuan?: boolean
     catatan_penolakan?: boolean
-    tanggal_pengajuan?: boolean
-    tanggal_diproses?: boolean
-    tanggal_selesai?: boolean
     nomor_surat?: boolean
     file_surat?: boolean
-    tanggal_diterbitkan?: boolean
-    ditandatangani_oleh?: boolean
+    tanggal_pengajuan?: boolean
+    tanggal_selesai?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    warga?: boolean | WargaDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["pengajuanSurat"]>
 
   export type PengajuanSuratSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    nama_lengkap?: boolean
-    no_nik?: boolean
-    no_kk?: boolean
-    alamat?: boolean
+    wargaId?: boolean
     jenis_surat?: boolean
-    keterangan?: boolean
-    foto_ktp?: boolean
     data_tambahan?: boolean
     status?: boolean
     no_pengajuan?: boolean
     catatan_penolakan?: boolean
-    tanggal_pengajuan?: boolean
-    tanggal_diproses?: boolean
-    tanggal_selesai?: boolean
     nomor_surat?: boolean
     file_surat?: boolean
-    tanggal_diterbitkan?: boolean
-    ditandatangani_oleh?: boolean
+    tanggal_pengajuan?: boolean
+    tanggal_selesai?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    warga?: boolean | WargaDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["pengajuanSurat"]>
 
   export type PengajuanSuratSelectScalar = {
     id?: boolean
-    nama_lengkap?: boolean
-    no_nik?: boolean
-    no_kk?: boolean
-    alamat?: boolean
+    wargaId?: boolean
     jenis_surat?: boolean
-    keterangan?: boolean
-    foto_ktp?: boolean
     data_tambahan?: boolean
     status?: boolean
     no_pengajuan?: boolean
     catatan_penolakan?: boolean
-    tanggal_pengajuan?: boolean
-    tanggal_diproses?: boolean
-    tanggal_selesai?: boolean
     nomor_surat?: boolean
     file_surat?: boolean
-    tanggal_diterbitkan?: boolean
-    ditandatangani_oleh?: boolean
+    tanggal_pengajuan?: boolean
+    tanggal_selesai?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type PengajuanSuratOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nama_lengkap" | "no_nik" | "no_kk" | "alamat" | "jenis_surat" | "keterangan" | "foto_ktp" | "data_tambahan" | "status" | "no_pengajuan" | "catatan_penolakan" | "tanggal_pengajuan" | "tanggal_diproses" | "tanggal_selesai" | "nomor_surat" | "file_surat" | "tanggal_diterbitkan" | "ditandatangani_oleh" | "createdAt" | "updatedAt", ExtArgs["result"]["pengajuanSurat"]>
+  export type PengajuanSuratOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "wargaId" | "jenis_surat" | "data_tambahan" | "status" | "no_pengajuan" | "catatan_penolakan" | "nomor_surat" | "file_surat" | "tanggal_pengajuan" | "tanggal_selesai" | "createdAt" | "updatedAt", ExtArgs["result"]["pengajuanSurat"]>
+  export type PengajuanSuratInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    warga?: boolean | WargaDefaultArgs<ExtArgs>
+  }
+  export type PengajuanSuratIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    warga?: boolean | WargaDefaultArgs<ExtArgs>
+  }
+  export type PengajuanSuratIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    warga?: boolean | WargaDefaultArgs<ExtArgs>
+  }
 
   export type $PengajuanSuratPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "PengajuanSurat"
-    objects: {}
+    objects: {
+      warga: Prisma.$WargaPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      nama_lengkap: string
-      no_nik: string
-      no_kk: string
-      alamat: string
+      wargaId: number
       jenis_surat: string
-      keterangan: string | null
-      foto_ktp: string | null
       data_tambahan: Prisma.JsonValue | null
       status: string
       no_pengajuan: string | null
       catatan_penolakan: string | null
-      tanggal_pengajuan: Date
-      tanggal_diproses: Date | null
-      tanggal_selesai: Date | null
       nomor_surat: string | null
       file_surat: string | null
-      tanggal_diterbitkan: Date | null
-      ditandatangani_oleh: string | null
+      tanggal_pengajuan: Date
+      tanggal_selesai: Date | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["pengajuanSurat"]>
@@ -3183,6 +3002,7 @@ export namespace Prisma {
    */
   export interface Prisma__PengajuanSuratClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    warga<T extends WargaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WargaDefaultArgs<ExtArgs>>): Prisma__WargaClient<$Result.GetResult<Prisma.$WargaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3213,24 +3033,16 @@ export namespace Prisma {
    */
   interface PengajuanSuratFieldRefs {
     readonly id: FieldRef<"PengajuanSurat", 'Int'>
-    readonly nama_lengkap: FieldRef<"PengajuanSurat", 'String'>
-    readonly no_nik: FieldRef<"PengajuanSurat", 'String'>
-    readonly no_kk: FieldRef<"PengajuanSurat", 'String'>
-    readonly alamat: FieldRef<"PengajuanSurat", 'String'>
+    readonly wargaId: FieldRef<"PengajuanSurat", 'Int'>
     readonly jenis_surat: FieldRef<"PengajuanSurat", 'String'>
-    readonly keterangan: FieldRef<"PengajuanSurat", 'String'>
-    readonly foto_ktp: FieldRef<"PengajuanSurat", 'String'>
     readonly data_tambahan: FieldRef<"PengajuanSurat", 'Json'>
     readonly status: FieldRef<"PengajuanSurat", 'String'>
     readonly no_pengajuan: FieldRef<"PengajuanSurat", 'String'>
     readonly catatan_penolakan: FieldRef<"PengajuanSurat", 'String'>
-    readonly tanggal_pengajuan: FieldRef<"PengajuanSurat", 'DateTime'>
-    readonly tanggal_diproses: FieldRef<"PengajuanSurat", 'DateTime'>
-    readonly tanggal_selesai: FieldRef<"PengajuanSurat", 'DateTime'>
     readonly nomor_surat: FieldRef<"PengajuanSurat", 'String'>
     readonly file_surat: FieldRef<"PengajuanSurat", 'String'>
-    readonly tanggal_diterbitkan: FieldRef<"PengajuanSurat", 'DateTime'>
-    readonly ditandatangani_oleh: FieldRef<"PengajuanSurat", 'String'>
+    readonly tanggal_pengajuan: FieldRef<"PengajuanSurat", 'DateTime'>
+    readonly tanggal_selesai: FieldRef<"PengajuanSurat", 'DateTime'>
     readonly createdAt: FieldRef<"PengajuanSurat", 'DateTime'>
     readonly updatedAt: FieldRef<"PengajuanSurat", 'DateTime'>
   }
@@ -3250,6 +3062,10 @@ export namespace Prisma {
      */
     omit?: PengajuanSuratOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengajuanSuratInclude<ExtArgs> | null
+    /**
      * Filter, which PengajuanSurat to fetch.
      */
     where: PengajuanSuratWhereUniqueInput
@@ -3268,6 +3084,10 @@ export namespace Prisma {
      */
     omit?: PengajuanSuratOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengajuanSuratInclude<ExtArgs> | null
+    /**
      * Filter, which PengajuanSurat to fetch.
      */
     where: PengajuanSuratWhereUniqueInput
@@ -3285,6 +3105,10 @@ export namespace Prisma {
      * Omit specific fields from the PengajuanSurat
      */
     omit?: PengajuanSuratOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengajuanSuratInclude<ExtArgs> | null
     /**
      * Filter, which PengajuanSurat to fetch.
      */
@@ -3334,6 +3158,10 @@ export namespace Prisma {
      */
     omit?: PengajuanSuratOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengajuanSuratInclude<ExtArgs> | null
+    /**
      * Filter, which PengajuanSurat to fetch.
      */
     where?: PengajuanSuratWhereInput
@@ -3382,6 +3210,10 @@ export namespace Prisma {
      */
     omit?: PengajuanSuratOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengajuanSuratInclude<ExtArgs> | null
+    /**
      * Filter, which PengajuanSurats to fetch.
      */
     where?: PengajuanSuratWhereInput
@@ -3425,6 +3257,10 @@ export namespace Prisma {
      */
     omit?: PengajuanSuratOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengajuanSuratInclude<ExtArgs> | null
+    /**
      * The data needed to create a PengajuanSurat.
      */
     data: XOR<PengajuanSuratCreateInput, PengajuanSuratUncheckedCreateInput>
@@ -3458,6 +3294,10 @@ export namespace Prisma {
      */
     data: PengajuanSuratCreateManyInput | PengajuanSuratCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengajuanSuratIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -3472,6 +3312,10 @@ export namespace Prisma {
      * Omit specific fields from the PengajuanSurat
      */
     omit?: PengajuanSuratOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengajuanSuratInclude<ExtArgs> | null
     /**
      * The data needed to update a PengajuanSurat.
      */
@@ -3524,6 +3368,10 @@ export namespace Prisma {
      * Limit how many PengajuanSurats to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengajuanSuratIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -3538,6 +3386,10 @@ export namespace Prisma {
      * Omit specific fields from the PengajuanSurat
      */
     omit?: PengajuanSuratOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengajuanSuratInclude<ExtArgs> | null
     /**
      * The filter to search for the PengajuanSurat to update in case it exists.
      */
@@ -3564,6 +3416,10 @@ export namespace Prisma {
      * Omit specific fields from the PengajuanSurat
      */
     omit?: PengajuanSuratOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengajuanSuratInclude<ExtArgs> | null
     /**
      * Filter which PengajuanSurat to delete.
      */
@@ -3596,6 +3452,10 @@ export namespace Prisma {
      * Omit specific fields from the PengajuanSurat
      */
     omit?: PengajuanSuratOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PengajuanSuratInclude<ExtArgs> | null
   }
 
 
@@ -4655,3033 +4515,6 @@ export namespace Prisma {
 
 
   /**
-   * Model TemplateSurat
-   */
-
-  export type AggregateTemplateSurat = {
-    _count: TemplateSuratCountAggregateOutputType | null
-    _min: TemplateSuratMinAggregateOutputType | null
-    _max: TemplateSuratMaxAggregateOutputType | null
-  }
-
-  export type TemplateSuratMinAggregateOutputType = {
-    id: string | null
-    judul: string | null
-    jenis_surat: string | null
-    terakhirDiubah: Date | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type TemplateSuratMaxAggregateOutputType = {
-    id: string | null
-    judul: string | null
-    jenis_surat: string | null
-    terakhirDiubah: Date | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type TemplateSuratCountAggregateOutputType = {
-    id: number
-    judul: number
-    jenis_surat: number
-    terakhirDiubah: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type TemplateSuratMinAggregateInputType = {
-    id?: true
-    judul?: true
-    jenis_surat?: true
-    terakhirDiubah?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type TemplateSuratMaxAggregateInputType = {
-    id?: true
-    judul?: true
-    jenis_surat?: true
-    terakhirDiubah?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type TemplateSuratCountAggregateInputType = {
-    id?: true
-    judul?: true
-    jenis_surat?: true
-    terakhirDiubah?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type TemplateSuratAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which TemplateSurat to aggregate.
-     */
-    where?: TemplateSuratWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TemplateSurats to fetch.
-     */
-    orderBy?: TemplateSuratOrderByWithRelationInput | TemplateSuratOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: TemplateSuratWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TemplateSurats from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TemplateSurats.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned TemplateSurats
-    **/
-    _count?: true | TemplateSuratCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: TemplateSuratMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: TemplateSuratMaxAggregateInputType
-  }
-
-  export type GetTemplateSuratAggregateType<T extends TemplateSuratAggregateArgs> = {
-        [P in keyof T & keyof AggregateTemplateSurat]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateTemplateSurat[P]>
-      : GetScalarType<T[P], AggregateTemplateSurat[P]>
-  }
-
-
-
-
-  export type TemplateSuratGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TemplateSuratWhereInput
-    orderBy?: TemplateSuratOrderByWithAggregationInput | TemplateSuratOrderByWithAggregationInput[]
-    by: TemplateSuratScalarFieldEnum[] | TemplateSuratScalarFieldEnum
-    having?: TemplateSuratScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: TemplateSuratCountAggregateInputType | true
-    _min?: TemplateSuratMinAggregateInputType
-    _max?: TemplateSuratMaxAggregateInputType
-  }
-
-  export type TemplateSuratGroupByOutputType = {
-    id: string
-    judul: string
-    jenis_surat: string
-    terakhirDiubah: Date
-    createdAt: Date
-    updatedAt: Date
-    _count: TemplateSuratCountAggregateOutputType | null
-    _min: TemplateSuratMinAggregateOutputType | null
-    _max: TemplateSuratMaxAggregateOutputType | null
-  }
-
-  type GetTemplateSuratGroupByPayload<T extends TemplateSuratGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<TemplateSuratGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof TemplateSuratGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], TemplateSuratGroupByOutputType[P]>
-            : GetScalarType<T[P], TemplateSuratGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type TemplateSuratSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    judul?: boolean
-    jenis_surat?: boolean
-    terakhirDiubah?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }, ExtArgs["result"]["templateSurat"]>
-
-  export type TemplateSuratSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    judul?: boolean
-    jenis_surat?: boolean
-    terakhirDiubah?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }, ExtArgs["result"]["templateSurat"]>
-
-  export type TemplateSuratSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    judul?: boolean
-    jenis_surat?: boolean
-    terakhirDiubah?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }, ExtArgs["result"]["templateSurat"]>
-
-  export type TemplateSuratSelectScalar = {
-    id?: boolean
-    judul?: boolean
-    jenis_surat?: boolean
-    terakhirDiubah?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type TemplateSuratOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "judul" | "jenis_surat" | "terakhirDiubah" | "createdAt" | "updatedAt", ExtArgs["result"]["templateSurat"]>
-
-  export type $TemplateSuratPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "TemplateSurat"
-    objects: {}
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      judul: string
-      jenis_surat: string
-      terakhirDiubah: Date
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["templateSurat"]>
-    composites: {}
-  }
-
-  type TemplateSuratGetPayload<S extends boolean | null | undefined | TemplateSuratDefaultArgs> = $Result.GetResult<Prisma.$TemplateSuratPayload, S>
-
-  type TemplateSuratCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TemplateSuratFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TemplateSuratCountAggregateInputType | true
-    }
-
-  export interface TemplateSuratDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TemplateSurat'], meta: { name: 'TemplateSurat' } }
-    /**
-     * Find zero or one TemplateSurat that matches the filter.
-     * @param {TemplateSuratFindUniqueArgs} args - Arguments to find a TemplateSurat
-     * @example
-     * // Get one TemplateSurat
-     * const templateSurat = await prisma.templateSurat.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends TemplateSuratFindUniqueArgs>(args: SelectSubset<T, TemplateSuratFindUniqueArgs<ExtArgs>>): Prisma__TemplateSuratClient<$Result.GetResult<Prisma.$TemplateSuratPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one TemplateSurat that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {TemplateSuratFindUniqueOrThrowArgs} args - Arguments to find a TemplateSurat
-     * @example
-     * // Get one TemplateSurat
-     * const templateSurat = await prisma.templateSurat.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends TemplateSuratFindUniqueOrThrowArgs>(args: SelectSubset<T, TemplateSuratFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TemplateSuratClient<$Result.GetResult<Prisma.$TemplateSuratPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first TemplateSurat that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TemplateSuratFindFirstArgs} args - Arguments to find a TemplateSurat
-     * @example
-     * // Get one TemplateSurat
-     * const templateSurat = await prisma.templateSurat.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends TemplateSuratFindFirstArgs>(args?: SelectSubset<T, TemplateSuratFindFirstArgs<ExtArgs>>): Prisma__TemplateSuratClient<$Result.GetResult<Prisma.$TemplateSuratPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first TemplateSurat that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TemplateSuratFindFirstOrThrowArgs} args - Arguments to find a TemplateSurat
-     * @example
-     * // Get one TemplateSurat
-     * const templateSurat = await prisma.templateSurat.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends TemplateSuratFindFirstOrThrowArgs>(args?: SelectSubset<T, TemplateSuratFindFirstOrThrowArgs<ExtArgs>>): Prisma__TemplateSuratClient<$Result.GetResult<Prisma.$TemplateSuratPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more TemplateSurats that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TemplateSuratFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all TemplateSurats
-     * const templateSurats = await prisma.templateSurat.findMany()
-     * 
-     * // Get first 10 TemplateSurats
-     * const templateSurats = await prisma.templateSurat.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const templateSuratWithIdOnly = await prisma.templateSurat.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends TemplateSuratFindManyArgs>(args?: SelectSubset<T, TemplateSuratFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TemplateSuratPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a TemplateSurat.
-     * @param {TemplateSuratCreateArgs} args - Arguments to create a TemplateSurat.
-     * @example
-     * // Create one TemplateSurat
-     * const TemplateSurat = await prisma.templateSurat.create({
-     *   data: {
-     *     // ... data to create a TemplateSurat
-     *   }
-     * })
-     * 
-     */
-    create<T extends TemplateSuratCreateArgs>(args: SelectSubset<T, TemplateSuratCreateArgs<ExtArgs>>): Prisma__TemplateSuratClient<$Result.GetResult<Prisma.$TemplateSuratPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many TemplateSurats.
-     * @param {TemplateSuratCreateManyArgs} args - Arguments to create many TemplateSurats.
-     * @example
-     * // Create many TemplateSurats
-     * const templateSurat = await prisma.templateSurat.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends TemplateSuratCreateManyArgs>(args?: SelectSubset<T, TemplateSuratCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many TemplateSurats and returns the data saved in the database.
-     * @param {TemplateSuratCreateManyAndReturnArgs} args - Arguments to create many TemplateSurats.
-     * @example
-     * // Create many TemplateSurats
-     * const templateSurat = await prisma.templateSurat.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many TemplateSurats and only return the `id`
-     * const templateSuratWithIdOnly = await prisma.templateSurat.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends TemplateSuratCreateManyAndReturnArgs>(args?: SelectSubset<T, TemplateSuratCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TemplateSuratPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a TemplateSurat.
-     * @param {TemplateSuratDeleteArgs} args - Arguments to delete one TemplateSurat.
-     * @example
-     * // Delete one TemplateSurat
-     * const TemplateSurat = await prisma.templateSurat.delete({
-     *   where: {
-     *     // ... filter to delete one TemplateSurat
-     *   }
-     * })
-     * 
-     */
-    delete<T extends TemplateSuratDeleteArgs>(args: SelectSubset<T, TemplateSuratDeleteArgs<ExtArgs>>): Prisma__TemplateSuratClient<$Result.GetResult<Prisma.$TemplateSuratPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one TemplateSurat.
-     * @param {TemplateSuratUpdateArgs} args - Arguments to update one TemplateSurat.
-     * @example
-     * // Update one TemplateSurat
-     * const templateSurat = await prisma.templateSurat.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends TemplateSuratUpdateArgs>(args: SelectSubset<T, TemplateSuratUpdateArgs<ExtArgs>>): Prisma__TemplateSuratClient<$Result.GetResult<Prisma.$TemplateSuratPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more TemplateSurats.
-     * @param {TemplateSuratDeleteManyArgs} args - Arguments to filter TemplateSurats to delete.
-     * @example
-     * // Delete a few TemplateSurats
-     * const { count } = await prisma.templateSurat.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends TemplateSuratDeleteManyArgs>(args?: SelectSubset<T, TemplateSuratDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more TemplateSurats.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TemplateSuratUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many TemplateSurats
-     * const templateSurat = await prisma.templateSurat.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends TemplateSuratUpdateManyArgs>(args: SelectSubset<T, TemplateSuratUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more TemplateSurats and returns the data updated in the database.
-     * @param {TemplateSuratUpdateManyAndReturnArgs} args - Arguments to update many TemplateSurats.
-     * @example
-     * // Update many TemplateSurats
-     * const templateSurat = await prisma.templateSurat.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more TemplateSurats and only return the `id`
-     * const templateSuratWithIdOnly = await prisma.templateSurat.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends TemplateSuratUpdateManyAndReturnArgs>(args: SelectSubset<T, TemplateSuratUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TemplateSuratPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one TemplateSurat.
-     * @param {TemplateSuratUpsertArgs} args - Arguments to update or create a TemplateSurat.
-     * @example
-     * // Update or create a TemplateSurat
-     * const templateSurat = await prisma.templateSurat.upsert({
-     *   create: {
-     *     // ... data to create a TemplateSurat
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the TemplateSurat we want to update
-     *   }
-     * })
-     */
-    upsert<T extends TemplateSuratUpsertArgs>(args: SelectSubset<T, TemplateSuratUpsertArgs<ExtArgs>>): Prisma__TemplateSuratClient<$Result.GetResult<Prisma.$TemplateSuratPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of TemplateSurats.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TemplateSuratCountArgs} args - Arguments to filter TemplateSurats to count.
-     * @example
-     * // Count the number of TemplateSurats
-     * const count = await prisma.templateSurat.count({
-     *   where: {
-     *     // ... the filter for the TemplateSurats we want to count
-     *   }
-     * })
-    **/
-    count<T extends TemplateSuratCountArgs>(
-      args?: Subset<T, TemplateSuratCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], TemplateSuratCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a TemplateSurat.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TemplateSuratAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends TemplateSuratAggregateArgs>(args: Subset<T, TemplateSuratAggregateArgs>): Prisma.PrismaPromise<GetTemplateSuratAggregateType<T>>
-
-    /**
-     * Group by TemplateSurat.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TemplateSuratGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends TemplateSuratGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TemplateSuratGroupByArgs['orderBy'] }
-        : { orderBy?: TemplateSuratGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, TemplateSuratGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTemplateSuratGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the TemplateSurat model
-   */
-  readonly fields: TemplateSuratFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for TemplateSurat.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__TemplateSuratClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the TemplateSurat model
-   */
-  interface TemplateSuratFieldRefs {
-    readonly id: FieldRef<"TemplateSurat", 'String'>
-    readonly judul: FieldRef<"TemplateSurat", 'String'>
-    readonly jenis_surat: FieldRef<"TemplateSurat", 'String'>
-    readonly terakhirDiubah: FieldRef<"TemplateSurat", 'DateTime'>
-    readonly createdAt: FieldRef<"TemplateSurat", 'DateTime'>
-    readonly updatedAt: FieldRef<"TemplateSurat", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * TemplateSurat findUnique
-   */
-  export type TemplateSuratFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TemplateSurat
-     */
-    select?: TemplateSuratSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TemplateSurat
-     */
-    omit?: TemplateSuratOmit<ExtArgs> | null
-    /**
-     * Filter, which TemplateSurat to fetch.
-     */
-    where: TemplateSuratWhereUniqueInput
-  }
-
-  /**
-   * TemplateSurat findUniqueOrThrow
-   */
-  export type TemplateSuratFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TemplateSurat
-     */
-    select?: TemplateSuratSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TemplateSurat
-     */
-    omit?: TemplateSuratOmit<ExtArgs> | null
-    /**
-     * Filter, which TemplateSurat to fetch.
-     */
-    where: TemplateSuratWhereUniqueInput
-  }
-
-  /**
-   * TemplateSurat findFirst
-   */
-  export type TemplateSuratFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TemplateSurat
-     */
-    select?: TemplateSuratSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TemplateSurat
-     */
-    omit?: TemplateSuratOmit<ExtArgs> | null
-    /**
-     * Filter, which TemplateSurat to fetch.
-     */
-    where?: TemplateSuratWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TemplateSurats to fetch.
-     */
-    orderBy?: TemplateSuratOrderByWithRelationInput | TemplateSuratOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for TemplateSurats.
-     */
-    cursor?: TemplateSuratWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TemplateSurats from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TemplateSurats.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of TemplateSurats.
-     */
-    distinct?: TemplateSuratScalarFieldEnum | TemplateSuratScalarFieldEnum[]
-  }
-
-  /**
-   * TemplateSurat findFirstOrThrow
-   */
-  export type TemplateSuratFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TemplateSurat
-     */
-    select?: TemplateSuratSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TemplateSurat
-     */
-    omit?: TemplateSuratOmit<ExtArgs> | null
-    /**
-     * Filter, which TemplateSurat to fetch.
-     */
-    where?: TemplateSuratWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TemplateSurats to fetch.
-     */
-    orderBy?: TemplateSuratOrderByWithRelationInput | TemplateSuratOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for TemplateSurats.
-     */
-    cursor?: TemplateSuratWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TemplateSurats from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TemplateSurats.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of TemplateSurats.
-     */
-    distinct?: TemplateSuratScalarFieldEnum | TemplateSuratScalarFieldEnum[]
-  }
-
-  /**
-   * TemplateSurat findMany
-   */
-  export type TemplateSuratFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TemplateSurat
-     */
-    select?: TemplateSuratSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TemplateSurat
-     */
-    omit?: TemplateSuratOmit<ExtArgs> | null
-    /**
-     * Filter, which TemplateSurats to fetch.
-     */
-    where?: TemplateSuratWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of TemplateSurats to fetch.
-     */
-    orderBy?: TemplateSuratOrderByWithRelationInput | TemplateSuratOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing TemplateSurats.
-     */
-    cursor?: TemplateSuratWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` TemplateSurats from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` TemplateSurats.
-     */
-    skip?: number
-    distinct?: TemplateSuratScalarFieldEnum | TemplateSuratScalarFieldEnum[]
-  }
-
-  /**
-   * TemplateSurat create
-   */
-  export type TemplateSuratCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TemplateSurat
-     */
-    select?: TemplateSuratSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TemplateSurat
-     */
-    omit?: TemplateSuratOmit<ExtArgs> | null
-    /**
-     * The data needed to create a TemplateSurat.
-     */
-    data: XOR<TemplateSuratCreateInput, TemplateSuratUncheckedCreateInput>
-  }
-
-  /**
-   * TemplateSurat createMany
-   */
-  export type TemplateSuratCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many TemplateSurats.
-     */
-    data: TemplateSuratCreateManyInput | TemplateSuratCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * TemplateSurat createManyAndReturn
-   */
-  export type TemplateSuratCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TemplateSurat
-     */
-    select?: TemplateSuratSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the TemplateSurat
-     */
-    omit?: TemplateSuratOmit<ExtArgs> | null
-    /**
-     * The data used to create many TemplateSurats.
-     */
-    data: TemplateSuratCreateManyInput | TemplateSuratCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * TemplateSurat update
-   */
-  export type TemplateSuratUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TemplateSurat
-     */
-    select?: TemplateSuratSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TemplateSurat
-     */
-    omit?: TemplateSuratOmit<ExtArgs> | null
-    /**
-     * The data needed to update a TemplateSurat.
-     */
-    data: XOR<TemplateSuratUpdateInput, TemplateSuratUncheckedUpdateInput>
-    /**
-     * Choose, which TemplateSurat to update.
-     */
-    where: TemplateSuratWhereUniqueInput
-  }
-
-  /**
-   * TemplateSurat updateMany
-   */
-  export type TemplateSuratUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update TemplateSurats.
-     */
-    data: XOR<TemplateSuratUpdateManyMutationInput, TemplateSuratUncheckedUpdateManyInput>
-    /**
-     * Filter which TemplateSurats to update
-     */
-    where?: TemplateSuratWhereInput
-    /**
-     * Limit how many TemplateSurats to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * TemplateSurat updateManyAndReturn
-   */
-  export type TemplateSuratUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TemplateSurat
-     */
-    select?: TemplateSuratSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the TemplateSurat
-     */
-    omit?: TemplateSuratOmit<ExtArgs> | null
-    /**
-     * The data used to update TemplateSurats.
-     */
-    data: XOR<TemplateSuratUpdateManyMutationInput, TemplateSuratUncheckedUpdateManyInput>
-    /**
-     * Filter which TemplateSurats to update
-     */
-    where?: TemplateSuratWhereInput
-    /**
-     * Limit how many TemplateSurats to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * TemplateSurat upsert
-   */
-  export type TemplateSuratUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TemplateSurat
-     */
-    select?: TemplateSuratSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TemplateSurat
-     */
-    omit?: TemplateSuratOmit<ExtArgs> | null
-    /**
-     * The filter to search for the TemplateSurat to update in case it exists.
-     */
-    where: TemplateSuratWhereUniqueInput
-    /**
-     * In case the TemplateSurat found by the `where` argument doesn't exist, create a new TemplateSurat with this data.
-     */
-    create: XOR<TemplateSuratCreateInput, TemplateSuratUncheckedCreateInput>
-    /**
-     * In case the TemplateSurat was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<TemplateSuratUpdateInput, TemplateSuratUncheckedUpdateInput>
-  }
-
-  /**
-   * TemplateSurat delete
-   */
-  export type TemplateSuratDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TemplateSurat
-     */
-    select?: TemplateSuratSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TemplateSurat
-     */
-    omit?: TemplateSuratOmit<ExtArgs> | null
-    /**
-     * Filter which TemplateSurat to delete.
-     */
-    where: TemplateSuratWhereUniqueInput
-  }
-
-  /**
-   * TemplateSurat deleteMany
-   */
-  export type TemplateSuratDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which TemplateSurats to delete
-     */
-    where?: TemplateSuratWhereInput
-    /**
-     * Limit how many TemplateSurats to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * TemplateSurat without action
-   */
-  export type TemplateSuratDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the TemplateSurat
-     */
-    select?: TemplateSuratSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the TemplateSurat
-     */
-    omit?: TemplateSuratOmit<ExtArgs> | null
-  }
-
-
-  /**
-   * Model User
-   */
-
-  export type AggregateUser = {
-    _count: UserCountAggregateOutputType | null
-    _avg: UserAvgAggregateOutputType | null
-    _sum: UserSumAggregateOutputType | null
-    _min: UserMinAggregateOutputType | null
-    _max: UserMaxAggregateOutputType | null
-  }
-
-  export type UserAvgAggregateOutputType = {
-    id: number | null
-  }
-
-  export type UserSumAggregateOutputType = {
-    id: number | null
-  }
-
-  export type UserMinAggregateOutputType = {
-    id: number | null
-    name: string | null
-    email: string | null
-  }
-
-  export type UserMaxAggregateOutputType = {
-    id: number | null
-    name: string | null
-    email: string | null
-  }
-
-  export type UserCountAggregateOutputType = {
-    id: number
-    name: number
-    email: number
-    _all: number
-  }
-
-
-  export type UserAvgAggregateInputType = {
-    id?: true
-  }
-
-  export type UserSumAggregateInputType = {
-    id?: true
-  }
-
-  export type UserMinAggregateInputType = {
-    id?: true
-    name?: true
-    email?: true
-  }
-
-  export type UserMaxAggregateInputType = {
-    id?: true
-    name?: true
-    email?: true
-  }
-
-  export type UserCountAggregateInputType = {
-    id?: true
-    name?: true
-    email?: true
-    _all?: true
-  }
-
-  export type UserAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which User to aggregate.
-     */
-    where?: UserWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Users to fetch.
-     */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: UserWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Users from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Users.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Users
-    **/
-    _count?: true | UserCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: UserAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: UserSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: UserMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: UserMaxAggregateInputType
-  }
-
-  export type GetUserAggregateType<T extends UserAggregateArgs> = {
-        [P in keyof T & keyof AggregateUser]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateUser[P]>
-      : GetScalarType<T[P], AggregateUser[P]>
-  }
-
-
-
-
-  export type UserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserWhereInput
-    orderBy?: UserOrderByWithAggregationInput | UserOrderByWithAggregationInput[]
-    by: UserScalarFieldEnum[] | UserScalarFieldEnum
-    having?: UserScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: UserCountAggregateInputType | true
-    _avg?: UserAvgAggregateInputType
-    _sum?: UserSumAggregateInputType
-    _min?: UserMinAggregateInputType
-    _max?: UserMaxAggregateInputType
-  }
-
-  export type UserGroupByOutputType = {
-    id: number
-    name: string
-    email: string
-    _count: UserCountAggregateOutputType | null
-    _avg: UserAvgAggregateOutputType | null
-    _sum: UserSumAggregateOutputType | null
-    _min: UserMinAggregateOutputType | null
-    _max: UserMaxAggregateOutputType | null
-  }
-
-  type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<UserGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof UserGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], UserGroupByOutputType[P]>
-            : GetScalarType<T[P], UserGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    email?: boolean
-  }, ExtArgs["result"]["user"]>
-
-  export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    email?: boolean
-  }, ExtArgs["result"]["user"]>
-
-  export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    email?: boolean
-  }, ExtArgs["result"]["user"]>
-
-  export type UserSelectScalar = {
-    id?: boolean
-    name?: boolean
-    email?: boolean
-  }
-
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email", ExtArgs["result"]["user"]>
-
-  export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "User"
-    objects: {}
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      name: string
-      email: string
-    }, ExtArgs["result"]["user"]>
-    composites: {}
-  }
-
-  type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> = $Result.GetResult<Prisma.$UserPayload, S>
-
-  type UserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<UserFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: UserCountAggregateInputType | true
-    }
-
-  export interface UserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['User'], meta: { name: 'User' } }
-    /**
-     * Find zero or one User that matches the filter.
-     * @param {UserFindUniqueArgs} args - Arguments to find a User
-     * @example
-     * // Get one User
-     * const user = await prisma.user.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends UserFindUniqueArgs>(args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one User that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {UserFindUniqueOrThrowArgs} args - Arguments to find a User
-     * @example
-     * // Get one User
-     * const user = await prisma.user.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs>(args: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first User that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserFindFirstArgs} args - Arguments to find a User
-     * @example
-     * // Get one User
-     * const user = await prisma.user.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends UserFindFirstArgs>(args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first User that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserFindFirstOrThrowArgs} args - Arguments to find a User
-     * @example
-     * // Get one User
-     * const user = await prisma.user.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends UserFindFirstOrThrowArgs>(args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Users that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Users
-     * const users = await prisma.user.findMany()
-     * 
-     * // Get first 10 Users
-     * const users = await prisma.user.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const userWithIdOnly = await prisma.user.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends UserFindManyArgs>(args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a User.
-     * @param {UserCreateArgs} args - Arguments to create a User.
-     * @example
-     * // Create one User
-     * const User = await prisma.user.create({
-     *   data: {
-     *     // ... data to create a User
-     *   }
-     * })
-     * 
-     */
-    create<T extends UserCreateArgs>(args: SelectSubset<T, UserCreateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Users.
-     * @param {UserCreateManyArgs} args - Arguments to create many Users.
-     * @example
-     * // Create many Users
-     * const user = await prisma.user.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends UserCreateManyArgs>(args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Users and returns the data saved in the database.
-     * @param {UserCreateManyAndReturnArgs} args - Arguments to create many Users.
-     * @example
-     * // Create many Users
-     * const user = await prisma.user.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Users and only return the `id`
-     * const userWithIdOnly = await prisma.user.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends UserCreateManyAndReturnArgs>(args?: SelectSubset<T, UserCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a User.
-     * @param {UserDeleteArgs} args - Arguments to delete one User.
-     * @example
-     * // Delete one User
-     * const User = await prisma.user.delete({
-     *   where: {
-     *     // ... filter to delete one User
-     *   }
-     * })
-     * 
-     */
-    delete<T extends UserDeleteArgs>(args: SelectSubset<T, UserDeleteArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one User.
-     * @param {UserUpdateArgs} args - Arguments to update one User.
-     * @example
-     * // Update one User
-     * const user = await prisma.user.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends UserUpdateArgs>(args: SelectSubset<T, UserUpdateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Users.
-     * @param {UserDeleteManyArgs} args - Arguments to filter Users to delete.
-     * @example
-     * // Delete a few Users
-     * const { count } = await prisma.user.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends UserDeleteManyArgs>(args?: SelectSubset<T, UserDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Users.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Users
-     * const user = await prisma.user.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends UserUpdateManyArgs>(args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Users and returns the data updated in the database.
-     * @param {UserUpdateManyAndReturnArgs} args - Arguments to update many Users.
-     * @example
-     * // Update many Users
-     * const user = await prisma.user.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Users and only return the `id`
-     * const userWithIdOnly = await prisma.user.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends UserUpdateManyAndReturnArgs>(args: SelectSubset<T, UserUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one User.
-     * @param {UserUpsertArgs} args - Arguments to update or create a User.
-     * @example
-     * // Update or create a User
-     * const user = await prisma.user.upsert({
-     *   create: {
-     *     // ... data to create a User
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the User we want to update
-     *   }
-     * })
-     */
-    upsert<T extends UserUpsertArgs>(args: SelectSubset<T, UserUpsertArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Users.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserCountArgs} args - Arguments to filter Users to count.
-     * @example
-     * // Count the number of Users
-     * const count = await prisma.user.count({
-     *   where: {
-     *     // ... the filter for the Users we want to count
-     *   }
-     * })
-    **/
-    count<T extends UserCountArgs>(
-      args?: Subset<T, UserCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], UserCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a User.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends UserAggregateArgs>(args: Subset<T, UserAggregateArgs>): Prisma.PrismaPromise<GetUserAggregateType<T>>
-
-    /**
-     * Group by User.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends UserGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: UserGroupByArgs['orderBy'] }
-        : { orderBy?: UserGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the User model
-   */
-  readonly fields: UserFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for User.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the User model
-   */
-  interface UserFieldRefs {
-    readonly id: FieldRef<"User", 'Int'>
-    readonly name: FieldRef<"User", 'String'>
-    readonly email: FieldRef<"User", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * User findUnique
-   */
-  export type UserFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Filter, which User to fetch.
-     */
-    where: UserWhereUniqueInput
-  }
-
-  /**
-   * User findUniqueOrThrow
-   */
-  export type UserFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Filter, which User to fetch.
-     */
-    where: UserWhereUniqueInput
-  }
-
-  /**
-   * User findFirst
-   */
-  export type UserFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Filter, which User to fetch.
-     */
-    where?: UserWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Users to fetch.
-     */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Users.
-     */
-    cursor?: UserWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Users from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Users.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Users.
-     */
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
-  }
-
-  /**
-   * User findFirstOrThrow
-   */
-  export type UserFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Filter, which User to fetch.
-     */
-    where?: UserWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Users to fetch.
-     */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Users.
-     */
-    cursor?: UserWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Users from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Users.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Users.
-     */
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
-  }
-
-  /**
-   * User findMany
-   */
-  export type UserFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Filter, which Users to fetch.
-     */
-    where?: UserWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Users to fetch.
-     */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Users.
-     */
-    cursor?: UserWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Users from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Users.
-     */
-    skip?: number
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
-  }
-
-  /**
-   * User create
-   */
-  export type UserCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * The data needed to create a User.
-     */
-    data: XOR<UserCreateInput, UserUncheckedCreateInput>
-  }
-
-  /**
-   * User createMany
-   */
-  export type UserCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Users.
-     */
-    data: UserCreateManyInput | UserCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * User createManyAndReturn
-   */
-  export type UserCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * The data used to create many Users.
-     */
-    data: UserCreateManyInput | UserCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * User update
-   */
-  export type UserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * The data needed to update a User.
-     */
-    data: XOR<UserUpdateInput, UserUncheckedUpdateInput>
-    /**
-     * Choose, which User to update.
-     */
-    where: UserWhereUniqueInput
-  }
-
-  /**
-   * User updateMany
-   */
-  export type UserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Users.
-     */
-    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
-    /**
-     * Filter which Users to update
-     */
-    where?: UserWhereInput
-    /**
-     * Limit how many Users to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * User updateManyAndReturn
-   */
-  export type UserUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * The data used to update Users.
-     */
-    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
-    /**
-     * Filter which Users to update
-     */
-    where?: UserWhereInput
-    /**
-     * Limit how many Users to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * User upsert
-   */
-  export type UserUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * The filter to search for the User to update in case it exists.
-     */
-    where: UserWhereUniqueInput
-    /**
-     * In case the User found by the `where` argument doesn't exist, create a new User with this data.
-     */
-    create: XOR<UserCreateInput, UserUncheckedCreateInput>
-    /**
-     * In case the User was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<UserUpdateInput, UserUncheckedUpdateInput>
-  }
-
-  /**
-   * User delete
-   */
-  export type UserDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-    /**
-     * Filter which User to delete.
-     */
-    where: UserWhereUniqueInput
-  }
-
-  /**
-   * User deleteMany
-   */
-  export type UserDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Users to delete
-     */
-    where?: UserWhereInput
-    /**
-     * Limit how many Users to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * User without action
-   */
-  export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the User
-     */
-    select?: UserSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the User
-     */
-    omit?: UserOmit<ExtArgs> | null
-  }
-
-
-  /**
-   * Model Testing
-   */
-
-  export type AggregateTesting = {
-    _count: TestingCountAggregateOutputType | null
-    _avg: TestingAvgAggregateOutputType | null
-    _sum: TestingSumAggregateOutputType | null
-    _min: TestingMinAggregateOutputType | null
-    _max: TestingMaxAggregateOutputType | null
-  }
-
-  export type TestingAvgAggregateOutputType = {
-    id: number | null
-  }
-
-  export type TestingSumAggregateOutputType = {
-    id: number | null
-  }
-
-  export type TestingMinAggregateOutputType = {
-    id: number | null
-    nama: string | null
-    status: string | null
-    createdAt: Date | null
-  }
-
-  export type TestingMaxAggregateOutputType = {
-    id: number | null
-    nama: string | null
-    status: string | null
-    createdAt: Date | null
-  }
-
-  export type TestingCountAggregateOutputType = {
-    id: number
-    nama: number
-    status: number
-    createdAt: number
-    _all: number
-  }
-
-
-  export type TestingAvgAggregateInputType = {
-    id?: true
-  }
-
-  export type TestingSumAggregateInputType = {
-    id?: true
-  }
-
-  export type TestingMinAggregateInputType = {
-    id?: true
-    nama?: true
-    status?: true
-    createdAt?: true
-  }
-
-  export type TestingMaxAggregateInputType = {
-    id?: true
-    nama?: true
-    status?: true
-    createdAt?: true
-  }
-
-  export type TestingCountAggregateInputType = {
-    id?: true
-    nama?: true
-    status?: true
-    createdAt?: true
-    _all?: true
-  }
-
-  export type TestingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Testing to aggregate.
-     */
-    where?: TestingWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Testings to fetch.
-     */
-    orderBy?: TestingOrderByWithRelationInput | TestingOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: TestingWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Testings from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Testings.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Testings
-    **/
-    _count?: true | TestingCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: TestingAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: TestingSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: TestingMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: TestingMaxAggregateInputType
-  }
-
-  export type GetTestingAggregateType<T extends TestingAggregateArgs> = {
-        [P in keyof T & keyof AggregateTesting]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateTesting[P]>
-      : GetScalarType<T[P], AggregateTesting[P]>
-  }
-
-
-
-
-  export type TestingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TestingWhereInput
-    orderBy?: TestingOrderByWithAggregationInput | TestingOrderByWithAggregationInput[]
-    by: TestingScalarFieldEnum[] | TestingScalarFieldEnum
-    having?: TestingScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: TestingCountAggregateInputType | true
-    _avg?: TestingAvgAggregateInputType
-    _sum?: TestingSumAggregateInputType
-    _min?: TestingMinAggregateInputType
-    _max?: TestingMaxAggregateInputType
-  }
-
-  export type TestingGroupByOutputType = {
-    id: number
-    nama: string
-    status: string
-    createdAt: Date
-    _count: TestingCountAggregateOutputType | null
-    _avg: TestingAvgAggregateOutputType | null
-    _sum: TestingSumAggregateOutputType | null
-    _min: TestingMinAggregateOutputType | null
-    _max: TestingMaxAggregateOutputType | null
-  }
-
-  type GetTestingGroupByPayload<T extends TestingGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<TestingGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof TestingGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], TestingGroupByOutputType[P]>
-            : GetScalarType<T[P], TestingGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type TestingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    nama?: boolean
-    status?: boolean
-    createdAt?: boolean
-  }, ExtArgs["result"]["testing"]>
-
-  export type TestingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    nama?: boolean
-    status?: boolean
-    createdAt?: boolean
-  }, ExtArgs["result"]["testing"]>
-
-  export type TestingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    nama?: boolean
-    status?: boolean
-    createdAt?: boolean
-  }, ExtArgs["result"]["testing"]>
-
-  export type TestingSelectScalar = {
-    id?: boolean
-    nama?: boolean
-    status?: boolean
-    createdAt?: boolean
-  }
-
-  export type TestingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nama" | "status" | "createdAt", ExtArgs["result"]["testing"]>
-
-  export type $TestingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Testing"
-    objects: {}
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      nama: string
-      status: string
-      createdAt: Date
-    }, ExtArgs["result"]["testing"]>
-    composites: {}
-  }
-
-  type TestingGetPayload<S extends boolean | null | undefined | TestingDefaultArgs> = $Result.GetResult<Prisma.$TestingPayload, S>
-
-  type TestingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TestingFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TestingCountAggregateInputType | true
-    }
-
-  export interface TestingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Testing'], meta: { name: 'Testing' } }
-    /**
-     * Find zero or one Testing that matches the filter.
-     * @param {TestingFindUniqueArgs} args - Arguments to find a Testing
-     * @example
-     * // Get one Testing
-     * const testing = await prisma.testing.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends TestingFindUniqueArgs>(args: SelectSubset<T, TestingFindUniqueArgs<ExtArgs>>): Prisma__TestingClient<$Result.GetResult<Prisma.$TestingPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Testing that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {TestingFindUniqueOrThrowArgs} args - Arguments to find a Testing
-     * @example
-     * // Get one Testing
-     * const testing = await prisma.testing.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends TestingFindUniqueOrThrowArgs>(args: SelectSubset<T, TestingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TestingClient<$Result.GetResult<Prisma.$TestingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Testing that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestingFindFirstArgs} args - Arguments to find a Testing
-     * @example
-     * // Get one Testing
-     * const testing = await prisma.testing.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends TestingFindFirstArgs>(args?: SelectSubset<T, TestingFindFirstArgs<ExtArgs>>): Prisma__TestingClient<$Result.GetResult<Prisma.$TestingPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Testing that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestingFindFirstOrThrowArgs} args - Arguments to find a Testing
-     * @example
-     * // Get one Testing
-     * const testing = await prisma.testing.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends TestingFindFirstOrThrowArgs>(args?: SelectSubset<T, TestingFindFirstOrThrowArgs<ExtArgs>>): Prisma__TestingClient<$Result.GetResult<Prisma.$TestingPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Testings that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestingFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Testings
-     * const testings = await prisma.testing.findMany()
-     * 
-     * // Get first 10 Testings
-     * const testings = await prisma.testing.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const testingWithIdOnly = await prisma.testing.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends TestingFindManyArgs>(args?: SelectSubset<T, TestingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TestingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Testing.
-     * @param {TestingCreateArgs} args - Arguments to create a Testing.
-     * @example
-     * // Create one Testing
-     * const Testing = await prisma.testing.create({
-     *   data: {
-     *     // ... data to create a Testing
-     *   }
-     * })
-     * 
-     */
-    create<T extends TestingCreateArgs>(args: SelectSubset<T, TestingCreateArgs<ExtArgs>>): Prisma__TestingClient<$Result.GetResult<Prisma.$TestingPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Testings.
-     * @param {TestingCreateManyArgs} args - Arguments to create many Testings.
-     * @example
-     * // Create many Testings
-     * const testing = await prisma.testing.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends TestingCreateManyArgs>(args?: SelectSubset<T, TestingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Testings and returns the data saved in the database.
-     * @param {TestingCreateManyAndReturnArgs} args - Arguments to create many Testings.
-     * @example
-     * // Create many Testings
-     * const testing = await prisma.testing.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Testings and only return the `id`
-     * const testingWithIdOnly = await prisma.testing.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends TestingCreateManyAndReturnArgs>(args?: SelectSubset<T, TestingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TestingPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Testing.
-     * @param {TestingDeleteArgs} args - Arguments to delete one Testing.
-     * @example
-     * // Delete one Testing
-     * const Testing = await prisma.testing.delete({
-     *   where: {
-     *     // ... filter to delete one Testing
-     *   }
-     * })
-     * 
-     */
-    delete<T extends TestingDeleteArgs>(args: SelectSubset<T, TestingDeleteArgs<ExtArgs>>): Prisma__TestingClient<$Result.GetResult<Prisma.$TestingPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Testing.
-     * @param {TestingUpdateArgs} args - Arguments to update one Testing.
-     * @example
-     * // Update one Testing
-     * const testing = await prisma.testing.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends TestingUpdateArgs>(args: SelectSubset<T, TestingUpdateArgs<ExtArgs>>): Prisma__TestingClient<$Result.GetResult<Prisma.$TestingPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Testings.
-     * @param {TestingDeleteManyArgs} args - Arguments to filter Testings to delete.
-     * @example
-     * // Delete a few Testings
-     * const { count } = await prisma.testing.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends TestingDeleteManyArgs>(args?: SelectSubset<T, TestingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Testings.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestingUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Testings
-     * const testing = await prisma.testing.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends TestingUpdateManyArgs>(args: SelectSubset<T, TestingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Testings and returns the data updated in the database.
-     * @param {TestingUpdateManyAndReturnArgs} args - Arguments to update many Testings.
-     * @example
-     * // Update many Testings
-     * const testing = await prisma.testing.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Testings and only return the `id`
-     * const testingWithIdOnly = await prisma.testing.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends TestingUpdateManyAndReturnArgs>(args: SelectSubset<T, TestingUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TestingPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Testing.
-     * @param {TestingUpsertArgs} args - Arguments to update or create a Testing.
-     * @example
-     * // Update or create a Testing
-     * const testing = await prisma.testing.upsert({
-     *   create: {
-     *     // ... data to create a Testing
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Testing we want to update
-     *   }
-     * })
-     */
-    upsert<T extends TestingUpsertArgs>(args: SelectSubset<T, TestingUpsertArgs<ExtArgs>>): Prisma__TestingClient<$Result.GetResult<Prisma.$TestingPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Testings.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestingCountArgs} args - Arguments to filter Testings to count.
-     * @example
-     * // Count the number of Testings
-     * const count = await prisma.testing.count({
-     *   where: {
-     *     // ... the filter for the Testings we want to count
-     *   }
-     * })
-    **/
-    count<T extends TestingCountArgs>(
-      args?: Subset<T, TestingCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], TestingCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Testing.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends TestingAggregateArgs>(args: Subset<T, TestingAggregateArgs>): Prisma.PrismaPromise<GetTestingAggregateType<T>>
-
-    /**
-     * Group by Testing.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TestingGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends TestingGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TestingGroupByArgs['orderBy'] }
-        : { orderBy?: TestingGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, TestingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTestingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Testing model
-   */
-  readonly fields: TestingFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Testing.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__TestingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Testing model
-   */
-  interface TestingFieldRefs {
-    readonly id: FieldRef<"Testing", 'Int'>
-    readonly nama: FieldRef<"Testing", 'String'>
-    readonly status: FieldRef<"Testing", 'String'>
-    readonly createdAt: FieldRef<"Testing", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Testing findUnique
-   */
-  export type TestingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Testing
-     */
-    select?: TestingSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Testing
-     */
-    omit?: TestingOmit<ExtArgs> | null
-    /**
-     * Filter, which Testing to fetch.
-     */
-    where: TestingWhereUniqueInput
-  }
-
-  /**
-   * Testing findUniqueOrThrow
-   */
-  export type TestingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Testing
-     */
-    select?: TestingSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Testing
-     */
-    omit?: TestingOmit<ExtArgs> | null
-    /**
-     * Filter, which Testing to fetch.
-     */
-    where: TestingWhereUniqueInput
-  }
-
-  /**
-   * Testing findFirst
-   */
-  export type TestingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Testing
-     */
-    select?: TestingSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Testing
-     */
-    omit?: TestingOmit<ExtArgs> | null
-    /**
-     * Filter, which Testing to fetch.
-     */
-    where?: TestingWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Testings to fetch.
-     */
-    orderBy?: TestingOrderByWithRelationInput | TestingOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Testings.
-     */
-    cursor?: TestingWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Testings from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Testings.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Testings.
-     */
-    distinct?: TestingScalarFieldEnum | TestingScalarFieldEnum[]
-  }
-
-  /**
-   * Testing findFirstOrThrow
-   */
-  export type TestingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Testing
-     */
-    select?: TestingSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Testing
-     */
-    omit?: TestingOmit<ExtArgs> | null
-    /**
-     * Filter, which Testing to fetch.
-     */
-    where?: TestingWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Testings to fetch.
-     */
-    orderBy?: TestingOrderByWithRelationInput | TestingOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Testings.
-     */
-    cursor?: TestingWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Testings from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Testings.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Testings.
-     */
-    distinct?: TestingScalarFieldEnum | TestingScalarFieldEnum[]
-  }
-
-  /**
-   * Testing findMany
-   */
-  export type TestingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Testing
-     */
-    select?: TestingSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Testing
-     */
-    omit?: TestingOmit<ExtArgs> | null
-    /**
-     * Filter, which Testings to fetch.
-     */
-    where?: TestingWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Testings to fetch.
-     */
-    orderBy?: TestingOrderByWithRelationInput | TestingOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Testings.
-     */
-    cursor?: TestingWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Testings from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Testings.
-     */
-    skip?: number
-    distinct?: TestingScalarFieldEnum | TestingScalarFieldEnum[]
-  }
-
-  /**
-   * Testing create
-   */
-  export type TestingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Testing
-     */
-    select?: TestingSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Testing
-     */
-    omit?: TestingOmit<ExtArgs> | null
-    /**
-     * The data needed to create a Testing.
-     */
-    data: XOR<TestingCreateInput, TestingUncheckedCreateInput>
-  }
-
-  /**
-   * Testing createMany
-   */
-  export type TestingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Testings.
-     */
-    data: TestingCreateManyInput | TestingCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Testing createManyAndReturn
-   */
-  export type TestingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Testing
-     */
-    select?: TestingSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Testing
-     */
-    omit?: TestingOmit<ExtArgs> | null
-    /**
-     * The data used to create many Testings.
-     */
-    data: TestingCreateManyInput | TestingCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Testing update
-   */
-  export type TestingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Testing
-     */
-    select?: TestingSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Testing
-     */
-    omit?: TestingOmit<ExtArgs> | null
-    /**
-     * The data needed to update a Testing.
-     */
-    data: XOR<TestingUpdateInput, TestingUncheckedUpdateInput>
-    /**
-     * Choose, which Testing to update.
-     */
-    where: TestingWhereUniqueInput
-  }
-
-  /**
-   * Testing updateMany
-   */
-  export type TestingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Testings.
-     */
-    data: XOR<TestingUpdateManyMutationInput, TestingUncheckedUpdateManyInput>
-    /**
-     * Filter which Testings to update
-     */
-    where?: TestingWhereInput
-    /**
-     * Limit how many Testings to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Testing updateManyAndReturn
-   */
-  export type TestingUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Testing
-     */
-    select?: TestingSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Testing
-     */
-    omit?: TestingOmit<ExtArgs> | null
-    /**
-     * The data used to update Testings.
-     */
-    data: XOR<TestingUpdateManyMutationInput, TestingUncheckedUpdateManyInput>
-    /**
-     * Filter which Testings to update
-     */
-    where?: TestingWhereInput
-    /**
-     * Limit how many Testings to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Testing upsert
-   */
-  export type TestingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Testing
-     */
-    select?: TestingSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Testing
-     */
-    omit?: TestingOmit<ExtArgs> | null
-    /**
-     * The filter to search for the Testing to update in case it exists.
-     */
-    where: TestingWhereUniqueInput
-    /**
-     * In case the Testing found by the `where` argument doesn't exist, create a new Testing with this data.
-     */
-    create: XOR<TestingCreateInput, TestingUncheckedCreateInput>
-    /**
-     * In case the Testing was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<TestingUpdateInput, TestingUncheckedUpdateInput>
-  }
-
-  /**
-   * Testing delete
-   */
-  export type TestingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Testing
-     */
-    select?: TestingSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Testing
-     */
-    omit?: TestingOmit<ExtArgs> | null
-    /**
-     * Filter which Testing to delete.
-     */
-    where: TestingWhereUniqueInput
-  }
-
-  /**
-   * Testing deleteMany
-   */
-  export type TestingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Testings to delete
-     */
-    where?: TestingWhereInput
-    /**
-     * Limit how many Testings to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Testing without action
-   */
-  export type TestingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Testing
-     */
-    select?: TestingSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Testing
-     */
-    omit?: TestingOmit<ExtArgs> | null
-  }
-
-
-  /**
    * Enums
    */
 
@@ -7700,6 +4533,11 @@ export namespace Prisma {
     nama_lengkap: 'nama_lengkap',
     no_nik: 'no_nik',
     no_kk: 'no_kk',
+    tempat_lahir: 'tempat_lahir',
+    tanggal_lahir: 'tanggal_lahir',
+    jenis_kelamin: 'jenis_kelamin',
+    agama: 'agama',
+    pekerjaan: 'pekerjaan',
     alamat: 'alamat',
     createdAt: 'createdAt'
   };
@@ -7709,24 +4547,16 @@ export namespace Prisma {
 
   export const PengajuanSuratScalarFieldEnum: {
     id: 'id',
-    nama_lengkap: 'nama_lengkap',
-    no_nik: 'no_nik',
-    no_kk: 'no_kk',
-    alamat: 'alamat',
+    wargaId: 'wargaId',
     jenis_surat: 'jenis_surat',
-    keterangan: 'keterangan',
-    foto_ktp: 'foto_ktp',
     data_tambahan: 'data_tambahan',
     status: 'status',
     no_pengajuan: 'no_pengajuan',
     catatan_penolakan: 'catatan_penolakan',
-    tanggal_pengajuan: 'tanggal_pengajuan',
-    tanggal_diproses: 'tanggal_diproses',
-    tanggal_selesai: 'tanggal_selesai',
     nomor_surat: 'nomor_surat',
     file_surat: 'file_surat',
-    tanggal_diterbitkan: 'tanggal_diterbitkan',
-    ditandatangani_oleh: 'ditandatangani_oleh',
+    tanggal_pengajuan: 'tanggal_pengajuan',
+    tanggal_selesai: 'tanggal_selesai',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -7745,37 +4575,6 @@ export namespace Prisma {
   };
 
   export type AdminScalarFieldEnum = (typeof AdminScalarFieldEnum)[keyof typeof AdminScalarFieldEnum]
-
-
-  export const TemplateSuratScalarFieldEnum: {
-    id: 'id',
-    judul: 'judul',
-    jenis_surat: 'jenis_surat',
-    terakhirDiubah: 'terakhirDiubah',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type TemplateSuratScalarFieldEnum = (typeof TemplateSuratScalarFieldEnum)[keyof typeof TemplateSuratScalarFieldEnum]
-
-
-  export const UserScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    email: 'email'
-  };
-
-  export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
-
-
-  export const TestingScalarFieldEnum: {
-    id: 'id',
-    nama: 'nama',
-    status: 'status',
-    createdAt: 'createdAt'
-  };
-
-  export type TestingScalarFieldEnum = (typeof TestingScalarFieldEnum)[keyof typeof TestingScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -7802,6 +4601,14 @@ export namespace Prisma {
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
   export const JsonNullValueFilter: {
     DbNull: typeof DbNull,
     JsonNull: typeof JsonNull,
@@ -7809,14 +4616,6 @@ export namespace Prisma {
   };
 
   export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
-
-
-  export const NullsOrder: {
-    first: 'first',
-    last: 'last'
-  };
-
-  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -7905,8 +4704,14 @@ export namespace Prisma {
     nama_lengkap?: StringFilter<"Warga"> | string
     no_nik?: StringFilter<"Warga"> | string
     no_kk?: StringFilter<"Warga"> | string
+    tempat_lahir?: StringFilter<"Warga"> | string
+    tanggal_lahir?: StringFilter<"Warga"> | string
+    jenis_kelamin?: StringFilter<"Warga"> | string
+    agama?: StringNullableFilter<"Warga"> | string | null
+    pekerjaan?: StringFilter<"Warga"> | string
     alamat?: StringFilter<"Warga"> | string
     createdAt?: DateTimeFilter<"Warga"> | Date | string
+    pengajuan?: PengajuanSuratListRelationFilter
   }
 
   export type WargaOrderByWithRelationInput = {
@@ -7914,8 +4719,14 @@ export namespace Prisma {
     nama_lengkap?: SortOrder
     no_nik?: SortOrder
     no_kk?: SortOrder
+    tempat_lahir?: SortOrder
+    tanggal_lahir?: SortOrder
+    jenis_kelamin?: SortOrder
+    agama?: SortOrderInput | SortOrder
+    pekerjaan?: SortOrder
     alamat?: SortOrder
     createdAt?: SortOrder
+    pengajuan?: PengajuanSuratOrderByRelationAggregateInput
   }
 
   export type WargaWhereUniqueInput = Prisma.AtLeast<{
@@ -7926,8 +4737,14 @@ export namespace Prisma {
     NOT?: WargaWhereInput | WargaWhereInput[]
     nama_lengkap?: StringFilter<"Warga"> | string
     no_kk?: StringFilter<"Warga"> | string
+    tempat_lahir?: StringFilter<"Warga"> | string
+    tanggal_lahir?: StringFilter<"Warga"> | string
+    jenis_kelamin?: StringFilter<"Warga"> | string
+    agama?: StringNullableFilter<"Warga"> | string | null
+    pekerjaan?: StringFilter<"Warga"> | string
     alamat?: StringFilter<"Warga"> | string
     createdAt?: DateTimeFilter<"Warga"> | Date | string
+    pengajuan?: PengajuanSuratListRelationFilter
   }, "id" | "no_nik">
 
   export type WargaOrderByWithAggregationInput = {
@@ -7935,6 +4752,11 @@ export namespace Prisma {
     nama_lengkap?: SortOrder
     no_nik?: SortOrder
     no_kk?: SortOrder
+    tempat_lahir?: SortOrder
+    tanggal_lahir?: SortOrder
+    jenis_kelamin?: SortOrder
+    agama?: SortOrderInput | SortOrder
+    pekerjaan?: SortOrder
     alamat?: SortOrder
     createdAt?: SortOrder
     _count?: WargaCountOrderByAggregateInput
@@ -7952,6 +4774,11 @@ export namespace Prisma {
     nama_lengkap?: StringWithAggregatesFilter<"Warga"> | string
     no_nik?: StringWithAggregatesFilter<"Warga"> | string
     no_kk?: StringWithAggregatesFilter<"Warga"> | string
+    tempat_lahir?: StringWithAggregatesFilter<"Warga"> | string
+    tanggal_lahir?: StringWithAggregatesFilter<"Warga"> | string
+    jenis_kelamin?: StringWithAggregatesFilter<"Warga"> | string
+    agama?: StringNullableWithAggregatesFilter<"Warga"> | string | null
+    pekerjaan?: StringWithAggregatesFilter<"Warga"> | string
     alamat?: StringWithAggregatesFilter<"Warga"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Warga"> | Date | string
   }
@@ -7961,50 +4788,36 @@ export namespace Prisma {
     OR?: PengajuanSuratWhereInput[]
     NOT?: PengajuanSuratWhereInput | PengajuanSuratWhereInput[]
     id?: IntFilter<"PengajuanSurat"> | number
-    nama_lengkap?: StringFilter<"PengajuanSurat"> | string
-    no_nik?: StringFilter<"PengajuanSurat"> | string
-    no_kk?: StringFilter<"PengajuanSurat"> | string
-    alamat?: StringFilter<"PengajuanSurat"> | string
+    wargaId?: IntFilter<"PengajuanSurat"> | number
     jenis_surat?: StringFilter<"PengajuanSurat"> | string
-    keterangan?: StringNullableFilter<"PengajuanSurat"> | string | null
-    foto_ktp?: StringNullableFilter<"PengajuanSurat"> | string | null
     data_tambahan?: JsonNullableFilter<"PengajuanSurat">
     status?: StringFilter<"PengajuanSurat"> | string
     no_pengajuan?: StringNullableFilter<"PengajuanSurat"> | string | null
     catatan_penolakan?: StringNullableFilter<"PengajuanSurat"> | string | null
-    tanggal_pengajuan?: DateTimeFilter<"PengajuanSurat"> | Date | string
-    tanggal_diproses?: DateTimeNullableFilter<"PengajuanSurat"> | Date | string | null
-    tanggal_selesai?: DateTimeNullableFilter<"PengajuanSurat"> | Date | string | null
     nomor_surat?: StringNullableFilter<"PengajuanSurat"> | string | null
     file_surat?: StringNullableFilter<"PengajuanSurat"> | string | null
-    tanggal_diterbitkan?: DateTimeNullableFilter<"PengajuanSurat"> | Date | string | null
-    ditandatangani_oleh?: StringNullableFilter<"PengajuanSurat"> | string | null
+    tanggal_pengajuan?: DateTimeFilter<"PengajuanSurat"> | Date | string
+    tanggal_selesai?: DateTimeNullableFilter<"PengajuanSurat"> | Date | string | null
     createdAt?: DateTimeFilter<"PengajuanSurat"> | Date | string
     updatedAt?: DateTimeFilter<"PengajuanSurat"> | Date | string
+    warga?: XOR<WargaScalarRelationFilter, WargaWhereInput>
   }
 
   export type PengajuanSuratOrderByWithRelationInput = {
     id?: SortOrder
-    nama_lengkap?: SortOrder
-    no_nik?: SortOrder
-    no_kk?: SortOrder
-    alamat?: SortOrder
+    wargaId?: SortOrder
     jenis_surat?: SortOrder
-    keterangan?: SortOrderInput | SortOrder
-    foto_ktp?: SortOrderInput | SortOrder
     data_tambahan?: SortOrderInput | SortOrder
     status?: SortOrder
     no_pengajuan?: SortOrderInput | SortOrder
     catatan_penolakan?: SortOrderInput | SortOrder
-    tanggal_pengajuan?: SortOrder
-    tanggal_diproses?: SortOrderInput | SortOrder
-    tanggal_selesai?: SortOrderInput | SortOrder
     nomor_surat?: SortOrderInput | SortOrder
     file_surat?: SortOrderInput | SortOrder
-    tanggal_diterbitkan?: SortOrderInput | SortOrder
-    ditandatangani_oleh?: SortOrderInput | SortOrder
+    tanggal_pengajuan?: SortOrder
+    tanggal_selesai?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    warga?: WargaOrderByWithRelationInput
   }
 
   export type PengajuanSuratWhereUniqueInput = Prisma.AtLeast<{
@@ -8013,47 +4826,32 @@ export namespace Prisma {
     AND?: PengajuanSuratWhereInput | PengajuanSuratWhereInput[]
     OR?: PengajuanSuratWhereInput[]
     NOT?: PengajuanSuratWhereInput | PengajuanSuratWhereInput[]
-    nama_lengkap?: StringFilter<"PengajuanSurat"> | string
-    no_nik?: StringFilter<"PengajuanSurat"> | string
-    no_kk?: StringFilter<"PengajuanSurat"> | string
-    alamat?: StringFilter<"PengajuanSurat"> | string
+    wargaId?: IntFilter<"PengajuanSurat"> | number
     jenis_surat?: StringFilter<"PengajuanSurat"> | string
-    keterangan?: StringNullableFilter<"PengajuanSurat"> | string | null
-    foto_ktp?: StringNullableFilter<"PengajuanSurat"> | string | null
     data_tambahan?: JsonNullableFilter<"PengajuanSurat">
     status?: StringFilter<"PengajuanSurat"> | string
     catatan_penolakan?: StringNullableFilter<"PengajuanSurat"> | string | null
-    tanggal_pengajuan?: DateTimeFilter<"PengajuanSurat"> | Date | string
-    tanggal_diproses?: DateTimeNullableFilter<"PengajuanSurat"> | Date | string | null
-    tanggal_selesai?: DateTimeNullableFilter<"PengajuanSurat"> | Date | string | null
     nomor_surat?: StringNullableFilter<"PengajuanSurat"> | string | null
     file_surat?: StringNullableFilter<"PengajuanSurat"> | string | null
-    tanggal_diterbitkan?: DateTimeNullableFilter<"PengajuanSurat"> | Date | string | null
-    ditandatangani_oleh?: StringNullableFilter<"PengajuanSurat"> | string | null
+    tanggal_pengajuan?: DateTimeFilter<"PengajuanSurat"> | Date | string
+    tanggal_selesai?: DateTimeNullableFilter<"PengajuanSurat"> | Date | string | null
     createdAt?: DateTimeFilter<"PengajuanSurat"> | Date | string
     updatedAt?: DateTimeFilter<"PengajuanSurat"> | Date | string
+    warga?: XOR<WargaScalarRelationFilter, WargaWhereInput>
   }, "id" | "no_pengajuan">
 
   export type PengajuanSuratOrderByWithAggregationInput = {
     id?: SortOrder
-    nama_lengkap?: SortOrder
-    no_nik?: SortOrder
-    no_kk?: SortOrder
-    alamat?: SortOrder
+    wargaId?: SortOrder
     jenis_surat?: SortOrder
-    keterangan?: SortOrderInput | SortOrder
-    foto_ktp?: SortOrderInput | SortOrder
     data_tambahan?: SortOrderInput | SortOrder
     status?: SortOrder
     no_pengajuan?: SortOrderInput | SortOrder
     catatan_penolakan?: SortOrderInput | SortOrder
-    tanggal_pengajuan?: SortOrder
-    tanggal_diproses?: SortOrderInput | SortOrder
-    tanggal_selesai?: SortOrderInput | SortOrder
     nomor_surat?: SortOrderInput | SortOrder
     file_surat?: SortOrderInput | SortOrder
-    tanggal_diterbitkan?: SortOrderInput | SortOrder
-    ditandatangani_oleh?: SortOrderInput | SortOrder
+    tanggal_pengajuan?: SortOrder
+    tanggal_selesai?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: PengajuanSuratCountOrderByAggregateInput
@@ -8068,24 +4866,16 @@ export namespace Prisma {
     OR?: PengajuanSuratScalarWhereWithAggregatesInput[]
     NOT?: PengajuanSuratScalarWhereWithAggregatesInput | PengajuanSuratScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"PengajuanSurat"> | number
-    nama_lengkap?: StringWithAggregatesFilter<"PengajuanSurat"> | string
-    no_nik?: StringWithAggregatesFilter<"PengajuanSurat"> | string
-    no_kk?: StringWithAggregatesFilter<"PengajuanSurat"> | string
-    alamat?: StringWithAggregatesFilter<"PengajuanSurat"> | string
+    wargaId?: IntWithAggregatesFilter<"PengajuanSurat"> | number
     jenis_surat?: StringWithAggregatesFilter<"PengajuanSurat"> | string
-    keterangan?: StringNullableWithAggregatesFilter<"PengajuanSurat"> | string | null
-    foto_ktp?: StringNullableWithAggregatesFilter<"PengajuanSurat"> | string | null
     data_tambahan?: JsonNullableWithAggregatesFilter<"PengajuanSurat">
     status?: StringWithAggregatesFilter<"PengajuanSurat"> | string
     no_pengajuan?: StringNullableWithAggregatesFilter<"PengajuanSurat"> | string | null
     catatan_penolakan?: StringNullableWithAggregatesFilter<"PengajuanSurat"> | string | null
-    tanggal_pengajuan?: DateTimeWithAggregatesFilter<"PengajuanSurat"> | Date | string
-    tanggal_diproses?: DateTimeNullableWithAggregatesFilter<"PengajuanSurat"> | Date | string | null
-    tanggal_selesai?: DateTimeNullableWithAggregatesFilter<"PengajuanSurat"> | Date | string | null
     nomor_surat?: StringNullableWithAggregatesFilter<"PengajuanSurat"> | string | null
     file_surat?: StringNullableWithAggregatesFilter<"PengajuanSurat"> | string | null
-    tanggal_diterbitkan?: DateTimeNullableWithAggregatesFilter<"PengajuanSurat"> | Date | string | null
-    ditandatangani_oleh?: StringNullableWithAggregatesFilter<"PengajuanSurat"> | string | null
+    tanggal_pengajuan?: DateTimeWithAggregatesFilter<"PengajuanSurat"> | Date | string
+    tanggal_selesai?: DateTimeNullableWithAggregatesFilter<"PengajuanSurat"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"PengajuanSurat"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"PengajuanSurat"> | Date | string
   }
@@ -8154,162 +4944,18 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Admin"> | Date | string
   }
 
-  export type TemplateSuratWhereInput = {
-    AND?: TemplateSuratWhereInput | TemplateSuratWhereInput[]
-    OR?: TemplateSuratWhereInput[]
-    NOT?: TemplateSuratWhereInput | TemplateSuratWhereInput[]
-    id?: StringFilter<"TemplateSurat"> | string
-    judul?: StringFilter<"TemplateSurat"> | string
-    jenis_surat?: StringFilter<"TemplateSurat"> | string
-    terakhirDiubah?: DateTimeFilter<"TemplateSurat"> | Date | string
-    createdAt?: DateTimeFilter<"TemplateSurat"> | Date | string
-    updatedAt?: DateTimeFilter<"TemplateSurat"> | Date | string
-  }
-
-  export type TemplateSuratOrderByWithRelationInput = {
-    id?: SortOrder
-    judul?: SortOrder
-    jenis_surat?: SortOrder
-    terakhirDiubah?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type TemplateSuratWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    jenis_surat?: string
-    AND?: TemplateSuratWhereInput | TemplateSuratWhereInput[]
-    OR?: TemplateSuratWhereInput[]
-    NOT?: TemplateSuratWhereInput | TemplateSuratWhereInput[]
-    judul?: StringFilter<"TemplateSurat"> | string
-    terakhirDiubah?: DateTimeFilter<"TemplateSurat"> | Date | string
-    createdAt?: DateTimeFilter<"TemplateSurat"> | Date | string
-    updatedAt?: DateTimeFilter<"TemplateSurat"> | Date | string
-  }, "id" | "jenis_surat">
-
-  export type TemplateSuratOrderByWithAggregationInput = {
-    id?: SortOrder
-    judul?: SortOrder
-    jenis_surat?: SortOrder
-    terakhirDiubah?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: TemplateSuratCountOrderByAggregateInput
-    _max?: TemplateSuratMaxOrderByAggregateInput
-    _min?: TemplateSuratMinOrderByAggregateInput
-  }
-
-  export type TemplateSuratScalarWhereWithAggregatesInput = {
-    AND?: TemplateSuratScalarWhereWithAggregatesInput | TemplateSuratScalarWhereWithAggregatesInput[]
-    OR?: TemplateSuratScalarWhereWithAggregatesInput[]
-    NOT?: TemplateSuratScalarWhereWithAggregatesInput | TemplateSuratScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"TemplateSurat"> | string
-    judul?: StringWithAggregatesFilter<"TemplateSurat"> | string
-    jenis_surat?: StringWithAggregatesFilter<"TemplateSurat"> | string
-    terakhirDiubah?: DateTimeWithAggregatesFilter<"TemplateSurat"> | Date | string
-    createdAt?: DateTimeWithAggregatesFilter<"TemplateSurat"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"TemplateSurat"> | Date | string
-  }
-
-  export type UserWhereInput = {
-    AND?: UserWhereInput | UserWhereInput[]
-    OR?: UserWhereInput[]
-    NOT?: UserWhereInput | UserWhereInput[]
-    id?: IntFilter<"User"> | number
-    name?: StringFilter<"User"> | string
-    email?: StringFilter<"User"> | string
-  }
-
-  export type UserOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-  }
-
-  export type UserWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    email?: string
-    AND?: UserWhereInput | UserWhereInput[]
-    OR?: UserWhereInput[]
-    NOT?: UserWhereInput | UserWhereInput[]
-    name?: StringFilter<"User"> | string
-  }, "id" | "email">
-
-  export type UserOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-    _count?: UserCountOrderByAggregateInput
-    _avg?: UserAvgOrderByAggregateInput
-    _max?: UserMaxOrderByAggregateInput
-    _min?: UserMinOrderByAggregateInput
-    _sum?: UserSumOrderByAggregateInput
-  }
-
-  export type UserScalarWhereWithAggregatesInput = {
-    AND?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
-    OR?: UserScalarWhereWithAggregatesInput[]
-    NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"User"> | number
-    name?: StringWithAggregatesFilter<"User"> | string
-    email?: StringWithAggregatesFilter<"User"> | string
-  }
-
-  export type TestingWhereInput = {
-    AND?: TestingWhereInput | TestingWhereInput[]
-    OR?: TestingWhereInput[]
-    NOT?: TestingWhereInput | TestingWhereInput[]
-    id?: IntFilter<"Testing"> | number
-    nama?: StringFilter<"Testing"> | string
-    status?: StringFilter<"Testing"> | string
-    createdAt?: DateTimeFilter<"Testing"> | Date | string
-  }
-
-  export type TestingOrderByWithRelationInput = {
-    id?: SortOrder
-    nama?: SortOrder
-    status?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type TestingWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    AND?: TestingWhereInput | TestingWhereInput[]
-    OR?: TestingWhereInput[]
-    NOT?: TestingWhereInput | TestingWhereInput[]
-    nama?: StringFilter<"Testing"> | string
-    status?: StringFilter<"Testing"> | string
-    createdAt?: DateTimeFilter<"Testing"> | Date | string
-  }, "id">
-
-  export type TestingOrderByWithAggregationInput = {
-    id?: SortOrder
-    nama?: SortOrder
-    status?: SortOrder
-    createdAt?: SortOrder
-    _count?: TestingCountOrderByAggregateInput
-    _avg?: TestingAvgOrderByAggregateInput
-    _max?: TestingMaxOrderByAggregateInput
-    _min?: TestingMinOrderByAggregateInput
-    _sum?: TestingSumOrderByAggregateInput
-  }
-
-  export type TestingScalarWhereWithAggregatesInput = {
-    AND?: TestingScalarWhereWithAggregatesInput | TestingScalarWhereWithAggregatesInput[]
-    OR?: TestingScalarWhereWithAggregatesInput[]
-    NOT?: TestingScalarWhereWithAggregatesInput | TestingScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Testing"> | number
-    nama?: StringWithAggregatesFilter<"Testing"> | string
-    status?: StringWithAggregatesFilter<"Testing"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"Testing"> | Date | string
-  }
-
   export type WargaCreateInput = {
     nama_lengkap: string
     no_nik: string
     no_kk: string
+    tempat_lahir: string
+    tanggal_lahir: string
+    jenis_kelamin: string
+    agama?: string | null
+    pekerjaan: string
     alamat: string
     createdAt?: Date | string
+    pengajuan?: PengajuanSuratCreateNestedManyWithoutWargaInput
   }
 
   export type WargaUncheckedCreateInput = {
@@ -8317,16 +4963,28 @@ export namespace Prisma {
     nama_lengkap: string
     no_nik: string
     no_kk: string
+    tempat_lahir: string
+    tanggal_lahir: string
+    jenis_kelamin: string
+    agama?: string | null
+    pekerjaan: string
     alamat: string
     createdAt?: Date | string
+    pengajuan?: PengajuanSuratUncheckedCreateNestedManyWithoutWargaInput
   }
 
   export type WargaUpdateInput = {
     nama_lengkap?: StringFieldUpdateOperationsInput | string
     no_nik?: StringFieldUpdateOperationsInput | string
     no_kk?: StringFieldUpdateOperationsInput | string
+    tempat_lahir?: StringFieldUpdateOperationsInput | string
+    tanggal_lahir?: StringFieldUpdateOperationsInput | string
+    jenis_kelamin?: StringFieldUpdateOperationsInput | string
+    agama?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaan?: StringFieldUpdateOperationsInput | string
     alamat?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    pengajuan?: PengajuanSuratUpdateManyWithoutWargaNestedInput
   }
 
   export type WargaUncheckedUpdateInput = {
@@ -8334,8 +4992,14 @@ export namespace Prisma {
     nama_lengkap?: StringFieldUpdateOperationsInput | string
     no_nik?: StringFieldUpdateOperationsInput | string
     no_kk?: StringFieldUpdateOperationsInput | string
+    tempat_lahir?: StringFieldUpdateOperationsInput | string
+    tanggal_lahir?: StringFieldUpdateOperationsInput | string
+    jenis_kelamin?: StringFieldUpdateOperationsInput | string
+    agama?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaan?: StringFieldUpdateOperationsInput | string
     alamat?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    pengajuan?: PengajuanSuratUncheckedUpdateManyWithoutWargaNestedInput
   }
 
   export type WargaCreateManyInput = {
@@ -8343,6 +5007,11 @@ export namespace Prisma {
     nama_lengkap: string
     no_nik: string
     no_kk: string
+    tempat_lahir: string
+    tanggal_lahir: string
+    jenis_kelamin: string
+    agama?: string | null
+    pekerjaan: string
     alamat: string
     createdAt?: Date | string
   }
@@ -8351,6 +5020,11 @@ export namespace Prisma {
     nama_lengkap?: StringFieldUpdateOperationsInput | string
     no_nik?: StringFieldUpdateOperationsInput | string
     no_kk?: StringFieldUpdateOperationsInput | string
+    tempat_lahir?: StringFieldUpdateOperationsInput | string
+    tanggal_lahir?: StringFieldUpdateOperationsInput | string
+    jenis_kelamin?: StringFieldUpdateOperationsInput | string
+    agama?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaan?: StringFieldUpdateOperationsInput | string
     alamat?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8360,171 +5034,119 @@ export namespace Prisma {
     nama_lengkap?: StringFieldUpdateOperationsInput | string
     no_nik?: StringFieldUpdateOperationsInput | string
     no_kk?: StringFieldUpdateOperationsInput | string
+    tempat_lahir?: StringFieldUpdateOperationsInput | string
+    tanggal_lahir?: StringFieldUpdateOperationsInput | string
+    jenis_kelamin?: StringFieldUpdateOperationsInput | string
+    agama?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaan?: StringFieldUpdateOperationsInput | string
     alamat?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PengajuanSuratCreateInput = {
-    nama_lengkap: string
-    no_nik: string
-    no_kk: string
-    alamat: string
     jenis_surat: string
-    keterangan?: string | null
-    foto_ktp?: string | null
     data_tambahan?: NullableJsonNullValueInput | InputJsonValue
     status?: string
     no_pengajuan?: string | null
     catatan_penolakan?: string | null
-    tanggal_pengajuan?: Date | string
-    tanggal_diproses?: Date | string | null
-    tanggal_selesai?: Date | string | null
     nomor_surat?: string | null
     file_surat?: string | null
-    tanggal_diterbitkan?: Date | string | null
-    ditandatangani_oleh?: string | null
+    tanggal_pengajuan?: Date | string
+    tanggal_selesai?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    warga: WargaCreateNestedOneWithoutPengajuanInput
   }
 
   export type PengajuanSuratUncheckedCreateInput = {
     id?: number
-    nama_lengkap: string
-    no_nik: string
-    no_kk: string
-    alamat: string
+    wargaId: number
     jenis_surat: string
-    keterangan?: string | null
-    foto_ktp?: string | null
     data_tambahan?: NullableJsonNullValueInput | InputJsonValue
     status?: string
     no_pengajuan?: string | null
     catatan_penolakan?: string | null
-    tanggal_pengajuan?: Date | string
-    tanggal_diproses?: Date | string | null
-    tanggal_selesai?: Date | string | null
     nomor_surat?: string | null
     file_surat?: string | null
-    tanggal_diterbitkan?: Date | string | null
-    ditandatangani_oleh?: string | null
+    tanggal_pengajuan?: Date | string
+    tanggal_selesai?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type PengajuanSuratUpdateInput = {
-    nama_lengkap?: StringFieldUpdateOperationsInput | string
-    no_nik?: StringFieldUpdateOperationsInput | string
-    no_kk?: StringFieldUpdateOperationsInput | string
-    alamat?: StringFieldUpdateOperationsInput | string
     jenis_surat?: StringFieldUpdateOperationsInput | string
-    keterangan?: NullableStringFieldUpdateOperationsInput | string | null
-    foto_ktp?: NullableStringFieldUpdateOperationsInput | string | null
     data_tambahan?: NullableJsonNullValueInput | InputJsonValue
     status?: StringFieldUpdateOperationsInput | string
     no_pengajuan?: NullableStringFieldUpdateOperationsInput | string | null
     catatan_penolakan?: NullableStringFieldUpdateOperationsInput | string | null
-    tanggal_pengajuan?: DateTimeFieldUpdateOperationsInput | Date | string
-    tanggal_diproses?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    tanggal_selesai?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
     file_surat?: NullableStringFieldUpdateOperationsInput | string | null
-    tanggal_diterbitkan?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    ditandatangani_oleh?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggal_pengajuan?: DateTimeFieldUpdateOperationsInput | Date | string
+    tanggal_selesai?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    warga?: WargaUpdateOneRequiredWithoutPengajuanNestedInput
   }
 
   export type PengajuanSuratUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    nama_lengkap?: StringFieldUpdateOperationsInput | string
-    no_nik?: StringFieldUpdateOperationsInput | string
-    no_kk?: StringFieldUpdateOperationsInput | string
-    alamat?: StringFieldUpdateOperationsInput | string
+    wargaId?: IntFieldUpdateOperationsInput | number
     jenis_surat?: StringFieldUpdateOperationsInput | string
-    keterangan?: NullableStringFieldUpdateOperationsInput | string | null
-    foto_ktp?: NullableStringFieldUpdateOperationsInput | string | null
     data_tambahan?: NullableJsonNullValueInput | InputJsonValue
     status?: StringFieldUpdateOperationsInput | string
     no_pengajuan?: NullableStringFieldUpdateOperationsInput | string | null
     catatan_penolakan?: NullableStringFieldUpdateOperationsInput | string | null
-    tanggal_pengajuan?: DateTimeFieldUpdateOperationsInput | Date | string
-    tanggal_diproses?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    tanggal_selesai?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
     file_surat?: NullableStringFieldUpdateOperationsInput | string | null
-    tanggal_diterbitkan?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    ditandatangani_oleh?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggal_pengajuan?: DateTimeFieldUpdateOperationsInput | Date | string
+    tanggal_selesai?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PengajuanSuratCreateManyInput = {
     id?: number
-    nama_lengkap: string
-    no_nik: string
-    no_kk: string
-    alamat: string
+    wargaId: number
     jenis_surat: string
-    keterangan?: string | null
-    foto_ktp?: string | null
     data_tambahan?: NullableJsonNullValueInput | InputJsonValue
     status?: string
     no_pengajuan?: string | null
     catatan_penolakan?: string | null
-    tanggal_pengajuan?: Date | string
-    tanggal_diproses?: Date | string | null
-    tanggal_selesai?: Date | string | null
     nomor_surat?: string | null
     file_surat?: string | null
-    tanggal_diterbitkan?: Date | string | null
-    ditandatangani_oleh?: string | null
+    tanggal_pengajuan?: Date | string
+    tanggal_selesai?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type PengajuanSuratUpdateManyMutationInput = {
-    nama_lengkap?: StringFieldUpdateOperationsInput | string
-    no_nik?: StringFieldUpdateOperationsInput | string
-    no_kk?: StringFieldUpdateOperationsInput | string
-    alamat?: StringFieldUpdateOperationsInput | string
     jenis_surat?: StringFieldUpdateOperationsInput | string
-    keterangan?: NullableStringFieldUpdateOperationsInput | string | null
-    foto_ktp?: NullableStringFieldUpdateOperationsInput | string | null
     data_tambahan?: NullableJsonNullValueInput | InputJsonValue
     status?: StringFieldUpdateOperationsInput | string
     no_pengajuan?: NullableStringFieldUpdateOperationsInput | string | null
     catatan_penolakan?: NullableStringFieldUpdateOperationsInput | string | null
-    tanggal_pengajuan?: DateTimeFieldUpdateOperationsInput | Date | string
-    tanggal_diproses?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    tanggal_selesai?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
     file_surat?: NullableStringFieldUpdateOperationsInput | string | null
-    tanggal_diterbitkan?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    ditandatangani_oleh?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggal_pengajuan?: DateTimeFieldUpdateOperationsInput | Date | string
+    tanggal_selesai?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PengajuanSuratUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    nama_lengkap?: StringFieldUpdateOperationsInput | string
-    no_nik?: StringFieldUpdateOperationsInput | string
-    no_kk?: StringFieldUpdateOperationsInput | string
-    alamat?: StringFieldUpdateOperationsInput | string
+    wargaId?: IntFieldUpdateOperationsInput | number
     jenis_surat?: StringFieldUpdateOperationsInput | string
-    keterangan?: NullableStringFieldUpdateOperationsInput | string | null
-    foto_ktp?: NullableStringFieldUpdateOperationsInput | string | null
     data_tambahan?: NullableJsonNullValueInput | InputJsonValue
     status?: StringFieldUpdateOperationsInput | string
     no_pengajuan?: NullableStringFieldUpdateOperationsInput | string | null
     catatan_penolakan?: NullableStringFieldUpdateOperationsInput | string | null
-    tanggal_pengajuan?: DateTimeFieldUpdateOperationsInput | Date | string
-    tanggal_diproses?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    tanggal_selesai?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
     file_surat?: NullableStringFieldUpdateOperationsInput | string | null
-    tanggal_diterbitkan?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    ditandatangani_oleh?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggal_pengajuan?: DateTimeFieldUpdateOperationsInput | Date | string
+    tanggal_selesai?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8596,154 +5218,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TemplateSuratCreateInput = {
-    id?: string
-    judul: string
-    jenis_surat: string
-    terakhirDiubah: Date | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type TemplateSuratUncheckedCreateInput = {
-    id?: string
-    judul: string
-    jenis_surat: string
-    terakhirDiubah: Date | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type TemplateSuratUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    judul?: StringFieldUpdateOperationsInput | string
-    jenis_surat?: StringFieldUpdateOperationsInput | string
-    terakhirDiubah?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TemplateSuratUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    judul?: StringFieldUpdateOperationsInput | string
-    jenis_surat?: StringFieldUpdateOperationsInput | string
-    terakhirDiubah?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TemplateSuratCreateManyInput = {
-    id?: string
-    judul: string
-    jenis_surat: string
-    terakhirDiubah: Date | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type TemplateSuratUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    judul?: StringFieldUpdateOperationsInput | string
-    jenis_surat?: StringFieldUpdateOperationsInput | string
-    terakhirDiubah?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TemplateSuratUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    judul?: StringFieldUpdateOperationsInput | string
-    jenis_surat?: StringFieldUpdateOperationsInput | string
-    terakhirDiubah?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type UserCreateInput = {
-    name: string
-    email: string
-  }
-
-  export type UserUncheckedCreateInput = {
-    id?: number
-    name: string
-    email: string
-  }
-
-  export type UserUpdateInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type UserUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type UserCreateManyInput = {
-    id?: number
-    name: string
-    email: string
-  }
-
-  export type UserUpdateManyMutationInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type UserUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type TestingCreateInput = {
-    nama: string
-    status?: string
-    createdAt?: Date | string
-  }
-
-  export type TestingUncheckedCreateInput = {
-    id?: number
-    nama: string
-    status?: string
-    createdAt?: Date | string
-  }
-
-  export type TestingUpdateInput = {
-    nama?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TestingUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    nama?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TestingCreateManyInput = {
-    id?: number
-    nama: string
-    status?: string
-    createdAt?: Date | string
-  }
-
-  export type TestingUpdateManyMutationInput = {
-    nama?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TestingUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    nama?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -8770,6 +5244,21 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -8781,11 +5270,31 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type PengajuanSuratListRelationFilter = {
+    every?: PengajuanSuratWhereInput
+    some?: PengajuanSuratWhereInput
+    none?: PengajuanSuratWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
+  export type PengajuanSuratOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type WargaCountOrderByAggregateInput = {
     id?: SortOrder
     nama_lengkap?: SortOrder
     no_nik?: SortOrder
     no_kk?: SortOrder
+    tempat_lahir?: SortOrder
+    tanggal_lahir?: SortOrder
+    jenis_kelamin?: SortOrder
+    agama?: SortOrder
+    pekerjaan?: SortOrder
     alamat?: SortOrder
     createdAt?: SortOrder
   }
@@ -8799,6 +5308,11 @@ export namespace Prisma {
     nama_lengkap?: SortOrder
     no_nik?: SortOrder
     no_kk?: SortOrder
+    tempat_lahir?: SortOrder
+    tanggal_lahir?: SortOrder
+    jenis_kelamin?: SortOrder
+    agama?: SortOrder
+    pekerjaan?: SortOrder
     alamat?: SortOrder
     createdAt?: SortOrder
   }
@@ -8808,6 +5322,11 @@ export namespace Prisma {
     nama_lengkap?: SortOrder
     no_nik?: SortOrder
     no_kk?: SortOrder
+    tempat_lahir?: SortOrder
+    tanggal_lahir?: SortOrder
+    jenis_kelamin?: SortOrder
+    agama?: SortOrder
+    pekerjaan?: SortOrder
     alamat?: SortOrder
     createdAt?: SortOrder
   }
@@ -8850,6 +5369,24 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -8862,21 +5399,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
   export type JsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -8913,105 +5435,65 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
+  export type WargaScalarRelationFilter = {
+    is?: WargaWhereInput
+    isNot?: WargaWhereInput
   }
 
   export type PengajuanSuratCountOrderByAggregateInput = {
     id?: SortOrder
-    nama_lengkap?: SortOrder
-    no_nik?: SortOrder
-    no_kk?: SortOrder
-    alamat?: SortOrder
+    wargaId?: SortOrder
     jenis_surat?: SortOrder
-    keterangan?: SortOrder
-    foto_ktp?: SortOrder
     data_tambahan?: SortOrder
     status?: SortOrder
     no_pengajuan?: SortOrder
     catatan_penolakan?: SortOrder
-    tanggal_pengajuan?: SortOrder
-    tanggal_diproses?: SortOrder
-    tanggal_selesai?: SortOrder
     nomor_surat?: SortOrder
     file_surat?: SortOrder
-    tanggal_diterbitkan?: SortOrder
-    ditandatangani_oleh?: SortOrder
+    tanggal_pengajuan?: SortOrder
+    tanggal_selesai?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type PengajuanSuratAvgOrderByAggregateInput = {
     id?: SortOrder
+    wargaId?: SortOrder
   }
 
   export type PengajuanSuratMaxOrderByAggregateInput = {
     id?: SortOrder
-    nama_lengkap?: SortOrder
-    no_nik?: SortOrder
-    no_kk?: SortOrder
-    alamat?: SortOrder
+    wargaId?: SortOrder
     jenis_surat?: SortOrder
-    keterangan?: SortOrder
-    foto_ktp?: SortOrder
     status?: SortOrder
     no_pengajuan?: SortOrder
     catatan_penolakan?: SortOrder
-    tanggal_pengajuan?: SortOrder
-    tanggal_diproses?: SortOrder
-    tanggal_selesai?: SortOrder
     nomor_surat?: SortOrder
     file_surat?: SortOrder
-    tanggal_diterbitkan?: SortOrder
-    ditandatangani_oleh?: SortOrder
+    tanggal_pengajuan?: SortOrder
+    tanggal_selesai?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type PengajuanSuratMinOrderByAggregateInput = {
     id?: SortOrder
-    nama_lengkap?: SortOrder
-    no_nik?: SortOrder
-    no_kk?: SortOrder
-    alamat?: SortOrder
+    wargaId?: SortOrder
     jenis_surat?: SortOrder
-    keterangan?: SortOrder
-    foto_ktp?: SortOrder
     status?: SortOrder
     no_pengajuan?: SortOrder
     catatan_penolakan?: SortOrder
-    tanggal_pengajuan?: SortOrder
-    tanggal_diproses?: SortOrder
-    tanggal_selesai?: SortOrder
     nomor_surat?: SortOrder
     file_surat?: SortOrder
-    tanggal_diterbitkan?: SortOrder
-    ditandatangani_oleh?: SortOrder
+    tanggal_pengajuan?: SortOrder
+    tanggal_selesai?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type PengajuanSuratSumOrderByAggregateInput = {
     id?: SortOrder
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
+    wargaId?: SortOrder
   }
   export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -9092,94 +5574,44 @@ export namespace Prisma {
     id?: SortOrder
   }
 
-  export type TemplateSuratCountOrderByAggregateInput = {
-    id?: SortOrder
-    judul?: SortOrder
-    jenis_surat?: SortOrder
-    terakhirDiubah?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
+  export type PengajuanSuratCreateNestedManyWithoutWargaInput = {
+    create?: XOR<PengajuanSuratCreateWithoutWargaInput, PengajuanSuratUncheckedCreateWithoutWargaInput> | PengajuanSuratCreateWithoutWargaInput[] | PengajuanSuratUncheckedCreateWithoutWargaInput[]
+    connectOrCreate?: PengajuanSuratCreateOrConnectWithoutWargaInput | PengajuanSuratCreateOrConnectWithoutWargaInput[]
+    createMany?: PengajuanSuratCreateManyWargaInputEnvelope
+    connect?: PengajuanSuratWhereUniqueInput | PengajuanSuratWhereUniqueInput[]
   }
 
-  export type TemplateSuratMaxOrderByAggregateInput = {
-    id?: SortOrder
-    judul?: SortOrder
-    jenis_surat?: SortOrder
-    terakhirDiubah?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type TemplateSuratMinOrderByAggregateInput = {
-    id?: SortOrder
-    judul?: SortOrder
-    jenis_surat?: SortOrder
-    terakhirDiubah?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type UserCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-  }
-
-  export type UserAvgOrderByAggregateInput = {
-    id?: SortOrder
-  }
-
-  export type UserMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-  }
-
-  export type UserMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    email?: SortOrder
-  }
-
-  export type UserSumOrderByAggregateInput = {
-    id?: SortOrder
-  }
-
-  export type TestingCountOrderByAggregateInput = {
-    id?: SortOrder
-    nama?: SortOrder
-    status?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type TestingAvgOrderByAggregateInput = {
-    id?: SortOrder
-  }
-
-  export type TestingMaxOrderByAggregateInput = {
-    id?: SortOrder
-    nama?: SortOrder
-    status?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type TestingMinOrderByAggregateInput = {
-    id?: SortOrder
-    nama?: SortOrder
-    status?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type TestingSumOrderByAggregateInput = {
-    id?: SortOrder
+  export type PengajuanSuratUncheckedCreateNestedManyWithoutWargaInput = {
+    create?: XOR<PengajuanSuratCreateWithoutWargaInput, PengajuanSuratUncheckedCreateWithoutWargaInput> | PengajuanSuratCreateWithoutWargaInput[] | PengajuanSuratUncheckedCreateWithoutWargaInput[]
+    connectOrCreate?: PengajuanSuratCreateOrConnectWithoutWargaInput | PengajuanSuratCreateOrConnectWithoutWargaInput[]
+    createMany?: PengajuanSuratCreateManyWargaInputEnvelope
+    connect?: PengajuanSuratWhereUniqueInput | PengajuanSuratWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type PengajuanSuratUpdateManyWithoutWargaNestedInput = {
+    create?: XOR<PengajuanSuratCreateWithoutWargaInput, PengajuanSuratUncheckedCreateWithoutWargaInput> | PengajuanSuratCreateWithoutWargaInput[] | PengajuanSuratUncheckedCreateWithoutWargaInput[]
+    connectOrCreate?: PengajuanSuratCreateOrConnectWithoutWargaInput | PengajuanSuratCreateOrConnectWithoutWargaInput[]
+    upsert?: PengajuanSuratUpsertWithWhereUniqueWithoutWargaInput | PengajuanSuratUpsertWithWhereUniqueWithoutWargaInput[]
+    createMany?: PengajuanSuratCreateManyWargaInputEnvelope
+    set?: PengajuanSuratWhereUniqueInput | PengajuanSuratWhereUniqueInput[]
+    disconnect?: PengajuanSuratWhereUniqueInput | PengajuanSuratWhereUniqueInput[]
+    delete?: PengajuanSuratWhereUniqueInput | PengajuanSuratWhereUniqueInput[]
+    connect?: PengajuanSuratWhereUniqueInput | PengajuanSuratWhereUniqueInput[]
+    update?: PengajuanSuratUpdateWithWhereUniqueWithoutWargaInput | PengajuanSuratUpdateWithWhereUniqueWithoutWargaInput[]
+    updateMany?: PengajuanSuratUpdateManyWithWhereWithoutWargaInput | PengajuanSuratUpdateManyWithWhereWithoutWargaInput[]
+    deleteMany?: PengajuanSuratScalarWhereInput | PengajuanSuratScalarWhereInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -9190,12 +5622,36 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
+  export type PengajuanSuratUncheckedUpdateManyWithoutWargaNestedInput = {
+    create?: XOR<PengajuanSuratCreateWithoutWargaInput, PengajuanSuratUncheckedCreateWithoutWargaInput> | PengajuanSuratCreateWithoutWargaInput[] | PengajuanSuratUncheckedCreateWithoutWargaInput[]
+    connectOrCreate?: PengajuanSuratCreateOrConnectWithoutWargaInput | PengajuanSuratCreateOrConnectWithoutWargaInput[]
+    upsert?: PengajuanSuratUpsertWithWhereUniqueWithoutWargaInput | PengajuanSuratUpsertWithWhereUniqueWithoutWargaInput[]
+    createMany?: PengajuanSuratCreateManyWargaInputEnvelope
+    set?: PengajuanSuratWhereUniqueInput | PengajuanSuratWhereUniqueInput[]
+    disconnect?: PengajuanSuratWhereUniqueInput | PengajuanSuratWhereUniqueInput[]
+    delete?: PengajuanSuratWhereUniqueInput | PengajuanSuratWhereUniqueInput[]
+    connect?: PengajuanSuratWhereUniqueInput | PengajuanSuratWhereUniqueInput[]
+    update?: PengajuanSuratUpdateWithWhereUniqueWithoutWargaInput | PengajuanSuratUpdateWithWhereUniqueWithoutWargaInput[]
+    updateMany?: PengajuanSuratUpdateManyWithWhereWithoutWargaInput | PengajuanSuratUpdateManyWithWhereWithoutWargaInput[]
+    deleteMany?: PengajuanSuratScalarWhereInput | PengajuanSuratScalarWhereInput[]
+  }
+
+  export type WargaCreateNestedOneWithoutPengajuanInput = {
+    create?: XOR<WargaCreateWithoutPengajuanInput, WargaUncheckedCreateWithoutPengajuanInput>
+    connectOrCreate?: WargaCreateOrConnectWithoutPengajuanInput
+    connect?: WargaWhereUniqueInput
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
+  }
+
+  export type WargaUpdateOneRequiredWithoutPengajuanNestedInput = {
+    create?: XOR<WargaCreateWithoutPengajuanInput, WargaUncheckedCreateWithoutPengajuanInput>
+    connectOrCreate?: WargaCreateOrConnectWithoutPengajuanInput
+    upsert?: WargaUpsertWithoutPengajuanInput
+    connect?: WargaWhereUniqueInput
+    update?: XOR<XOR<WargaUpdateToOneWithWhereWithoutPengajuanInput, WargaUpdateWithoutPengajuanInput>, WargaUncheckedUpdateWithoutPengajuanInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -9221,6 +5677,20 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -9278,45 +5748,6 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -9343,6 +5774,31 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
   export type NestedJsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -9380,6 +5836,209 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type PengajuanSuratCreateWithoutWargaInput = {
+    jenis_surat: string
+    data_tambahan?: NullableJsonNullValueInput | InputJsonValue
+    status?: string
+    no_pengajuan?: string | null
+    catatan_penolakan?: string | null
+    nomor_surat?: string | null
+    file_surat?: string | null
+    tanggal_pengajuan?: Date | string
+    tanggal_selesai?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PengajuanSuratUncheckedCreateWithoutWargaInput = {
+    id?: number
+    jenis_surat: string
+    data_tambahan?: NullableJsonNullValueInput | InputJsonValue
+    status?: string
+    no_pengajuan?: string | null
+    catatan_penolakan?: string | null
+    nomor_surat?: string | null
+    file_surat?: string | null
+    tanggal_pengajuan?: Date | string
+    tanggal_selesai?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PengajuanSuratCreateOrConnectWithoutWargaInput = {
+    where: PengajuanSuratWhereUniqueInput
+    create: XOR<PengajuanSuratCreateWithoutWargaInput, PengajuanSuratUncheckedCreateWithoutWargaInput>
+  }
+
+  export type PengajuanSuratCreateManyWargaInputEnvelope = {
+    data: PengajuanSuratCreateManyWargaInput | PengajuanSuratCreateManyWargaInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PengajuanSuratUpsertWithWhereUniqueWithoutWargaInput = {
+    where: PengajuanSuratWhereUniqueInput
+    update: XOR<PengajuanSuratUpdateWithoutWargaInput, PengajuanSuratUncheckedUpdateWithoutWargaInput>
+    create: XOR<PengajuanSuratCreateWithoutWargaInput, PengajuanSuratUncheckedCreateWithoutWargaInput>
+  }
+
+  export type PengajuanSuratUpdateWithWhereUniqueWithoutWargaInput = {
+    where: PengajuanSuratWhereUniqueInput
+    data: XOR<PengajuanSuratUpdateWithoutWargaInput, PengajuanSuratUncheckedUpdateWithoutWargaInput>
+  }
+
+  export type PengajuanSuratUpdateManyWithWhereWithoutWargaInput = {
+    where: PengajuanSuratScalarWhereInput
+    data: XOR<PengajuanSuratUpdateManyMutationInput, PengajuanSuratUncheckedUpdateManyWithoutWargaInput>
+  }
+
+  export type PengajuanSuratScalarWhereInput = {
+    AND?: PengajuanSuratScalarWhereInput | PengajuanSuratScalarWhereInput[]
+    OR?: PengajuanSuratScalarWhereInput[]
+    NOT?: PengajuanSuratScalarWhereInput | PengajuanSuratScalarWhereInput[]
+    id?: IntFilter<"PengajuanSurat"> | number
+    wargaId?: IntFilter<"PengajuanSurat"> | number
+    jenis_surat?: StringFilter<"PengajuanSurat"> | string
+    data_tambahan?: JsonNullableFilter<"PengajuanSurat">
+    status?: StringFilter<"PengajuanSurat"> | string
+    no_pengajuan?: StringNullableFilter<"PengajuanSurat"> | string | null
+    catatan_penolakan?: StringNullableFilter<"PengajuanSurat"> | string | null
+    nomor_surat?: StringNullableFilter<"PengajuanSurat"> | string | null
+    file_surat?: StringNullableFilter<"PengajuanSurat"> | string | null
+    tanggal_pengajuan?: DateTimeFilter<"PengajuanSurat"> | Date | string
+    tanggal_selesai?: DateTimeNullableFilter<"PengajuanSurat"> | Date | string | null
+    createdAt?: DateTimeFilter<"PengajuanSurat"> | Date | string
+    updatedAt?: DateTimeFilter<"PengajuanSurat"> | Date | string
+  }
+
+  export type WargaCreateWithoutPengajuanInput = {
+    nama_lengkap: string
+    no_nik: string
+    no_kk: string
+    tempat_lahir: string
+    tanggal_lahir: string
+    jenis_kelamin: string
+    agama?: string | null
+    pekerjaan: string
+    alamat: string
+    createdAt?: Date | string
+  }
+
+  export type WargaUncheckedCreateWithoutPengajuanInput = {
+    id?: number
+    nama_lengkap: string
+    no_nik: string
+    no_kk: string
+    tempat_lahir: string
+    tanggal_lahir: string
+    jenis_kelamin: string
+    agama?: string | null
+    pekerjaan: string
+    alamat: string
+    createdAt?: Date | string
+  }
+
+  export type WargaCreateOrConnectWithoutPengajuanInput = {
+    where: WargaWhereUniqueInput
+    create: XOR<WargaCreateWithoutPengajuanInput, WargaUncheckedCreateWithoutPengajuanInput>
+  }
+
+  export type WargaUpsertWithoutPengajuanInput = {
+    update: XOR<WargaUpdateWithoutPengajuanInput, WargaUncheckedUpdateWithoutPengajuanInput>
+    create: XOR<WargaCreateWithoutPengajuanInput, WargaUncheckedCreateWithoutPengajuanInput>
+    where?: WargaWhereInput
+  }
+
+  export type WargaUpdateToOneWithWhereWithoutPengajuanInput = {
+    where?: WargaWhereInput
+    data: XOR<WargaUpdateWithoutPengajuanInput, WargaUncheckedUpdateWithoutPengajuanInput>
+  }
+
+  export type WargaUpdateWithoutPengajuanInput = {
+    nama_lengkap?: StringFieldUpdateOperationsInput | string
+    no_nik?: StringFieldUpdateOperationsInput | string
+    no_kk?: StringFieldUpdateOperationsInput | string
+    tempat_lahir?: StringFieldUpdateOperationsInput | string
+    tanggal_lahir?: StringFieldUpdateOperationsInput | string
+    jenis_kelamin?: StringFieldUpdateOperationsInput | string
+    agama?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaan?: StringFieldUpdateOperationsInput | string
+    alamat?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WargaUncheckedUpdateWithoutPengajuanInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nama_lengkap?: StringFieldUpdateOperationsInput | string
+    no_nik?: StringFieldUpdateOperationsInput | string
+    no_kk?: StringFieldUpdateOperationsInput | string
+    tempat_lahir?: StringFieldUpdateOperationsInput | string
+    tanggal_lahir?: StringFieldUpdateOperationsInput | string
+    jenis_kelamin?: StringFieldUpdateOperationsInput | string
+    agama?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaan?: StringFieldUpdateOperationsInput | string
+    alamat?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PengajuanSuratCreateManyWargaInput = {
+    id?: number
+    jenis_surat: string
+    data_tambahan?: NullableJsonNullValueInput | InputJsonValue
+    status?: string
+    no_pengajuan?: string | null
+    catatan_penolakan?: string | null
+    nomor_surat?: string | null
+    file_surat?: string | null
+    tanggal_pengajuan?: Date | string
+    tanggal_selesai?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PengajuanSuratUpdateWithoutWargaInput = {
+    jenis_surat?: StringFieldUpdateOperationsInput | string
+    data_tambahan?: NullableJsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    no_pengajuan?: NullableStringFieldUpdateOperationsInput | string | null
+    catatan_penolakan?: NullableStringFieldUpdateOperationsInput | string | null
+    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
+    file_surat?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggal_pengajuan?: DateTimeFieldUpdateOperationsInput | Date | string
+    tanggal_selesai?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PengajuanSuratUncheckedUpdateWithoutWargaInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    jenis_surat?: StringFieldUpdateOperationsInput | string
+    data_tambahan?: NullableJsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    no_pengajuan?: NullableStringFieldUpdateOperationsInput | string | null
+    catatan_penolakan?: NullableStringFieldUpdateOperationsInput | string | null
+    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
+    file_surat?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggal_pengajuan?: DateTimeFieldUpdateOperationsInput | Date | string
+    tanggal_selesai?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PengajuanSuratUncheckedUpdateManyWithoutWargaInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    jenis_surat?: StringFieldUpdateOperationsInput | string
+    data_tambahan?: NullableJsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    no_pengajuan?: NullableStringFieldUpdateOperationsInput | string | null
+    catatan_penolakan?: NullableStringFieldUpdateOperationsInput | string | null
+    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
+    file_surat?: NullableStringFieldUpdateOperationsInput | string | null
+    tanggal_pengajuan?: DateTimeFieldUpdateOperationsInput | Date | string
+    tanggal_selesai?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

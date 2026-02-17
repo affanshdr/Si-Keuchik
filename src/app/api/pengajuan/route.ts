@@ -5,62 +5,38 @@ import { v4 as uuidv4 } from 'uuid';
 
 const prisma = new PrismaClient();
 
-// Helper: Validasi field wajib
-function validateFields(fields: Record<string, any>) {
-  const requiredFields = ['jenis_surat', 'no_kk', 'no_nik', 'nama_lengkap', 'alamat'];
-
-  const missingFields = requiredFields.filter((field) => !fields[field]);
-  if (missingFields.length > 0) {
-    throw new Error(`Field wajib tidak lengkap: ${missingFields.join(', ')}`);
-  }
-
-  if (!/^\d{16}$/.test(fields.no_nik)) {
-    throw new Error('NIK harus 16 digit angka');
-  }
-
-  if (!/^\d{16}$/.test(fields.no_kk)) {
-    throw new Error('Nomor KK harus 16 digit angka');
-  }
-}
-
 // Helper: Generate nomor pengajuan otomatis
 async function generateNomorPengajuan(jenisSurat: string): Promise<string> {
   const prefixes: Record<string, string> = {
-    'domisili': 'DOM',
-    'usaha': 'USH',
-    'belum-menikah': 'BM',
-    'tidak-mampu': 'TM',
-    'meninggal': 'MGL',
-    'berkelakuan-baik': 'BB',
+    domisili: 'SKD',
+    kehilangan: 'SKK',
+    kurang_mampu: 'SKKM',
+    lanjut_usia: 'SKLU',
+    usaha: 'SKU',
+    belum_menikah: 'SKBM',
+    meninggal: 'SKM',
+    berkelakuan_baik: 'SKBB',
   };
 
   const prefix = prefixes[jenisSurat] || 'SRT';
 
   const lastPengajuan = await prisma.pengajuanSurat.findFirst({
-    where: {
-      jenis_surat: jenisSurat,
-    },
-    orderBy: {
-      id: 'desc',
-    },
-    select: {
-      no_pengajuan: true,
-    },
+    where: { jenis_surat: jenisSurat },
+    orderBy: { id: 'desc' },
+    select: { no_pengajuan: true },
   });
 
   let nextNumber = 1;
   if (lastPengajuan?.no_pengajuan) {
     const parts = lastPengajuan.no_pengajuan.split('/');
     const lastNumber = parseInt(parts[0]);
-    if (!isNaN(lastNumber)) {
-      nextNumber = lastNumber + 1;
-    }
+    if (!isNaN(lastNumber)) nextNumber = lastNumber + 1;
   }
 
   const year = new Date().getFullYear();
   const month = String(new Date().getMonth() + 1).padStart(2, '0');
-  
-  // Format: 001/DOM/II/2025
+
+  // Format: 001/SKD/12/2025
   return `${String(nextNumber).padStart(3, '0')}/${prefix}/${month}/${year}`;
 }
 
@@ -68,27 +44,17 @@ async function generateNomorPengajuan(jenisSurat: string): Promise<string> {
 async function uploadFotoKTP(file: File): Promise<string> {
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
-
   const ext = file.name.split('.').pop();
   const filename = `${uuidv4()}.${ext}`;
   const filepath = `foto-ktp/${filename}`;
 
-  const { data, error } = await supabase.storage
+  const { error } = await supabase.storage
     .from('pengajuan-surat')
-    .upload(filepath, buffer, {
-      contentType: file.type,
-      upsert: false,
-    });
+    .upload(filepath, buffer, { contentType: file.type, upsert: false });
 
-  if (error) {
-    console.error('Upload error:', error);
-    throw new Error(`Gagal upload foto KTP: ${error.message}`);
-  }
+  if (error) throw new Error(`Gagal upload foto KTP: ${error.message}`);
 
-  const { data: urlData } = supabase.storage
-    .from('pengajuan-surat')
-    .getPublicUrl(filepath);
-
+  const { data: urlData } = supabase.storage.from('pengajuan-surat').getPublicUrl(filepath);
   return urlData.publicUrl;
 }
 
@@ -97,83 +63,65 @@ export async function POST(request: Request) {
   try {
     const formData = await request.formData();
 
-    // Extract form fields
-    const formFields = {
-      jenis_surat: formData.get('jenis_surat') as string,
-      no_kk: formData.get('no_kk') as string,
-      no_nik: formData.get('no_nik') as string,
-      nama_lengkap: formData.get('nama_lengkap') as string,
-      alamat: formData.get('alamat') as string,
-      keterangan: (formData.get('keterangan') as string) || null,
-    };
+    const wargaId = parseInt(formData.get('wargaId') as string);
+    const jenis_surat = formData.get('jenis_surat') as string;
 
-    // Validasi field wajib
-    validateFields(formFields);
+    if (!wargaId || isNaN(wargaId)) {
+      return NextResponse.json({ success: false, message: 'Data warga tidak valid' }, { status: 400 });
+    }
+
+    if (!jenis_surat) {
+      return NextResponse.json({ success: false, message: 'Jenis surat wajib dipilih' }, { status: 400 });
+    }
+
+    // Pastikan warga ada di database
+    const warga = await prisma.warga.findUnique({ where: { id: wargaId } });
+    if (!warga) {
+      return NextResponse.json({ success: false, message: 'Data warga tidak ditemukan' }, { status: 404 });
+    }
 
     // Upload foto KTP (wajib)
     const fotoKtpFile = formData.get('foto_ktp') as File | null;
     if (!fotoKtpFile || fotoKtpFile.size === 0) {
-      throw new Error('Foto KTP wajib diupload untuk validasi');
+      return NextResponse.json({ success: false, message: 'Foto KTP wajib diupload untuk validasi' }, { status: 400 });
     }
     const fotoKtpUrl = await uploadFotoKTP(fotoKtpFile);
 
     // Parse data tambahan (JSON)
-    const dataTambahanStr = formData.get('data_tambahan') as string;
     let dataTambahan = null;
+    const dataTambahanStr = formData.get('data_tambahan') as string;
     if (dataTambahanStr) {
       try {
         dataTambahan = JSON.parse(dataTambahanStr);
-      } catch (e) {
-        throw new Error('Format data tambahan tidak valid');
+      } catch {
+        return NextResponse.json({ success: false, message: 'Format data tambahan tidak valid' }, { status: 400 });
       }
     }
 
-    // Generate nomor pengajuan
-    const no_pengajuan = await generateNomorPengajuan(formFields.jenis_surat);
+    const no_pengajuan = await generateNomorPengajuan(jenis_surat);
 
-    // Save to database
     const pengajuan = await prisma.pengajuanSurat.create({
       data: {
-        no_pengajuan,
-        jenis_surat: formFields.jenis_surat,
-        no_kk: formFields.no_kk,
-        no_nik: formFields.no_nik,
-        nama_lengkap: formFields.nama_lengkap,
-        alamat: formFields.alamat,
-        keterangan: formFields.keterangan,
-        foto_ktp: fotoKtpUrl,
+        wargaId,
+        jenis_surat,
         data_tambahan: dataTambahan,
+
+        no_pengajuan,
         status: 'diajukan',
         tanggal_pengajuan: new Date(),
       },
+      include: { warga: true },
     });
 
     return NextResponse.json(
-      {
-        success: true,
-        data: pengajuan,
-        nomor_pengajuan: no_pengajuan,
-        message: 'Pengajuan berhasil dibuat',
-      },
+      { success: true, data: pengajuan, nomor_pengajuan: no_pengajuan, message: 'Pengajuan berhasil dibuat' },
       { status: 201 }
     );
   } catch (error: any) {
     console.error('Error:', error);
     return NextResponse.json(
-      {
-        success: false,
-        error: error.message,
-        message:
-          error.message.includes('wajib') || error.message.includes('digit')
-            ? error.message
-            : 'Terjadi kesalahan saat membuat pengajuan',
-      },
-      {
-        status:
-          error.message.includes('wajib') || error.message.includes('digit')
-            ? 400
-            : 500,
-      }
+      { success: false, message: 'Terjadi kesalahan saat membuat pengajuan' },
+      { status: 500 }
     );
   }
 }
@@ -191,15 +139,13 @@ export async function GET(request: Request) {
 
     if (search) {
       whereClause.OR = [
-        { no_pengajuan: { contains: search } },
-        { no_nik: { contains: search } },
-        { nama_lengkap: { contains: search } },
+        { no_pengajuan: { contains: search, mode: 'insensitive' } },
+        { warga: { no_nik: { contains: search } } },
+        { warga: { nama_lengkap: { contains: search, mode: 'insensitive' } } },
       ];
     }
 
-    if (status) {
-      whereClause.status = status;
-    }
+    if (status) whereClause.status = status;
 
     const [data, total] = await Promise.all([
       prisma.pengajuanSurat.findMany({
@@ -207,6 +153,7 @@ export async function GET(request: Request) {
         orderBy: { tanggal_pengajuan: 'desc' },
         take: limit,
         skip: (page - 1) * limit,
+        include: { warga: true },
       }),
       prisma.pengajuanSurat.count({ where: whereClause }),
     ]);
@@ -214,23 +161,11 @@ export async function GET(request: Request) {
     return NextResponse.json({
       success: true,
       data,
-      meta: {
-        total,
-        page,
-        limit,
-        totalPages: Math.ceil(total / limit),
-      },
+      meta: { total, page, limit, totalPages: Math.ceil(total / limit) },
     });
   } catch (error) {
     console.error('Error fetching pengajuan:', error);
-    return NextResponse.json(
-      {
-        success: false,
-        error: 'Internal Server Error',
-        message: 'Gagal mengambil data pengajuan',
-      },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: false, message: 'Gagal mengambil data pengajuan' }, { status: 500 });
   }
 }
 
@@ -242,70 +177,33 @@ export async function PUT(request: Request) {
     const body = await request.json();
 
     if (!id) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: 'ID pengajuan diperlukan',
-          message: 'ID pengajuan tidak valid',
-        },
-        { status: 400 }
-      );
+      return NextResponse.json({ success: false, message: 'ID pengajuan diperlukan' }, { status: 400 });
     }
 
     const updateData: Record<string, any> = {};
 
-    // Update status
     if (body.status) {
       updateData.status = body.status;
-      
-      if (body.status === 'diproses') {
-        updateData.tanggal_diproses = new Date();
-      }
-      
-      if (body.status === 'selesai') {
-        updateData.tanggal_selesai = new Date();
-      }
+      if (body.status === 'selesai') updateData.tanggal_selesai = new Date();
     }
 
-    // Update catatan penolakan (jika ditolak)
     if (body.status === 'ditolak' && body.catatan_penolakan) {
       updateData.catatan_penolakan = body.catatan_penolakan;
     }
 
-    // Update data surat (setelah approved)
-    if (body.nomor_surat) {
-      updateData.nomor_surat = body.nomor_surat;
-      updateData.tanggal_diterbitkan = new Date();
-    }
-
-    if (body.file_surat) {
-      updateData.file_surat = body.file_surat;
-    }
-
-    if (body.ditandatangani_oleh) {
-      updateData.ditandatangani_oleh = body.ditandatangani_oleh;
-    }
+    if (body.nomor_surat) updateData.nomor_surat = body.nomor_surat;
+    if (body.file_surat) updateData.file_surat = body.file_surat;
 
     const updated = await prisma.pengajuanSurat.update({
       where: { id: parseInt(id) },
       data: updateData,
+      include: { warga: true },
     });
 
-    return NextResponse.json({
-      success: true,
-      data: updated,
-      message: 'Pengajuan berhasil diperbarui',
-    });
+    return NextResponse.json({ success: true, data: updated, message: 'Pengajuan berhasil diperbarui' });
   } catch (error) {
     console.error('Error updating pengajuan:', error);
-    return NextResponse.json(
-      {
-        success: false,
-        error: 'Internal Server Error',
-        message: 'Gagal memperbarui pengajuan',
-      },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: false, message: 'Gagal memperbarui pengajuan' }, { status: 500 });
   }
 }
 
@@ -316,32 +214,14 @@ export async function DELETE(request: Request) {
     const id = searchParams.get('id');
 
     if (!id) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: 'ID pengajuan diperlukan',
-        },
-        { status: 400 }
-      );
+      return NextResponse.json({ success: false, message: 'ID pengajuan diperlukan' }, { status: 400 });
     }
 
-    await prisma.pengajuanSurat.delete({
-      where: { id: parseInt(id) },
-    });
+    await prisma.pengajuanSurat.delete({ where: { id: parseInt(id) } });
 
-    return NextResponse.json({
-      success: true,
-      message: 'Pengajuan berhasil dihapus',
-    });
+    return NextResponse.json({ success: true, message: 'Pengajuan berhasil dihapus' });
   } catch (error) {
     console.error('Error deleting pengajuan:', error);
-    return NextResponse.json(
-      {
-        success: false,
-        error: 'Internal Server Error',
-        message: 'Gagal menghapus pengajuan',
-      },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: false, message: 'Gagal menghapus pengajuan' }, { status: 500 });
   }
 }

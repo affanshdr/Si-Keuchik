@@ -14,11 +14,6 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
- * Model Warga
- * 
- */
-export type Warga = $Result.DefaultSelection<Prisma.$WargaPayload>
-/**
  * Model PengajuanSurat
  * 
  */
@@ -36,8 +31,8 @@ export type Admin = $Result.DefaultSelection<Prisma.$AdminPayload>
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Wargas
- * const wargas = await prisma.warga.findMany()
+ * // Fetch zero or more PengajuanSurats
+ * const pengajuanSurats = await prisma.pengajuanSurat.findMany()
  * ```
  *
  *
@@ -57,8 +52,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Wargas
-   * const wargas = await prisma.warga.findMany()
+   * // Fetch zero or more PengajuanSurats
+   * const pengajuanSurats = await prisma.pengajuanSurat.findMany()
    * ```
    *
    *
@@ -155,16 +150,6 @@ export class PrismaClient<
   }>>
 
       /**
-   * `prisma.warga`: Exposes CRUD operations for the **Warga** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Wargas
-    * const wargas = await prisma.warga.findMany()
-    * ```
-    */
-  get warga(): Prisma.WargaDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.pengajuanSurat`: Exposes CRUD operations for the **PengajuanSurat** model.
     * Example usage:
     * ```ts
@@ -623,7 +608,6 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    Warga: 'Warga',
     PengajuanSurat: 'PengajuanSurat',
     Admin: 'Admin'
   };
@@ -644,84 +628,10 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "warga" | "pengajuanSurat" | "admin"
+      modelProps: "pengajuanSurat" | "admin"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
-      Warga: {
-        payload: Prisma.$WargaPayload<ExtArgs>
-        fields: Prisma.WargaFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.WargaFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$WargaPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.WargaFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$WargaPayload>
-          }
-          findFirst: {
-            args: Prisma.WargaFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$WargaPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.WargaFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$WargaPayload>
-          }
-          findMany: {
-            args: Prisma.WargaFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$WargaPayload>[]
-          }
-          create: {
-            args: Prisma.WargaCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$WargaPayload>
-          }
-          createMany: {
-            args: Prisma.WargaCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.WargaCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$WargaPayload>[]
-          }
-          delete: {
-            args: Prisma.WargaDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$WargaPayload>
-          }
-          update: {
-            args: Prisma.WargaUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$WargaPayload>
-          }
-          deleteMany: {
-            args: Prisma.WargaDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.WargaUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.WargaUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$WargaPayload>[]
-          }
-          upsert: {
-            args: Prisma.WargaUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$WargaPayload>
-          }
-          aggregate: {
-            args: Prisma.WargaAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateWarga>
-          }
-          groupBy: {
-            args: Prisma.WargaGroupByArgs<ExtArgs>
-            result: $Utils.Optional<WargaGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.WargaCountArgs<ExtArgs>
-            result: $Utils.Optional<WargaCountAggregateOutputType> | number
-          }
-        }
-      }
       PengajuanSurat: {
         payload: Prisma.$PengajuanSuratPayload<ExtArgs>
         fields: Prisma.PengajuanSuratFieldRefs
@@ -954,7 +864,6 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
-    warga?: WargaOmit
     pengajuanSurat?: PengajuanSuratOmit
     admin?: AdminOmit
   }
@@ -1046,1222 +955,10 @@ export namespace Prisma {
    */
 
 
-  /**
-   * Count Type WargaCountOutputType
-   */
-
-  export type WargaCountOutputType = {
-    pengajuan: number
-  }
-
-  export type WargaCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    pengajuan?: boolean | WargaCountOutputTypeCountPengajuanArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * WargaCountOutputType without action
-   */
-  export type WargaCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the WargaCountOutputType
-     */
-    select?: WargaCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * WargaCountOutputType without action
-   */
-  export type WargaCountOutputTypeCountPengajuanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PengajuanSuratWhereInput
-  }
-
 
   /**
    * Models
    */
-
-  /**
-   * Model Warga
-   */
-
-  export type AggregateWarga = {
-    _count: WargaCountAggregateOutputType | null
-    _avg: WargaAvgAggregateOutputType | null
-    _sum: WargaSumAggregateOutputType | null
-    _min: WargaMinAggregateOutputType | null
-    _max: WargaMaxAggregateOutputType | null
-  }
-
-  export type WargaAvgAggregateOutputType = {
-    id: number | null
-  }
-
-  export type WargaSumAggregateOutputType = {
-    id: number | null
-  }
-
-  export type WargaMinAggregateOutputType = {
-    id: number | null
-    nama_lengkap: string | null
-    no_nik: string | null
-    no_kk: string | null
-    tempat_lahir: string | null
-    tanggal_lahir: string | null
-    jenis_kelamin: string | null
-    agama: string | null
-    pekerjaan: string | null
-    alamat: string | null
-    createdAt: Date | null
-  }
-
-  export type WargaMaxAggregateOutputType = {
-    id: number | null
-    nama_lengkap: string | null
-    no_nik: string | null
-    no_kk: string | null
-    tempat_lahir: string | null
-    tanggal_lahir: string | null
-    jenis_kelamin: string | null
-    agama: string | null
-    pekerjaan: string | null
-    alamat: string | null
-    createdAt: Date | null
-  }
-
-  export type WargaCountAggregateOutputType = {
-    id: number
-    nama_lengkap: number
-    no_nik: number
-    no_kk: number
-    tempat_lahir: number
-    tanggal_lahir: number
-    jenis_kelamin: number
-    agama: number
-    pekerjaan: number
-    alamat: number
-    createdAt: number
-    _all: number
-  }
-
-
-  export type WargaAvgAggregateInputType = {
-    id?: true
-  }
-
-  export type WargaSumAggregateInputType = {
-    id?: true
-  }
-
-  export type WargaMinAggregateInputType = {
-    id?: true
-    nama_lengkap?: true
-    no_nik?: true
-    no_kk?: true
-    tempat_lahir?: true
-    tanggal_lahir?: true
-    jenis_kelamin?: true
-    agama?: true
-    pekerjaan?: true
-    alamat?: true
-    createdAt?: true
-  }
-
-  export type WargaMaxAggregateInputType = {
-    id?: true
-    nama_lengkap?: true
-    no_nik?: true
-    no_kk?: true
-    tempat_lahir?: true
-    tanggal_lahir?: true
-    jenis_kelamin?: true
-    agama?: true
-    pekerjaan?: true
-    alamat?: true
-    createdAt?: true
-  }
-
-  export type WargaCountAggregateInputType = {
-    id?: true
-    nama_lengkap?: true
-    no_nik?: true
-    no_kk?: true
-    tempat_lahir?: true
-    tanggal_lahir?: true
-    jenis_kelamin?: true
-    agama?: true
-    pekerjaan?: true
-    alamat?: true
-    createdAt?: true
-    _all?: true
-  }
-
-  export type WargaAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Warga to aggregate.
-     */
-    where?: WargaWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Wargas to fetch.
-     */
-    orderBy?: WargaOrderByWithRelationInput | WargaOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: WargaWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Wargas from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Wargas.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Wargas
-    **/
-    _count?: true | WargaCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: WargaAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: WargaSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: WargaMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: WargaMaxAggregateInputType
-  }
-
-  export type GetWargaAggregateType<T extends WargaAggregateArgs> = {
-        [P in keyof T & keyof AggregateWarga]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateWarga[P]>
-      : GetScalarType<T[P], AggregateWarga[P]>
-  }
-
-
-
-
-  export type WargaGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: WargaWhereInput
-    orderBy?: WargaOrderByWithAggregationInput | WargaOrderByWithAggregationInput[]
-    by: WargaScalarFieldEnum[] | WargaScalarFieldEnum
-    having?: WargaScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: WargaCountAggregateInputType | true
-    _avg?: WargaAvgAggregateInputType
-    _sum?: WargaSumAggregateInputType
-    _min?: WargaMinAggregateInputType
-    _max?: WargaMaxAggregateInputType
-  }
-
-  export type WargaGroupByOutputType = {
-    id: number
-    nama_lengkap: string
-    no_nik: string
-    no_kk: string
-    tempat_lahir: string
-    tanggal_lahir: string
-    jenis_kelamin: string
-    agama: string | null
-    pekerjaan: string
-    alamat: string
-    createdAt: Date
-    _count: WargaCountAggregateOutputType | null
-    _avg: WargaAvgAggregateOutputType | null
-    _sum: WargaSumAggregateOutputType | null
-    _min: WargaMinAggregateOutputType | null
-    _max: WargaMaxAggregateOutputType | null
-  }
-
-  type GetWargaGroupByPayload<T extends WargaGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<WargaGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof WargaGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], WargaGroupByOutputType[P]>
-            : GetScalarType<T[P], WargaGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type WargaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    nama_lengkap?: boolean
-    no_nik?: boolean
-    no_kk?: boolean
-    tempat_lahir?: boolean
-    tanggal_lahir?: boolean
-    jenis_kelamin?: boolean
-    agama?: boolean
-    pekerjaan?: boolean
-    alamat?: boolean
-    createdAt?: boolean
-    pengajuan?: boolean | Warga$pengajuanArgs<ExtArgs>
-    _count?: boolean | WargaCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["warga"]>
-
-  export type WargaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    nama_lengkap?: boolean
-    no_nik?: boolean
-    no_kk?: boolean
-    tempat_lahir?: boolean
-    tanggal_lahir?: boolean
-    jenis_kelamin?: boolean
-    agama?: boolean
-    pekerjaan?: boolean
-    alamat?: boolean
-    createdAt?: boolean
-  }, ExtArgs["result"]["warga"]>
-
-  export type WargaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    nama_lengkap?: boolean
-    no_nik?: boolean
-    no_kk?: boolean
-    tempat_lahir?: boolean
-    tanggal_lahir?: boolean
-    jenis_kelamin?: boolean
-    agama?: boolean
-    pekerjaan?: boolean
-    alamat?: boolean
-    createdAt?: boolean
-  }, ExtArgs["result"]["warga"]>
-
-  export type WargaSelectScalar = {
-    id?: boolean
-    nama_lengkap?: boolean
-    no_nik?: boolean
-    no_kk?: boolean
-    tempat_lahir?: boolean
-    tanggal_lahir?: boolean
-    jenis_kelamin?: boolean
-    agama?: boolean
-    pekerjaan?: boolean
-    alamat?: boolean
-    createdAt?: boolean
-  }
-
-  export type WargaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nama_lengkap" | "no_nik" | "no_kk" | "tempat_lahir" | "tanggal_lahir" | "jenis_kelamin" | "agama" | "pekerjaan" | "alamat" | "createdAt", ExtArgs["result"]["warga"]>
-  export type WargaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    pengajuan?: boolean | Warga$pengajuanArgs<ExtArgs>
-    _count?: boolean | WargaCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type WargaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type WargaIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-
-  export type $WargaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Warga"
-    objects: {
-      pengajuan: Prisma.$PengajuanSuratPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      nama_lengkap: string
-      no_nik: string
-      no_kk: string
-      tempat_lahir: string
-      tanggal_lahir: string
-      jenis_kelamin: string
-      agama: string | null
-      pekerjaan: string
-      alamat: string
-      createdAt: Date
-    }, ExtArgs["result"]["warga"]>
-    composites: {}
-  }
-
-  type WargaGetPayload<S extends boolean | null | undefined | WargaDefaultArgs> = $Result.GetResult<Prisma.$WargaPayload, S>
-
-  type WargaCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<WargaFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: WargaCountAggregateInputType | true
-    }
-
-  export interface WargaDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Warga'], meta: { name: 'Warga' } }
-    /**
-     * Find zero or one Warga that matches the filter.
-     * @param {WargaFindUniqueArgs} args - Arguments to find a Warga
-     * @example
-     * // Get one Warga
-     * const warga = await prisma.warga.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends WargaFindUniqueArgs>(args: SelectSubset<T, WargaFindUniqueArgs<ExtArgs>>): Prisma__WargaClient<$Result.GetResult<Prisma.$WargaPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Warga that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {WargaFindUniqueOrThrowArgs} args - Arguments to find a Warga
-     * @example
-     * // Get one Warga
-     * const warga = await prisma.warga.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends WargaFindUniqueOrThrowArgs>(args: SelectSubset<T, WargaFindUniqueOrThrowArgs<ExtArgs>>): Prisma__WargaClient<$Result.GetResult<Prisma.$WargaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Warga that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {WargaFindFirstArgs} args - Arguments to find a Warga
-     * @example
-     * // Get one Warga
-     * const warga = await prisma.warga.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends WargaFindFirstArgs>(args?: SelectSubset<T, WargaFindFirstArgs<ExtArgs>>): Prisma__WargaClient<$Result.GetResult<Prisma.$WargaPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Warga that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {WargaFindFirstOrThrowArgs} args - Arguments to find a Warga
-     * @example
-     * // Get one Warga
-     * const warga = await prisma.warga.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends WargaFindFirstOrThrowArgs>(args?: SelectSubset<T, WargaFindFirstOrThrowArgs<ExtArgs>>): Prisma__WargaClient<$Result.GetResult<Prisma.$WargaPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Wargas that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {WargaFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Wargas
-     * const wargas = await prisma.warga.findMany()
-     * 
-     * // Get first 10 Wargas
-     * const wargas = await prisma.warga.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const wargaWithIdOnly = await prisma.warga.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends WargaFindManyArgs>(args?: SelectSubset<T, WargaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WargaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Warga.
-     * @param {WargaCreateArgs} args - Arguments to create a Warga.
-     * @example
-     * // Create one Warga
-     * const Warga = await prisma.warga.create({
-     *   data: {
-     *     // ... data to create a Warga
-     *   }
-     * })
-     * 
-     */
-    create<T extends WargaCreateArgs>(args: SelectSubset<T, WargaCreateArgs<ExtArgs>>): Prisma__WargaClient<$Result.GetResult<Prisma.$WargaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Wargas.
-     * @param {WargaCreateManyArgs} args - Arguments to create many Wargas.
-     * @example
-     * // Create many Wargas
-     * const warga = await prisma.warga.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends WargaCreateManyArgs>(args?: SelectSubset<T, WargaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Wargas and returns the data saved in the database.
-     * @param {WargaCreateManyAndReturnArgs} args - Arguments to create many Wargas.
-     * @example
-     * // Create many Wargas
-     * const warga = await prisma.warga.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Wargas and only return the `id`
-     * const wargaWithIdOnly = await prisma.warga.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends WargaCreateManyAndReturnArgs>(args?: SelectSubset<T, WargaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WargaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Warga.
-     * @param {WargaDeleteArgs} args - Arguments to delete one Warga.
-     * @example
-     * // Delete one Warga
-     * const Warga = await prisma.warga.delete({
-     *   where: {
-     *     // ... filter to delete one Warga
-     *   }
-     * })
-     * 
-     */
-    delete<T extends WargaDeleteArgs>(args: SelectSubset<T, WargaDeleteArgs<ExtArgs>>): Prisma__WargaClient<$Result.GetResult<Prisma.$WargaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Warga.
-     * @param {WargaUpdateArgs} args - Arguments to update one Warga.
-     * @example
-     * // Update one Warga
-     * const warga = await prisma.warga.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends WargaUpdateArgs>(args: SelectSubset<T, WargaUpdateArgs<ExtArgs>>): Prisma__WargaClient<$Result.GetResult<Prisma.$WargaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Wargas.
-     * @param {WargaDeleteManyArgs} args - Arguments to filter Wargas to delete.
-     * @example
-     * // Delete a few Wargas
-     * const { count } = await prisma.warga.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends WargaDeleteManyArgs>(args?: SelectSubset<T, WargaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Wargas.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {WargaUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Wargas
-     * const warga = await prisma.warga.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends WargaUpdateManyArgs>(args: SelectSubset<T, WargaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Wargas and returns the data updated in the database.
-     * @param {WargaUpdateManyAndReturnArgs} args - Arguments to update many Wargas.
-     * @example
-     * // Update many Wargas
-     * const warga = await prisma.warga.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Wargas and only return the `id`
-     * const wargaWithIdOnly = await prisma.warga.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends WargaUpdateManyAndReturnArgs>(args: SelectSubset<T, WargaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WargaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Warga.
-     * @param {WargaUpsertArgs} args - Arguments to update or create a Warga.
-     * @example
-     * // Update or create a Warga
-     * const warga = await prisma.warga.upsert({
-     *   create: {
-     *     // ... data to create a Warga
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Warga we want to update
-     *   }
-     * })
-     */
-    upsert<T extends WargaUpsertArgs>(args: SelectSubset<T, WargaUpsertArgs<ExtArgs>>): Prisma__WargaClient<$Result.GetResult<Prisma.$WargaPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Wargas.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {WargaCountArgs} args - Arguments to filter Wargas to count.
-     * @example
-     * // Count the number of Wargas
-     * const count = await prisma.warga.count({
-     *   where: {
-     *     // ... the filter for the Wargas we want to count
-     *   }
-     * })
-    **/
-    count<T extends WargaCountArgs>(
-      args?: Subset<T, WargaCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], WargaCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Warga.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {WargaAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends WargaAggregateArgs>(args: Subset<T, WargaAggregateArgs>): Prisma.PrismaPromise<GetWargaAggregateType<T>>
-
-    /**
-     * Group by Warga.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {WargaGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends WargaGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: WargaGroupByArgs['orderBy'] }
-        : { orderBy?: WargaGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, WargaGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWargaGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Warga model
-   */
-  readonly fields: WargaFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Warga.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__WargaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    pengajuan<T extends Warga$pengajuanArgs<ExtArgs> = {}>(args?: Subset<T, Warga$pengajuanArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PengajuanSuratPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Warga model
-   */
-  interface WargaFieldRefs {
-    readonly id: FieldRef<"Warga", 'Int'>
-    readonly nama_lengkap: FieldRef<"Warga", 'String'>
-    readonly no_nik: FieldRef<"Warga", 'String'>
-    readonly no_kk: FieldRef<"Warga", 'String'>
-    readonly tempat_lahir: FieldRef<"Warga", 'String'>
-    readonly tanggal_lahir: FieldRef<"Warga", 'String'>
-    readonly jenis_kelamin: FieldRef<"Warga", 'String'>
-    readonly agama: FieldRef<"Warga", 'String'>
-    readonly pekerjaan: FieldRef<"Warga", 'String'>
-    readonly alamat: FieldRef<"Warga", 'String'>
-    readonly createdAt: FieldRef<"Warga", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Warga findUnique
-   */
-  export type WargaFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Warga
-     */
-    select?: WargaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Warga
-     */
-    omit?: WargaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: WargaInclude<ExtArgs> | null
-    /**
-     * Filter, which Warga to fetch.
-     */
-    where: WargaWhereUniqueInput
-  }
-
-  /**
-   * Warga findUniqueOrThrow
-   */
-  export type WargaFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Warga
-     */
-    select?: WargaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Warga
-     */
-    omit?: WargaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: WargaInclude<ExtArgs> | null
-    /**
-     * Filter, which Warga to fetch.
-     */
-    where: WargaWhereUniqueInput
-  }
-
-  /**
-   * Warga findFirst
-   */
-  export type WargaFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Warga
-     */
-    select?: WargaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Warga
-     */
-    omit?: WargaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: WargaInclude<ExtArgs> | null
-    /**
-     * Filter, which Warga to fetch.
-     */
-    where?: WargaWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Wargas to fetch.
-     */
-    orderBy?: WargaOrderByWithRelationInput | WargaOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Wargas.
-     */
-    cursor?: WargaWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Wargas from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Wargas.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Wargas.
-     */
-    distinct?: WargaScalarFieldEnum | WargaScalarFieldEnum[]
-  }
-
-  /**
-   * Warga findFirstOrThrow
-   */
-  export type WargaFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Warga
-     */
-    select?: WargaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Warga
-     */
-    omit?: WargaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: WargaInclude<ExtArgs> | null
-    /**
-     * Filter, which Warga to fetch.
-     */
-    where?: WargaWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Wargas to fetch.
-     */
-    orderBy?: WargaOrderByWithRelationInput | WargaOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Wargas.
-     */
-    cursor?: WargaWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Wargas from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Wargas.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Wargas.
-     */
-    distinct?: WargaScalarFieldEnum | WargaScalarFieldEnum[]
-  }
-
-  /**
-   * Warga findMany
-   */
-  export type WargaFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Warga
-     */
-    select?: WargaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Warga
-     */
-    omit?: WargaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: WargaInclude<ExtArgs> | null
-    /**
-     * Filter, which Wargas to fetch.
-     */
-    where?: WargaWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Wargas to fetch.
-     */
-    orderBy?: WargaOrderByWithRelationInput | WargaOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Wargas.
-     */
-    cursor?: WargaWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Wargas from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Wargas.
-     */
-    skip?: number
-    distinct?: WargaScalarFieldEnum | WargaScalarFieldEnum[]
-  }
-
-  /**
-   * Warga create
-   */
-  export type WargaCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Warga
-     */
-    select?: WargaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Warga
-     */
-    omit?: WargaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: WargaInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Warga.
-     */
-    data: XOR<WargaCreateInput, WargaUncheckedCreateInput>
-  }
-
-  /**
-   * Warga createMany
-   */
-  export type WargaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Wargas.
-     */
-    data: WargaCreateManyInput | WargaCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Warga createManyAndReturn
-   */
-  export type WargaCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Warga
-     */
-    select?: WargaSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Warga
-     */
-    omit?: WargaOmit<ExtArgs> | null
-    /**
-     * The data used to create many Wargas.
-     */
-    data: WargaCreateManyInput | WargaCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Warga update
-   */
-  export type WargaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Warga
-     */
-    select?: WargaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Warga
-     */
-    omit?: WargaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: WargaInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Warga.
-     */
-    data: XOR<WargaUpdateInput, WargaUncheckedUpdateInput>
-    /**
-     * Choose, which Warga to update.
-     */
-    where: WargaWhereUniqueInput
-  }
-
-  /**
-   * Warga updateMany
-   */
-  export type WargaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Wargas.
-     */
-    data: XOR<WargaUpdateManyMutationInput, WargaUncheckedUpdateManyInput>
-    /**
-     * Filter which Wargas to update
-     */
-    where?: WargaWhereInput
-    /**
-     * Limit how many Wargas to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Warga updateManyAndReturn
-   */
-  export type WargaUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Warga
-     */
-    select?: WargaSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Warga
-     */
-    omit?: WargaOmit<ExtArgs> | null
-    /**
-     * The data used to update Wargas.
-     */
-    data: XOR<WargaUpdateManyMutationInput, WargaUncheckedUpdateManyInput>
-    /**
-     * Filter which Wargas to update
-     */
-    where?: WargaWhereInput
-    /**
-     * Limit how many Wargas to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Warga upsert
-   */
-  export type WargaUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Warga
-     */
-    select?: WargaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Warga
-     */
-    omit?: WargaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: WargaInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Warga to update in case it exists.
-     */
-    where: WargaWhereUniqueInput
-    /**
-     * In case the Warga found by the `where` argument doesn't exist, create a new Warga with this data.
-     */
-    create: XOR<WargaCreateInput, WargaUncheckedCreateInput>
-    /**
-     * In case the Warga was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<WargaUpdateInput, WargaUncheckedUpdateInput>
-  }
-
-  /**
-   * Warga delete
-   */
-  export type WargaDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Warga
-     */
-    select?: WargaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Warga
-     */
-    omit?: WargaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: WargaInclude<ExtArgs> | null
-    /**
-     * Filter which Warga to delete.
-     */
-    where: WargaWhereUniqueInput
-  }
-
-  /**
-   * Warga deleteMany
-   */
-  export type WargaDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Wargas to delete
-     */
-    where?: WargaWhereInput
-    /**
-     * Limit how many Wargas to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Warga.pengajuan
-   */
-  export type Warga$pengajuanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PengajuanSurat
-     */
-    select?: PengajuanSuratSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PengajuanSurat
-     */
-    omit?: PengajuanSuratOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PengajuanSuratInclude<ExtArgs> | null
-    where?: PengajuanSuratWhereInput
-    orderBy?: PengajuanSuratOrderByWithRelationInput | PengajuanSuratOrderByWithRelationInput[]
-    cursor?: PengajuanSuratWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: PengajuanSuratScalarFieldEnum | PengajuanSuratScalarFieldEnum[]
-  }
-
-  /**
-   * Warga without action
-   */
-  export type WargaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Warga
-     */
-    select?: WargaSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Warga
-     */
-    omit?: WargaOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: WargaInclude<ExtArgs> | null
-  }
-
 
   /**
    * Model PengajuanSurat
@@ -2277,17 +974,24 @@ export namespace Prisma {
 
   export type PengajuanSuratAvgAggregateOutputType = {
     id: number | null
-    wargaId: number | null
   }
 
   export type PengajuanSuratSumAggregateOutputType = {
     id: number | null
-    wargaId: number | null
   }
 
   export type PengajuanSuratMinAggregateOutputType = {
     id: number | null
-    wargaId: number | null
+    nama_lengkap: string | null
+    no_nik: string | null
+    no_kk: string | null
+    tempat_lahir: string | null
+    tanggal_lahir: string | null
+    jenis_kelamin: string | null
+    agama: string | null
+    pekerjaan: string | null
+    alamat: string | null
+    foto_ktp: string | null
     jenis_surat: string | null
     status: string | null
     no_pengajuan: string | null
@@ -2302,7 +1006,16 @@ export namespace Prisma {
 
   export type PengajuanSuratMaxAggregateOutputType = {
     id: number | null
-    wargaId: number | null
+    nama_lengkap: string | null
+    no_nik: string | null
+    no_kk: string | null
+    tempat_lahir: string | null
+    tanggal_lahir: string | null
+    jenis_kelamin: string | null
+    agama: string | null
+    pekerjaan: string | null
+    alamat: string | null
+    foto_ktp: string | null
     jenis_surat: string | null
     status: string | null
     no_pengajuan: string | null
@@ -2317,7 +1030,16 @@ export namespace Prisma {
 
   export type PengajuanSuratCountAggregateOutputType = {
     id: number
-    wargaId: number
+    nama_lengkap: number
+    no_nik: number
+    no_kk: number
+    tempat_lahir: number
+    tanggal_lahir: number
+    jenis_kelamin: number
+    agama: number
+    pekerjaan: number
+    alamat: number
+    foto_ktp: number
     jenis_surat: number
     data_tambahan: number
     status: number
@@ -2335,17 +1057,24 @@ export namespace Prisma {
 
   export type PengajuanSuratAvgAggregateInputType = {
     id?: true
-    wargaId?: true
   }
 
   export type PengajuanSuratSumAggregateInputType = {
     id?: true
-    wargaId?: true
   }
 
   export type PengajuanSuratMinAggregateInputType = {
     id?: true
-    wargaId?: true
+    nama_lengkap?: true
+    no_nik?: true
+    no_kk?: true
+    tempat_lahir?: true
+    tanggal_lahir?: true
+    jenis_kelamin?: true
+    agama?: true
+    pekerjaan?: true
+    alamat?: true
+    foto_ktp?: true
     jenis_surat?: true
     status?: true
     no_pengajuan?: true
@@ -2360,7 +1089,16 @@ export namespace Prisma {
 
   export type PengajuanSuratMaxAggregateInputType = {
     id?: true
-    wargaId?: true
+    nama_lengkap?: true
+    no_nik?: true
+    no_kk?: true
+    tempat_lahir?: true
+    tanggal_lahir?: true
+    jenis_kelamin?: true
+    agama?: true
+    pekerjaan?: true
+    alamat?: true
+    foto_ktp?: true
     jenis_surat?: true
     status?: true
     no_pengajuan?: true
@@ -2375,7 +1113,16 @@ export namespace Prisma {
 
   export type PengajuanSuratCountAggregateInputType = {
     id?: true
-    wargaId?: true
+    nama_lengkap?: true
+    no_nik?: true
+    no_kk?: true
+    tempat_lahir?: true
+    tanggal_lahir?: true
+    jenis_kelamin?: true
+    agama?: true
+    pekerjaan?: true
+    alamat?: true
+    foto_ktp?: true
     jenis_surat?: true
     data_tambahan?: true
     status?: true
@@ -2478,7 +1225,16 @@ export namespace Prisma {
 
   export type PengajuanSuratGroupByOutputType = {
     id: number
-    wargaId: number
+    nama_lengkap: string
+    no_nik: string
+    no_kk: string
+    tempat_lahir: string
+    tanggal_lahir: string
+    jenis_kelamin: string
+    agama: string | null
+    pekerjaan: string
+    alamat: string
+    foto_ktp: string | null
     jenis_surat: string
     data_tambahan: JsonValue | null
     status: string
@@ -2513,7 +1269,16 @@ export namespace Prisma {
 
   export type PengajuanSuratSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    wargaId?: boolean
+    nama_lengkap?: boolean
+    no_nik?: boolean
+    no_kk?: boolean
+    tempat_lahir?: boolean
+    tanggal_lahir?: boolean
+    jenis_kelamin?: boolean
+    agama?: boolean
+    pekerjaan?: boolean
+    alamat?: boolean
+    foto_ktp?: boolean
     jenis_surat?: boolean
     data_tambahan?: boolean
     status?: boolean
@@ -2525,12 +1290,20 @@ export namespace Prisma {
     tanggal_selesai?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    warga?: boolean | WargaDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["pengajuanSurat"]>
 
   export type PengajuanSuratSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    wargaId?: boolean
+    nama_lengkap?: boolean
+    no_nik?: boolean
+    no_kk?: boolean
+    tempat_lahir?: boolean
+    tanggal_lahir?: boolean
+    jenis_kelamin?: boolean
+    agama?: boolean
+    pekerjaan?: boolean
+    alamat?: boolean
+    foto_ktp?: boolean
     jenis_surat?: boolean
     data_tambahan?: boolean
     status?: boolean
@@ -2542,12 +1315,20 @@ export namespace Prisma {
     tanggal_selesai?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    warga?: boolean | WargaDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["pengajuanSurat"]>
 
   export type PengajuanSuratSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    wargaId?: boolean
+    nama_lengkap?: boolean
+    no_nik?: boolean
+    no_kk?: boolean
+    tempat_lahir?: boolean
+    tanggal_lahir?: boolean
+    jenis_kelamin?: boolean
+    agama?: boolean
+    pekerjaan?: boolean
+    alamat?: boolean
+    foto_ktp?: boolean
     jenis_surat?: boolean
     data_tambahan?: boolean
     status?: boolean
@@ -2559,12 +1340,20 @@ export namespace Prisma {
     tanggal_selesai?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    warga?: boolean | WargaDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["pengajuanSurat"]>
 
   export type PengajuanSuratSelectScalar = {
     id?: boolean
-    wargaId?: boolean
+    nama_lengkap?: boolean
+    no_nik?: boolean
+    no_kk?: boolean
+    tempat_lahir?: boolean
+    tanggal_lahir?: boolean
+    jenis_kelamin?: boolean
+    agama?: boolean
+    pekerjaan?: boolean
+    alamat?: boolean
+    foto_ktp?: boolean
     jenis_surat?: boolean
     data_tambahan?: boolean
     status?: boolean
@@ -2578,25 +1367,23 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type PengajuanSuratOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "wargaId" | "jenis_surat" | "data_tambahan" | "status" | "no_pengajuan" | "catatan_penolakan" | "nomor_surat" | "file_surat" | "tanggal_pengajuan" | "tanggal_selesai" | "createdAt" | "updatedAt", ExtArgs["result"]["pengajuanSurat"]>
-  export type PengajuanSuratInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    warga?: boolean | WargaDefaultArgs<ExtArgs>
-  }
-  export type PengajuanSuratIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    warga?: boolean | WargaDefaultArgs<ExtArgs>
-  }
-  export type PengajuanSuratIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    warga?: boolean | WargaDefaultArgs<ExtArgs>
-  }
+  export type PengajuanSuratOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nama_lengkap" | "no_nik" | "no_kk" | "tempat_lahir" | "tanggal_lahir" | "jenis_kelamin" | "agama" | "pekerjaan" | "alamat" | "foto_ktp" | "jenis_surat" | "data_tambahan" | "status" | "no_pengajuan" | "catatan_penolakan" | "nomor_surat" | "file_surat" | "tanggal_pengajuan" | "tanggal_selesai" | "createdAt" | "updatedAt", ExtArgs["result"]["pengajuanSurat"]>
 
   export type $PengajuanSuratPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "PengajuanSurat"
-    objects: {
-      warga: Prisma.$WargaPayload<ExtArgs>
-    }
+    objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      wargaId: number
+      nama_lengkap: string
+      no_nik: string
+      no_kk: string
+      tempat_lahir: string
+      tanggal_lahir: string
+      jenis_kelamin: string
+      agama: string | null
+      pekerjaan: string
+      alamat: string
+      foto_ktp: string | null
       jenis_surat: string
       data_tambahan: Prisma.JsonValue | null
       status: string
@@ -3002,7 +1789,6 @@ export namespace Prisma {
    */
   export interface Prisma__PengajuanSuratClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    warga<T extends WargaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WargaDefaultArgs<ExtArgs>>): Prisma__WargaClient<$Result.GetResult<Prisma.$WargaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3033,7 +1819,16 @@ export namespace Prisma {
    */
   interface PengajuanSuratFieldRefs {
     readonly id: FieldRef<"PengajuanSurat", 'Int'>
-    readonly wargaId: FieldRef<"PengajuanSurat", 'Int'>
+    readonly nama_lengkap: FieldRef<"PengajuanSurat", 'String'>
+    readonly no_nik: FieldRef<"PengajuanSurat", 'String'>
+    readonly no_kk: FieldRef<"PengajuanSurat", 'String'>
+    readonly tempat_lahir: FieldRef<"PengajuanSurat", 'String'>
+    readonly tanggal_lahir: FieldRef<"PengajuanSurat", 'String'>
+    readonly jenis_kelamin: FieldRef<"PengajuanSurat", 'String'>
+    readonly agama: FieldRef<"PengajuanSurat", 'String'>
+    readonly pekerjaan: FieldRef<"PengajuanSurat", 'String'>
+    readonly alamat: FieldRef<"PengajuanSurat", 'String'>
+    readonly foto_ktp: FieldRef<"PengajuanSurat", 'String'>
     readonly jenis_surat: FieldRef<"PengajuanSurat", 'String'>
     readonly data_tambahan: FieldRef<"PengajuanSurat", 'Json'>
     readonly status: FieldRef<"PengajuanSurat", 'String'>
@@ -3062,10 +1857,6 @@ export namespace Prisma {
      */
     omit?: PengajuanSuratOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PengajuanSuratInclude<ExtArgs> | null
-    /**
      * Filter, which PengajuanSurat to fetch.
      */
     where: PengajuanSuratWhereUniqueInput
@@ -3084,10 +1875,6 @@ export namespace Prisma {
      */
     omit?: PengajuanSuratOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PengajuanSuratInclude<ExtArgs> | null
-    /**
      * Filter, which PengajuanSurat to fetch.
      */
     where: PengajuanSuratWhereUniqueInput
@@ -3105,10 +1892,6 @@ export namespace Prisma {
      * Omit specific fields from the PengajuanSurat
      */
     omit?: PengajuanSuratOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PengajuanSuratInclude<ExtArgs> | null
     /**
      * Filter, which PengajuanSurat to fetch.
      */
@@ -3158,10 +1941,6 @@ export namespace Prisma {
      */
     omit?: PengajuanSuratOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PengajuanSuratInclude<ExtArgs> | null
-    /**
      * Filter, which PengajuanSurat to fetch.
      */
     where?: PengajuanSuratWhereInput
@@ -3210,10 +1989,6 @@ export namespace Prisma {
      */
     omit?: PengajuanSuratOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PengajuanSuratInclude<ExtArgs> | null
-    /**
      * Filter, which PengajuanSurats to fetch.
      */
     where?: PengajuanSuratWhereInput
@@ -3257,10 +2032,6 @@ export namespace Prisma {
      */
     omit?: PengajuanSuratOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PengajuanSuratInclude<ExtArgs> | null
-    /**
      * The data needed to create a PengajuanSurat.
      */
     data: XOR<PengajuanSuratCreateInput, PengajuanSuratUncheckedCreateInput>
@@ -3294,10 +2065,6 @@ export namespace Prisma {
      */
     data: PengajuanSuratCreateManyInput | PengajuanSuratCreateManyInput[]
     skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PengajuanSuratIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -3312,10 +2079,6 @@ export namespace Prisma {
      * Omit specific fields from the PengajuanSurat
      */
     omit?: PengajuanSuratOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PengajuanSuratInclude<ExtArgs> | null
     /**
      * The data needed to update a PengajuanSurat.
      */
@@ -3368,10 +2131,6 @@ export namespace Prisma {
      * Limit how many PengajuanSurats to update.
      */
     limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PengajuanSuratIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -3386,10 +2145,6 @@ export namespace Prisma {
      * Omit specific fields from the PengajuanSurat
      */
     omit?: PengajuanSuratOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PengajuanSuratInclude<ExtArgs> | null
     /**
      * The filter to search for the PengajuanSurat to update in case it exists.
      */
@@ -3416,10 +2171,6 @@ export namespace Prisma {
      * Omit specific fields from the PengajuanSurat
      */
     omit?: PengajuanSuratOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PengajuanSuratInclude<ExtArgs> | null
     /**
      * Filter which PengajuanSurat to delete.
      */
@@ -3452,10 +2203,6 @@ export namespace Prisma {
      * Omit specific fields from the PengajuanSurat
      */
     omit?: PengajuanSuratOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PengajuanSuratInclude<ExtArgs> | null
   }
 
 
@@ -4528,7 +3275,7 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-  export const WargaScalarFieldEnum: {
+  export const PengajuanSuratScalarFieldEnum: {
     id: 'id',
     nama_lengkap: 'nama_lengkap',
     no_nik: 'no_nik',
@@ -4539,15 +3286,7 @@ export namespace Prisma {
     agama: 'agama',
     pekerjaan: 'pekerjaan',
     alamat: 'alamat',
-    createdAt: 'createdAt'
-  };
-
-  export type WargaScalarFieldEnum = (typeof WargaScalarFieldEnum)[keyof typeof WargaScalarFieldEnum]
-
-
-  export const PengajuanSuratScalarFieldEnum: {
-    id: 'id',
-    wargaId: 'wargaId',
+    foto_ktp: 'foto_ktp',
     jenis_surat: 'jenis_surat',
     data_tambahan: 'data_tambahan',
     status: 'status',
@@ -4601,14 +3340,6 @@ export namespace Prisma {
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
-  export const NullsOrder: {
-    first: 'first',
-    last: 'last'
-  };
-
-  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
   export const JsonNullValueFilter: {
     DbNull: typeof DbNull,
     JsonNull: typeof JsonNull,
@@ -4616,6 +3347,14 @@ export namespace Prisma {
   };
 
   export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -4652,20 +3391,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'DateTime'
-   */
-  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
-    
-
-
-  /**
-   * Reference to a field of type 'DateTime[]'
-   */
-  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Json'
    */
   export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
@@ -4676,6 +3401,20 @@ export namespace Prisma {
    * Reference to a field of type 'QueryMode'
    */
   export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
     
 
 
@@ -4696,99 +3435,21 @@ export namespace Prisma {
    */
 
 
-  export type WargaWhereInput = {
-    AND?: WargaWhereInput | WargaWhereInput[]
-    OR?: WargaWhereInput[]
-    NOT?: WargaWhereInput | WargaWhereInput[]
-    id?: IntFilter<"Warga"> | number
-    nama_lengkap?: StringFilter<"Warga"> | string
-    no_nik?: StringFilter<"Warga"> | string
-    no_kk?: StringFilter<"Warga"> | string
-    tempat_lahir?: StringFilter<"Warga"> | string
-    tanggal_lahir?: StringFilter<"Warga"> | string
-    jenis_kelamin?: StringFilter<"Warga"> | string
-    agama?: StringNullableFilter<"Warga"> | string | null
-    pekerjaan?: StringFilter<"Warga"> | string
-    alamat?: StringFilter<"Warga"> | string
-    createdAt?: DateTimeFilter<"Warga"> | Date | string
-    pengajuan?: PengajuanSuratListRelationFilter
-  }
-
-  export type WargaOrderByWithRelationInput = {
-    id?: SortOrder
-    nama_lengkap?: SortOrder
-    no_nik?: SortOrder
-    no_kk?: SortOrder
-    tempat_lahir?: SortOrder
-    tanggal_lahir?: SortOrder
-    jenis_kelamin?: SortOrder
-    agama?: SortOrderInput | SortOrder
-    pekerjaan?: SortOrder
-    alamat?: SortOrder
-    createdAt?: SortOrder
-    pengajuan?: PengajuanSuratOrderByRelationAggregateInput
-  }
-
-  export type WargaWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    no_nik?: string
-    AND?: WargaWhereInput | WargaWhereInput[]
-    OR?: WargaWhereInput[]
-    NOT?: WargaWhereInput | WargaWhereInput[]
-    nama_lengkap?: StringFilter<"Warga"> | string
-    no_kk?: StringFilter<"Warga"> | string
-    tempat_lahir?: StringFilter<"Warga"> | string
-    tanggal_lahir?: StringFilter<"Warga"> | string
-    jenis_kelamin?: StringFilter<"Warga"> | string
-    agama?: StringNullableFilter<"Warga"> | string | null
-    pekerjaan?: StringFilter<"Warga"> | string
-    alamat?: StringFilter<"Warga"> | string
-    createdAt?: DateTimeFilter<"Warga"> | Date | string
-    pengajuan?: PengajuanSuratListRelationFilter
-  }, "id" | "no_nik">
-
-  export type WargaOrderByWithAggregationInput = {
-    id?: SortOrder
-    nama_lengkap?: SortOrder
-    no_nik?: SortOrder
-    no_kk?: SortOrder
-    tempat_lahir?: SortOrder
-    tanggal_lahir?: SortOrder
-    jenis_kelamin?: SortOrder
-    agama?: SortOrderInput | SortOrder
-    pekerjaan?: SortOrder
-    alamat?: SortOrder
-    createdAt?: SortOrder
-    _count?: WargaCountOrderByAggregateInput
-    _avg?: WargaAvgOrderByAggregateInput
-    _max?: WargaMaxOrderByAggregateInput
-    _min?: WargaMinOrderByAggregateInput
-    _sum?: WargaSumOrderByAggregateInput
-  }
-
-  export type WargaScalarWhereWithAggregatesInput = {
-    AND?: WargaScalarWhereWithAggregatesInput | WargaScalarWhereWithAggregatesInput[]
-    OR?: WargaScalarWhereWithAggregatesInput[]
-    NOT?: WargaScalarWhereWithAggregatesInput | WargaScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Warga"> | number
-    nama_lengkap?: StringWithAggregatesFilter<"Warga"> | string
-    no_nik?: StringWithAggregatesFilter<"Warga"> | string
-    no_kk?: StringWithAggregatesFilter<"Warga"> | string
-    tempat_lahir?: StringWithAggregatesFilter<"Warga"> | string
-    tanggal_lahir?: StringWithAggregatesFilter<"Warga"> | string
-    jenis_kelamin?: StringWithAggregatesFilter<"Warga"> | string
-    agama?: StringNullableWithAggregatesFilter<"Warga"> | string | null
-    pekerjaan?: StringWithAggregatesFilter<"Warga"> | string
-    alamat?: StringWithAggregatesFilter<"Warga"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"Warga"> | Date | string
-  }
-
   export type PengajuanSuratWhereInput = {
     AND?: PengajuanSuratWhereInput | PengajuanSuratWhereInput[]
     OR?: PengajuanSuratWhereInput[]
     NOT?: PengajuanSuratWhereInput | PengajuanSuratWhereInput[]
     id?: IntFilter<"PengajuanSurat"> | number
-    wargaId?: IntFilter<"PengajuanSurat"> | number
+    nama_lengkap?: StringFilter<"PengajuanSurat"> | string
+    no_nik?: StringFilter<"PengajuanSurat"> | string
+    no_kk?: StringFilter<"PengajuanSurat"> | string
+    tempat_lahir?: StringFilter<"PengajuanSurat"> | string
+    tanggal_lahir?: StringFilter<"PengajuanSurat"> | string
+    jenis_kelamin?: StringFilter<"PengajuanSurat"> | string
+    agama?: StringNullableFilter<"PengajuanSurat"> | string | null
+    pekerjaan?: StringFilter<"PengajuanSurat"> | string
+    alamat?: StringFilter<"PengajuanSurat"> | string
+    foto_ktp?: StringNullableFilter<"PengajuanSurat"> | string | null
     jenis_surat?: StringFilter<"PengajuanSurat"> | string
     data_tambahan?: JsonNullableFilter<"PengajuanSurat">
     status?: StringFilter<"PengajuanSurat"> | string
@@ -4800,12 +3461,20 @@ export namespace Prisma {
     tanggal_selesai?: DateTimeNullableFilter<"PengajuanSurat"> | Date | string | null
     createdAt?: DateTimeFilter<"PengajuanSurat"> | Date | string
     updatedAt?: DateTimeFilter<"PengajuanSurat"> | Date | string
-    warga?: XOR<WargaScalarRelationFilter, WargaWhereInput>
   }
 
   export type PengajuanSuratOrderByWithRelationInput = {
     id?: SortOrder
-    wargaId?: SortOrder
+    nama_lengkap?: SortOrder
+    no_nik?: SortOrder
+    no_kk?: SortOrder
+    tempat_lahir?: SortOrder
+    tanggal_lahir?: SortOrder
+    jenis_kelamin?: SortOrder
+    agama?: SortOrderInput | SortOrder
+    pekerjaan?: SortOrder
+    alamat?: SortOrder
+    foto_ktp?: SortOrderInput | SortOrder
     jenis_surat?: SortOrder
     data_tambahan?: SortOrderInput | SortOrder
     status?: SortOrder
@@ -4817,7 +3486,6 @@ export namespace Prisma {
     tanggal_selesai?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    warga?: WargaOrderByWithRelationInput
   }
 
   export type PengajuanSuratWhereUniqueInput = Prisma.AtLeast<{
@@ -4826,7 +3494,16 @@ export namespace Prisma {
     AND?: PengajuanSuratWhereInput | PengajuanSuratWhereInput[]
     OR?: PengajuanSuratWhereInput[]
     NOT?: PengajuanSuratWhereInput | PengajuanSuratWhereInput[]
-    wargaId?: IntFilter<"PengajuanSurat"> | number
+    nama_lengkap?: StringFilter<"PengajuanSurat"> | string
+    no_nik?: StringFilter<"PengajuanSurat"> | string
+    no_kk?: StringFilter<"PengajuanSurat"> | string
+    tempat_lahir?: StringFilter<"PengajuanSurat"> | string
+    tanggal_lahir?: StringFilter<"PengajuanSurat"> | string
+    jenis_kelamin?: StringFilter<"PengajuanSurat"> | string
+    agama?: StringNullableFilter<"PengajuanSurat"> | string | null
+    pekerjaan?: StringFilter<"PengajuanSurat"> | string
+    alamat?: StringFilter<"PengajuanSurat"> | string
+    foto_ktp?: StringNullableFilter<"PengajuanSurat"> | string | null
     jenis_surat?: StringFilter<"PengajuanSurat"> | string
     data_tambahan?: JsonNullableFilter<"PengajuanSurat">
     status?: StringFilter<"PengajuanSurat"> | string
@@ -4837,12 +3514,20 @@ export namespace Prisma {
     tanggal_selesai?: DateTimeNullableFilter<"PengajuanSurat"> | Date | string | null
     createdAt?: DateTimeFilter<"PengajuanSurat"> | Date | string
     updatedAt?: DateTimeFilter<"PengajuanSurat"> | Date | string
-    warga?: XOR<WargaScalarRelationFilter, WargaWhereInput>
   }, "id" | "no_pengajuan">
 
   export type PengajuanSuratOrderByWithAggregationInput = {
     id?: SortOrder
-    wargaId?: SortOrder
+    nama_lengkap?: SortOrder
+    no_nik?: SortOrder
+    no_kk?: SortOrder
+    tempat_lahir?: SortOrder
+    tanggal_lahir?: SortOrder
+    jenis_kelamin?: SortOrder
+    agama?: SortOrderInput | SortOrder
+    pekerjaan?: SortOrder
+    alamat?: SortOrder
+    foto_ktp?: SortOrderInput | SortOrder
     jenis_surat?: SortOrder
     data_tambahan?: SortOrderInput | SortOrder
     status?: SortOrder
@@ -4866,7 +3551,16 @@ export namespace Prisma {
     OR?: PengajuanSuratScalarWhereWithAggregatesInput[]
     NOT?: PengajuanSuratScalarWhereWithAggregatesInput | PengajuanSuratScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"PengajuanSurat"> | number
-    wargaId?: IntWithAggregatesFilter<"PengajuanSurat"> | number
+    nama_lengkap?: StringWithAggregatesFilter<"PengajuanSurat"> | string
+    no_nik?: StringWithAggregatesFilter<"PengajuanSurat"> | string
+    no_kk?: StringWithAggregatesFilter<"PengajuanSurat"> | string
+    tempat_lahir?: StringWithAggregatesFilter<"PengajuanSurat"> | string
+    tanggal_lahir?: StringWithAggregatesFilter<"PengajuanSurat"> | string
+    jenis_kelamin?: StringWithAggregatesFilter<"PengajuanSurat"> | string
+    agama?: StringNullableWithAggregatesFilter<"PengajuanSurat"> | string | null
+    pekerjaan?: StringWithAggregatesFilter<"PengajuanSurat"> | string
+    alamat?: StringWithAggregatesFilter<"PengajuanSurat"> | string
+    foto_ktp?: StringNullableWithAggregatesFilter<"PengajuanSurat"> | string | null
     jenis_surat?: StringWithAggregatesFilter<"PengajuanSurat"> | string
     data_tambahan?: JsonNullableWithAggregatesFilter<"PengajuanSurat">
     status?: StringWithAggregatesFilter<"PengajuanSurat"> | string
@@ -4944,106 +3638,17 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Admin"> | Date | string
   }
 
-  export type WargaCreateInput = {
-    nama_lengkap: string
-    no_nik: string
-    no_kk: string
-    tempat_lahir: string
-    tanggal_lahir: string
-    jenis_kelamin: string
-    agama?: string | null
-    pekerjaan: string
-    alamat: string
-    createdAt?: Date | string
-    pengajuan?: PengajuanSuratCreateNestedManyWithoutWargaInput
-  }
-
-  export type WargaUncheckedCreateInput = {
-    id?: number
-    nama_lengkap: string
-    no_nik: string
-    no_kk: string
-    tempat_lahir: string
-    tanggal_lahir: string
-    jenis_kelamin: string
-    agama?: string | null
-    pekerjaan: string
-    alamat: string
-    createdAt?: Date | string
-    pengajuan?: PengajuanSuratUncheckedCreateNestedManyWithoutWargaInput
-  }
-
-  export type WargaUpdateInput = {
-    nama_lengkap?: StringFieldUpdateOperationsInput | string
-    no_nik?: StringFieldUpdateOperationsInput | string
-    no_kk?: StringFieldUpdateOperationsInput | string
-    tempat_lahir?: StringFieldUpdateOperationsInput | string
-    tanggal_lahir?: StringFieldUpdateOperationsInput | string
-    jenis_kelamin?: StringFieldUpdateOperationsInput | string
-    agama?: NullableStringFieldUpdateOperationsInput | string | null
-    pekerjaan?: StringFieldUpdateOperationsInput | string
-    alamat?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    pengajuan?: PengajuanSuratUpdateManyWithoutWargaNestedInput
-  }
-
-  export type WargaUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    nama_lengkap?: StringFieldUpdateOperationsInput | string
-    no_nik?: StringFieldUpdateOperationsInput | string
-    no_kk?: StringFieldUpdateOperationsInput | string
-    tempat_lahir?: StringFieldUpdateOperationsInput | string
-    tanggal_lahir?: StringFieldUpdateOperationsInput | string
-    jenis_kelamin?: StringFieldUpdateOperationsInput | string
-    agama?: NullableStringFieldUpdateOperationsInput | string | null
-    pekerjaan?: StringFieldUpdateOperationsInput | string
-    alamat?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    pengajuan?: PengajuanSuratUncheckedUpdateManyWithoutWargaNestedInput
-  }
-
-  export type WargaCreateManyInput = {
-    id?: number
-    nama_lengkap: string
-    no_nik: string
-    no_kk: string
-    tempat_lahir: string
-    tanggal_lahir: string
-    jenis_kelamin: string
-    agama?: string | null
-    pekerjaan: string
-    alamat: string
-    createdAt?: Date | string
-  }
-
-  export type WargaUpdateManyMutationInput = {
-    nama_lengkap?: StringFieldUpdateOperationsInput | string
-    no_nik?: StringFieldUpdateOperationsInput | string
-    no_kk?: StringFieldUpdateOperationsInput | string
-    tempat_lahir?: StringFieldUpdateOperationsInput | string
-    tanggal_lahir?: StringFieldUpdateOperationsInput | string
-    jenis_kelamin?: StringFieldUpdateOperationsInput | string
-    agama?: NullableStringFieldUpdateOperationsInput | string | null
-    pekerjaan?: StringFieldUpdateOperationsInput | string
-    alamat?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type WargaUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    nama_lengkap?: StringFieldUpdateOperationsInput | string
-    no_nik?: StringFieldUpdateOperationsInput | string
-    no_kk?: StringFieldUpdateOperationsInput | string
-    tempat_lahir?: StringFieldUpdateOperationsInput | string
-    tanggal_lahir?: StringFieldUpdateOperationsInput | string
-    jenis_kelamin?: StringFieldUpdateOperationsInput | string
-    agama?: NullableStringFieldUpdateOperationsInput | string | null
-    pekerjaan?: StringFieldUpdateOperationsInput | string
-    alamat?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type PengajuanSuratCreateInput = {
+    nama_lengkap: string
+    no_nik: string
+    no_kk: string
+    tempat_lahir: string
+    tanggal_lahir: string
+    jenis_kelamin: string
+    agama?: string | null
+    pekerjaan: string
+    alamat: string
+    foto_ktp?: string | null
     jenis_surat: string
     data_tambahan?: NullableJsonNullValueInput | InputJsonValue
     status?: string
@@ -5055,12 +3660,20 @@ export namespace Prisma {
     tanggal_selesai?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    warga: WargaCreateNestedOneWithoutPengajuanInput
   }
 
   export type PengajuanSuratUncheckedCreateInput = {
     id?: number
-    wargaId: number
+    nama_lengkap: string
+    no_nik: string
+    no_kk: string
+    tempat_lahir: string
+    tanggal_lahir: string
+    jenis_kelamin: string
+    agama?: string | null
+    pekerjaan: string
+    alamat: string
+    foto_ktp?: string | null
     jenis_surat: string
     data_tambahan?: NullableJsonNullValueInput | InputJsonValue
     status?: string
@@ -5075,6 +3688,16 @@ export namespace Prisma {
   }
 
   export type PengajuanSuratUpdateInput = {
+    nama_lengkap?: StringFieldUpdateOperationsInput | string
+    no_nik?: StringFieldUpdateOperationsInput | string
+    no_kk?: StringFieldUpdateOperationsInput | string
+    tempat_lahir?: StringFieldUpdateOperationsInput | string
+    tanggal_lahir?: StringFieldUpdateOperationsInput | string
+    jenis_kelamin?: StringFieldUpdateOperationsInput | string
+    agama?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaan?: StringFieldUpdateOperationsInput | string
+    alamat?: StringFieldUpdateOperationsInput | string
+    foto_ktp?: NullableStringFieldUpdateOperationsInput | string | null
     jenis_surat?: StringFieldUpdateOperationsInput | string
     data_tambahan?: NullableJsonNullValueInput | InputJsonValue
     status?: StringFieldUpdateOperationsInput | string
@@ -5086,12 +3709,20 @@ export namespace Prisma {
     tanggal_selesai?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    warga?: WargaUpdateOneRequiredWithoutPengajuanNestedInput
   }
 
   export type PengajuanSuratUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    wargaId?: IntFieldUpdateOperationsInput | number
+    nama_lengkap?: StringFieldUpdateOperationsInput | string
+    no_nik?: StringFieldUpdateOperationsInput | string
+    no_kk?: StringFieldUpdateOperationsInput | string
+    tempat_lahir?: StringFieldUpdateOperationsInput | string
+    tanggal_lahir?: StringFieldUpdateOperationsInput | string
+    jenis_kelamin?: StringFieldUpdateOperationsInput | string
+    agama?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaan?: StringFieldUpdateOperationsInput | string
+    alamat?: StringFieldUpdateOperationsInput | string
+    foto_ktp?: NullableStringFieldUpdateOperationsInput | string | null
     jenis_surat?: StringFieldUpdateOperationsInput | string
     data_tambahan?: NullableJsonNullValueInput | InputJsonValue
     status?: StringFieldUpdateOperationsInput | string
@@ -5107,7 +3738,16 @@ export namespace Prisma {
 
   export type PengajuanSuratCreateManyInput = {
     id?: number
-    wargaId: number
+    nama_lengkap: string
+    no_nik: string
+    no_kk: string
+    tempat_lahir: string
+    tanggal_lahir: string
+    jenis_kelamin: string
+    agama?: string | null
+    pekerjaan: string
+    alamat: string
+    foto_ktp?: string | null
     jenis_surat: string
     data_tambahan?: NullableJsonNullValueInput | InputJsonValue
     status?: string
@@ -5122,6 +3762,16 @@ export namespace Prisma {
   }
 
   export type PengajuanSuratUpdateManyMutationInput = {
+    nama_lengkap?: StringFieldUpdateOperationsInput | string
+    no_nik?: StringFieldUpdateOperationsInput | string
+    no_kk?: StringFieldUpdateOperationsInput | string
+    tempat_lahir?: StringFieldUpdateOperationsInput | string
+    tanggal_lahir?: StringFieldUpdateOperationsInput | string
+    jenis_kelamin?: StringFieldUpdateOperationsInput | string
+    agama?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaan?: StringFieldUpdateOperationsInput | string
+    alamat?: StringFieldUpdateOperationsInput | string
+    foto_ktp?: NullableStringFieldUpdateOperationsInput | string | null
     jenis_surat?: StringFieldUpdateOperationsInput | string
     data_tambahan?: NullableJsonNullValueInput | InputJsonValue
     status?: StringFieldUpdateOperationsInput | string
@@ -5137,7 +3787,16 @@ export namespace Prisma {
 
   export type PengajuanSuratUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    wargaId?: IntFieldUpdateOperationsInput | number
+    nama_lengkap?: StringFieldUpdateOperationsInput | string
+    no_nik?: StringFieldUpdateOperationsInput | string
+    no_kk?: StringFieldUpdateOperationsInput | string
+    tempat_lahir?: StringFieldUpdateOperationsInput | string
+    tanggal_lahir?: StringFieldUpdateOperationsInput | string
+    jenis_kelamin?: StringFieldUpdateOperationsInput | string
+    agama?: NullableStringFieldUpdateOperationsInput | string | null
+    pekerjaan?: StringFieldUpdateOperationsInput | string
+    alamat?: StringFieldUpdateOperationsInput | string
+    foto_ktp?: NullableStringFieldUpdateOperationsInput | string | null
     jenis_surat?: StringFieldUpdateOperationsInput | string
     data_tambahan?: NullableJsonNullValueInput | InputJsonValue
     status?: StringFieldUpdateOperationsInput | string
@@ -5258,6 +3917,29 @@ export namespace Prisma {
     mode?: QueryMode
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
+  export type JsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -5270,10 +3952,15 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type PengajuanSuratListRelationFilter = {
-    every?: PengajuanSuratWhereInput
-    some?: PengajuanSuratWhereInput
-    none?: PengajuanSuratWhereInput
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type SortOrderInput = {
@@ -5281,11 +3968,7 @@ export namespace Prisma {
     nulls?: NullsOrder
   }
 
-  export type PengajuanSuratOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type WargaCountOrderByAggregateInput = {
+  export type PengajuanSuratCountOrderByAggregateInput = {
     id?: SortOrder
     nama_lengkap?: SortOrder
     no_nik?: SortOrder
@@ -5296,28 +3979,25 @@ export namespace Prisma {
     agama?: SortOrder
     pekerjaan?: SortOrder
     alamat?: SortOrder
+    foto_ktp?: SortOrder
+    jenis_surat?: SortOrder
+    data_tambahan?: SortOrder
+    status?: SortOrder
+    no_pengajuan?: SortOrder
+    catatan_penolakan?: SortOrder
+    nomor_surat?: SortOrder
+    file_surat?: SortOrder
+    tanggal_pengajuan?: SortOrder
+    tanggal_selesai?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
-  export type WargaAvgOrderByAggregateInput = {
+  export type PengajuanSuratAvgOrderByAggregateInput = {
     id?: SortOrder
   }
 
-  export type WargaMaxOrderByAggregateInput = {
-    id?: SortOrder
-    nama_lengkap?: SortOrder
-    no_nik?: SortOrder
-    no_kk?: SortOrder
-    tempat_lahir?: SortOrder
-    tanggal_lahir?: SortOrder
-    jenis_kelamin?: SortOrder
-    agama?: SortOrder
-    pekerjaan?: SortOrder
-    alamat?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type WargaMinOrderByAggregateInput = {
+  export type PengajuanSuratMaxOrderByAggregateInput = {
     id?: SortOrder
     nama_lengkap?: SortOrder
     no_nik?: SortOrder
@@ -5328,10 +4008,44 @@ export namespace Prisma {
     agama?: SortOrder
     pekerjaan?: SortOrder
     alamat?: SortOrder
+    foto_ktp?: SortOrder
+    jenis_surat?: SortOrder
+    status?: SortOrder
+    no_pengajuan?: SortOrder
+    catatan_penolakan?: SortOrder
+    nomor_surat?: SortOrder
+    file_surat?: SortOrder
+    tanggal_pengajuan?: SortOrder
+    tanggal_selesai?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
-  export type WargaSumOrderByAggregateInput = {
+  export type PengajuanSuratMinOrderByAggregateInput = {
+    id?: SortOrder
+    nama_lengkap?: SortOrder
+    no_nik?: SortOrder
+    no_kk?: SortOrder
+    tempat_lahir?: SortOrder
+    tanggal_lahir?: SortOrder
+    jenis_kelamin?: SortOrder
+    agama?: SortOrder
+    pekerjaan?: SortOrder
+    alamat?: SortOrder
+    foto_ktp?: SortOrder
+    jenis_surat?: SortOrder
+    status?: SortOrder
+    no_pengajuan?: SortOrder
+    catatan_penolakan?: SortOrder
+    nomor_surat?: SortOrder
+    file_surat?: SortOrder
+    tanggal_pengajuan?: SortOrder
+    tanggal_selesai?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PengajuanSuratSumOrderByAggregateInput = {
     id?: SortOrder
   }
 
@@ -5386,115 +4100,6 @@ export namespace Prisma {
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-  export type JsonNullableFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonNullableFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonNullableFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
-
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type WargaScalarRelationFilter = {
-    is?: WargaWhereInput
-    isNot?: WargaWhereInput
-  }
-
-  export type PengajuanSuratCountOrderByAggregateInput = {
-    id?: SortOrder
-    wargaId?: SortOrder
-    jenis_surat?: SortOrder
-    data_tambahan?: SortOrder
-    status?: SortOrder
-    no_pengajuan?: SortOrder
-    catatan_penolakan?: SortOrder
-    nomor_surat?: SortOrder
-    file_surat?: SortOrder
-    tanggal_pengajuan?: SortOrder
-    tanggal_selesai?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type PengajuanSuratAvgOrderByAggregateInput = {
-    id?: SortOrder
-    wargaId?: SortOrder
-  }
-
-  export type PengajuanSuratMaxOrderByAggregateInput = {
-    id?: SortOrder
-    wargaId?: SortOrder
-    jenis_surat?: SortOrder
-    status?: SortOrder
-    no_pengajuan?: SortOrder
-    catatan_penolakan?: SortOrder
-    nomor_surat?: SortOrder
-    file_surat?: SortOrder
-    tanggal_pengajuan?: SortOrder
-    tanggal_selesai?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type PengajuanSuratMinOrderByAggregateInput = {
-    id?: SortOrder
-    wargaId?: SortOrder
-    jenis_surat?: SortOrder
-    status?: SortOrder
-    no_pengajuan?: SortOrder
-    catatan_penolakan?: SortOrder
-    nomor_surat?: SortOrder
-    file_surat?: SortOrder
-    tanggal_pengajuan?: SortOrder
-    tanggal_selesai?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type PengajuanSuratSumOrderByAggregateInput = {
-    id?: SortOrder
-    wargaId?: SortOrder
-  }
   export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
     | PatchUndefined<
         Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
@@ -5520,6 +4125,20 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedJsonNullableFilter<$PrismaModel>
     _max?: NestedJsonNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -5574,20 +4193,6 @@ export namespace Prisma {
     id?: SortOrder
   }
 
-  export type PengajuanSuratCreateNestedManyWithoutWargaInput = {
-    create?: XOR<PengajuanSuratCreateWithoutWargaInput, PengajuanSuratUncheckedCreateWithoutWargaInput> | PengajuanSuratCreateWithoutWargaInput[] | PengajuanSuratUncheckedCreateWithoutWargaInput[]
-    connectOrCreate?: PengajuanSuratCreateOrConnectWithoutWargaInput | PengajuanSuratCreateOrConnectWithoutWargaInput[]
-    createMany?: PengajuanSuratCreateManyWargaInputEnvelope
-    connect?: PengajuanSuratWhereUniqueInput | PengajuanSuratWhereUniqueInput[]
-  }
-
-  export type PengajuanSuratUncheckedCreateNestedManyWithoutWargaInput = {
-    create?: XOR<PengajuanSuratCreateWithoutWargaInput, PengajuanSuratUncheckedCreateWithoutWargaInput> | PengajuanSuratCreateWithoutWargaInput[] | PengajuanSuratUncheckedCreateWithoutWargaInput[]
-    connectOrCreate?: PengajuanSuratCreateOrConnectWithoutWargaInput | PengajuanSuratCreateOrConnectWithoutWargaInput[]
-    createMany?: PengajuanSuratCreateManyWargaInputEnvelope
-    connect?: PengajuanSuratWhereUniqueInput | PengajuanSuratWhereUniqueInput[]
-  }
-
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -5600,18 +4205,8 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type PengajuanSuratUpdateManyWithoutWargaNestedInput = {
-    create?: XOR<PengajuanSuratCreateWithoutWargaInput, PengajuanSuratUncheckedCreateWithoutWargaInput> | PengajuanSuratCreateWithoutWargaInput[] | PengajuanSuratUncheckedCreateWithoutWargaInput[]
-    connectOrCreate?: PengajuanSuratCreateOrConnectWithoutWargaInput | PengajuanSuratCreateOrConnectWithoutWargaInput[]
-    upsert?: PengajuanSuratUpsertWithWhereUniqueWithoutWargaInput | PengajuanSuratUpsertWithWhereUniqueWithoutWargaInput[]
-    createMany?: PengajuanSuratCreateManyWargaInputEnvelope
-    set?: PengajuanSuratWhereUniqueInput | PengajuanSuratWhereUniqueInput[]
-    disconnect?: PengajuanSuratWhereUniqueInput | PengajuanSuratWhereUniqueInput[]
-    delete?: PengajuanSuratWhereUniqueInput | PengajuanSuratWhereUniqueInput[]
-    connect?: PengajuanSuratWhereUniqueInput | PengajuanSuratWhereUniqueInput[]
-    update?: PengajuanSuratUpdateWithWhereUniqueWithoutWargaInput | PengajuanSuratUpdateWithWhereUniqueWithoutWargaInput[]
-    updateMany?: PengajuanSuratUpdateManyWithWhereWithoutWargaInput | PengajuanSuratUpdateManyWithWhereWithoutWargaInput[]
-    deleteMany?: PengajuanSuratScalarWhereInput | PengajuanSuratScalarWhereInput[]
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -5620,38 +4215,6 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type PengajuanSuratUncheckedUpdateManyWithoutWargaNestedInput = {
-    create?: XOR<PengajuanSuratCreateWithoutWargaInput, PengajuanSuratUncheckedCreateWithoutWargaInput> | PengajuanSuratCreateWithoutWargaInput[] | PengajuanSuratUncheckedCreateWithoutWargaInput[]
-    connectOrCreate?: PengajuanSuratCreateOrConnectWithoutWargaInput | PengajuanSuratCreateOrConnectWithoutWargaInput[]
-    upsert?: PengajuanSuratUpsertWithWhereUniqueWithoutWargaInput | PengajuanSuratUpsertWithWhereUniqueWithoutWargaInput[]
-    createMany?: PengajuanSuratCreateManyWargaInputEnvelope
-    set?: PengajuanSuratWhereUniqueInput | PengajuanSuratWhereUniqueInput[]
-    disconnect?: PengajuanSuratWhereUniqueInput | PengajuanSuratWhereUniqueInput[]
-    delete?: PengajuanSuratWhereUniqueInput | PengajuanSuratWhereUniqueInput[]
-    connect?: PengajuanSuratWhereUniqueInput | PengajuanSuratWhereUniqueInput[]
-    update?: PengajuanSuratUpdateWithWhereUniqueWithoutWargaInput | PengajuanSuratUpdateWithWhereUniqueWithoutWargaInput[]
-    updateMany?: PengajuanSuratUpdateManyWithWhereWithoutWargaInput | PengajuanSuratUpdateManyWithWhereWithoutWargaInput[]
-    deleteMany?: PengajuanSuratScalarWhereInput | PengajuanSuratScalarWhereInput[]
-  }
-
-  export type WargaCreateNestedOneWithoutPengajuanInput = {
-    create?: XOR<WargaCreateWithoutPengajuanInput, WargaUncheckedCreateWithoutPengajuanInput>
-    connectOrCreate?: WargaCreateOrConnectWithoutPengajuanInput
-    connect?: WargaWhereUniqueInput
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
-  }
-
-  export type WargaUpdateOneRequiredWithoutPengajuanNestedInput = {
-    create?: XOR<WargaCreateWithoutPengajuanInput, WargaUncheckedCreateWithoutPengajuanInput>
-    connectOrCreate?: WargaCreateOrConnectWithoutPengajuanInput
-    upsert?: WargaUpsertWithoutPengajuanInput
-    connect?: WargaWhereUniqueInput
-    update?: XOR<XOR<WargaUpdateToOneWithWhereWithoutPengajuanInput, WargaUpdateWithoutPengajuanInput>, WargaUncheckedUpdateWithoutPengajuanInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -5702,6 +4265,17 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -5775,31 +4349,6 @@ export namespace Prisma {
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
   export type NestedJsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
         Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
@@ -5824,6 +4373,20 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -5836,209 +4399,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type PengajuanSuratCreateWithoutWargaInput = {
-    jenis_surat: string
-    data_tambahan?: NullableJsonNullValueInput | InputJsonValue
-    status?: string
-    no_pengajuan?: string | null
-    catatan_penolakan?: string | null
-    nomor_surat?: string | null
-    file_surat?: string | null
-    tanggal_pengajuan?: Date | string
-    tanggal_selesai?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type PengajuanSuratUncheckedCreateWithoutWargaInput = {
-    id?: number
-    jenis_surat: string
-    data_tambahan?: NullableJsonNullValueInput | InputJsonValue
-    status?: string
-    no_pengajuan?: string | null
-    catatan_penolakan?: string | null
-    nomor_surat?: string | null
-    file_surat?: string | null
-    tanggal_pengajuan?: Date | string
-    tanggal_selesai?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type PengajuanSuratCreateOrConnectWithoutWargaInput = {
-    where: PengajuanSuratWhereUniqueInput
-    create: XOR<PengajuanSuratCreateWithoutWargaInput, PengajuanSuratUncheckedCreateWithoutWargaInput>
-  }
-
-  export type PengajuanSuratCreateManyWargaInputEnvelope = {
-    data: PengajuanSuratCreateManyWargaInput | PengajuanSuratCreateManyWargaInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type PengajuanSuratUpsertWithWhereUniqueWithoutWargaInput = {
-    where: PengajuanSuratWhereUniqueInput
-    update: XOR<PengajuanSuratUpdateWithoutWargaInput, PengajuanSuratUncheckedUpdateWithoutWargaInput>
-    create: XOR<PengajuanSuratCreateWithoutWargaInput, PengajuanSuratUncheckedCreateWithoutWargaInput>
-  }
-
-  export type PengajuanSuratUpdateWithWhereUniqueWithoutWargaInput = {
-    where: PengajuanSuratWhereUniqueInput
-    data: XOR<PengajuanSuratUpdateWithoutWargaInput, PengajuanSuratUncheckedUpdateWithoutWargaInput>
-  }
-
-  export type PengajuanSuratUpdateManyWithWhereWithoutWargaInput = {
-    where: PengajuanSuratScalarWhereInput
-    data: XOR<PengajuanSuratUpdateManyMutationInput, PengajuanSuratUncheckedUpdateManyWithoutWargaInput>
-  }
-
-  export type PengajuanSuratScalarWhereInput = {
-    AND?: PengajuanSuratScalarWhereInput | PengajuanSuratScalarWhereInput[]
-    OR?: PengajuanSuratScalarWhereInput[]
-    NOT?: PengajuanSuratScalarWhereInput | PengajuanSuratScalarWhereInput[]
-    id?: IntFilter<"PengajuanSurat"> | number
-    wargaId?: IntFilter<"PengajuanSurat"> | number
-    jenis_surat?: StringFilter<"PengajuanSurat"> | string
-    data_tambahan?: JsonNullableFilter<"PengajuanSurat">
-    status?: StringFilter<"PengajuanSurat"> | string
-    no_pengajuan?: StringNullableFilter<"PengajuanSurat"> | string | null
-    catatan_penolakan?: StringNullableFilter<"PengajuanSurat"> | string | null
-    nomor_surat?: StringNullableFilter<"PengajuanSurat"> | string | null
-    file_surat?: StringNullableFilter<"PengajuanSurat"> | string | null
-    tanggal_pengajuan?: DateTimeFilter<"PengajuanSurat"> | Date | string
-    tanggal_selesai?: DateTimeNullableFilter<"PengajuanSurat"> | Date | string | null
-    createdAt?: DateTimeFilter<"PengajuanSurat"> | Date | string
-    updatedAt?: DateTimeFilter<"PengajuanSurat"> | Date | string
-  }
-
-  export type WargaCreateWithoutPengajuanInput = {
-    nama_lengkap: string
-    no_nik: string
-    no_kk: string
-    tempat_lahir: string
-    tanggal_lahir: string
-    jenis_kelamin: string
-    agama?: string | null
-    pekerjaan: string
-    alamat: string
-    createdAt?: Date | string
-  }
-
-  export type WargaUncheckedCreateWithoutPengajuanInput = {
-    id?: number
-    nama_lengkap: string
-    no_nik: string
-    no_kk: string
-    tempat_lahir: string
-    tanggal_lahir: string
-    jenis_kelamin: string
-    agama?: string | null
-    pekerjaan: string
-    alamat: string
-    createdAt?: Date | string
-  }
-
-  export type WargaCreateOrConnectWithoutPengajuanInput = {
-    where: WargaWhereUniqueInput
-    create: XOR<WargaCreateWithoutPengajuanInput, WargaUncheckedCreateWithoutPengajuanInput>
-  }
-
-  export type WargaUpsertWithoutPengajuanInput = {
-    update: XOR<WargaUpdateWithoutPengajuanInput, WargaUncheckedUpdateWithoutPengajuanInput>
-    create: XOR<WargaCreateWithoutPengajuanInput, WargaUncheckedCreateWithoutPengajuanInput>
-    where?: WargaWhereInput
-  }
-
-  export type WargaUpdateToOneWithWhereWithoutPengajuanInput = {
-    where?: WargaWhereInput
-    data: XOR<WargaUpdateWithoutPengajuanInput, WargaUncheckedUpdateWithoutPengajuanInput>
-  }
-
-  export type WargaUpdateWithoutPengajuanInput = {
-    nama_lengkap?: StringFieldUpdateOperationsInput | string
-    no_nik?: StringFieldUpdateOperationsInput | string
-    no_kk?: StringFieldUpdateOperationsInput | string
-    tempat_lahir?: StringFieldUpdateOperationsInput | string
-    tanggal_lahir?: StringFieldUpdateOperationsInput | string
-    jenis_kelamin?: StringFieldUpdateOperationsInput | string
-    agama?: NullableStringFieldUpdateOperationsInput | string | null
-    pekerjaan?: StringFieldUpdateOperationsInput | string
-    alamat?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type WargaUncheckedUpdateWithoutPengajuanInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    nama_lengkap?: StringFieldUpdateOperationsInput | string
-    no_nik?: StringFieldUpdateOperationsInput | string
-    no_kk?: StringFieldUpdateOperationsInput | string
-    tempat_lahir?: StringFieldUpdateOperationsInput | string
-    tanggal_lahir?: StringFieldUpdateOperationsInput | string
-    jenis_kelamin?: StringFieldUpdateOperationsInput | string
-    agama?: NullableStringFieldUpdateOperationsInput | string | null
-    pekerjaan?: StringFieldUpdateOperationsInput | string
-    alamat?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PengajuanSuratCreateManyWargaInput = {
-    id?: number
-    jenis_surat: string
-    data_tambahan?: NullableJsonNullValueInput | InputJsonValue
-    status?: string
-    no_pengajuan?: string | null
-    catatan_penolakan?: string | null
-    nomor_surat?: string | null
-    file_surat?: string | null
-    tanggal_pengajuan?: Date | string
-    tanggal_selesai?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type PengajuanSuratUpdateWithoutWargaInput = {
-    jenis_surat?: StringFieldUpdateOperationsInput | string
-    data_tambahan?: NullableJsonNullValueInput | InputJsonValue
-    status?: StringFieldUpdateOperationsInput | string
-    no_pengajuan?: NullableStringFieldUpdateOperationsInput | string | null
-    catatan_penolakan?: NullableStringFieldUpdateOperationsInput | string | null
-    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
-    file_surat?: NullableStringFieldUpdateOperationsInput | string | null
-    tanggal_pengajuan?: DateTimeFieldUpdateOperationsInput | Date | string
-    tanggal_selesai?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PengajuanSuratUncheckedUpdateWithoutWargaInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    jenis_surat?: StringFieldUpdateOperationsInput | string
-    data_tambahan?: NullableJsonNullValueInput | InputJsonValue
-    status?: StringFieldUpdateOperationsInput | string
-    no_pengajuan?: NullableStringFieldUpdateOperationsInput | string | null
-    catatan_penolakan?: NullableStringFieldUpdateOperationsInput | string | null
-    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
-    file_surat?: NullableStringFieldUpdateOperationsInput | string | null
-    tanggal_pengajuan?: DateTimeFieldUpdateOperationsInput | Date | string
-    tanggal_selesai?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PengajuanSuratUncheckedUpdateManyWithoutWargaInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    jenis_surat?: StringFieldUpdateOperationsInput | string
-    data_tambahan?: NullableJsonNullValueInput | InputJsonValue
-    status?: StringFieldUpdateOperationsInput | string
-    no_pengajuan?: NullableStringFieldUpdateOperationsInput | string | null
-    catatan_penolakan?: NullableStringFieldUpdateOperationsInput | string | null
-    nomor_surat?: NullableStringFieldUpdateOperationsInput | string | null
-    file_surat?: NullableStringFieldUpdateOperationsInput | string | null
-    tanggal_pengajuan?: DateTimeFieldUpdateOperationsInput | Date | string
-    tanggal_selesai?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

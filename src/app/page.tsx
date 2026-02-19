@@ -1,22 +1,9 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-interface WargaData {
-  id: number;
-  no_nik: string;
-  no_kk: string;
-  nama_lengkap: string;
-  tempat_lahir: string;
-  tanggal_lahir: string;
-  jenis_kelamin: string;
-  agama: string | null;
-  pekerjaan: string | null;
-  alamat: string;
-}
 
 type LetterType =
   | "domisili"
@@ -44,9 +31,14 @@ export default function FormPengajuanSurat() {
   const totalSteps = 4;
 
   const [formData, setFormData] = useState({
+    nama_lengkap: "",
     no_nik: "",
     no_kk: "",
-    namaLengkap: "",
+    tempat_lahir: "",
+    tanggal_lahir: "",
+    jenis_kelamin: "",
+    agama: "",
+    pekerjaan: "",
     alamat: "",
   });
 
@@ -55,40 +47,8 @@ export default function FormPengajuanSurat() {
   const [fotoKtpPreview, setFotoKtpPreview] = useState<string | null>(null);
   const [dataTambahan, setDataTambahan] = useState<any>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [wargaData, setWargaData] = useState<WargaData | null>(null);
-  const [nikValid, setNikValid] = useState<boolean | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState({ title: "", message: "", isSuccess: false });
-
-  useEffect(() => {
-    const checkNik = async () => {
-      if (formData.no_nik.length === 16) {
-        try {
-          const response = await fetch(`/api/check?no_nik=${formData.no_nik}`);
-          const data = await response.json();
-          if (!response.ok || !data.success) throw new Error(data.message || "Gagal memeriksa NIK");
-          setNikValid(data.exists);
-          if (data.exists && data.data) {
-            setWargaData(data.data);
-            setFormData((prev) => ({
-              ...prev,
-              namaLengkap: data.data.nama_lengkap || prev.namaLengkap,
-              no_kk: data.data.no_kk || prev.no_kk,
-              alamat: data.data.alamat || prev.alamat,
-            }));
-          }
-        } catch (error) {
-          setNikValid(false);
-          toast.error(error instanceof Error ? error.message : "Error checking NIK");
-        }
-      } else {
-        setNikValid(null);
-        setWargaData(null);
-      }
-    };
-    const timer = setTimeout(checkNik, 800);
-    return () => clearTimeout(timer);
-  }, [formData.no_nik]);
 
   const handleFotoKtpChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -102,7 +62,7 @@ export default function FormPengajuanSurat() {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -114,7 +74,10 @@ export default function FormPengajuanSurat() {
     setDataTambahan((prev: any) => ({ ...prev, [parent]: { ...(prev[parent] || {}), [field]: value } }));
 
   const canGoToNextStep = () => {
-    if (currentStep === 1) return formData.no_nik.length === 16 && formData.no_kk.length === 16 && formData.namaLengkap && formData.alamat && nikValid === true;
+    if (currentStep === 1) {
+      return formData.nama_lengkap && formData.no_nik.length === 16 && formData.no_kk.length === 16 && 
+             formData.tempat_lahir && formData.tanggal_lahir && formData.jenis_kelamin && formData.pekerjaan && formData.alamat;
+    }
     if (currentStep === 2) return fotoKtp !== null;
     if (currentStep === 3) return selectedLetter !== "";
     return true;
@@ -126,21 +89,21 @@ export default function FormPengajuanSurat() {
   const closeModal = () => {
     setIsModalOpen(false);
     if (modalContent.isSuccess) {
-      setFormData({ no_nik: "", no_kk: "", namaLengkap: "", alamat: "" });
+      setFormData({ nama_lengkap: "", no_nik: "", no_kk: "", tempat_lahir: "", tanggal_lahir: "", jenis_kelamin: "", agama: "", pekerjaan: "", alamat: "" });
       setSelectedLetter(""); setFotoKtp(null); setFotoKtpPreview(null);
-      setDataTambahan({}); setNikValid(null); setWargaData(null); setCurrentStep(1);
+      setDataTambahan({}); setCurrentStep(1);
     }
   };
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
     try {
-      if (!nikValid || !wargaData) throw new Error("NIK tidak terdaftar di sistem");
       if (!fotoKtp) throw new Error("Foto KTP wajib diupload");
       if (!selectedLetter) throw new Error("Pilih jenis surat terlebih dahulu");
 
       const submitData = new FormData();
-      submitData.append("wargaId", String(wargaData.id));
+      // Kirim semua data warga (flat)
+      Object.entries(formData).forEach(([key, value]) => submitData.append(key, value));
       submitData.append("jenis_surat", selectedLetter);
       submitData.append("foto_ktp", fotoKtp);
       if (Object.keys(dataTambahan).length > 0) submitData.append("data_tambahan", JSON.stringify(dataTambahan));
@@ -159,7 +122,7 @@ export default function FormPengajuanSurat() {
     }
   };
 
-  const inputClass = "w-full px-4 py-3 rounded-xl border-2 border-gray-300 focus:border-teal-500 focus:outline-none placeholder:text-gray-400";
+  const inputClass = "w-full px-4 py-3 rounded-xl border-2 border-gray-300 focus:border-teal-500 focus:outline-none placeholder:text-gray-400 text-gray-900";
   const labelClass = "block text-sm font-medium text-gray-700 mb-2";
 
   return (
@@ -216,65 +179,59 @@ export default function FormPengajuanSurat() {
           </div>
 
           <div className="min-h-[400px]">
-            {/* STEP 1 */}
+            {/* STEP 1 - Input Manual */}
             {currentStep === 1 && (
-              <div className="space-y-6">
+              <div className="space-y-4">
                 <div className="text-center mb-6">
                   <h2 className="text-2xl font-bold text-gray-800 mb-2">Langkah 1: Data Diri Anda</h2>
-                  <p className="text-gray-600 text-sm">Masukkan NIK — data lain akan otomatis terisi</p>
+                  <p className="text-gray-600 text-sm">Isi semua data dengan lengkap dan benar sesuai KTP</p>
                 </div>
 
-                <div>
-                  <label className={labelClass}>Nomor KTP (NIK) - 16 Angka <span className="text-red-500">*</span></label>
-                  <input type="text" name="no_nik" value={formData.no_nik} onChange={handleInputChange} maxLength={16}
-                    className={`w-full px-4 py-3 text-lg rounded-xl border-2 transition-all focus:outline-none 
-                      placeholder-gray-400
-                      ${nikValid === true 
-                        ? "border-green-500 bg-green-50" 
-                        : nikValid === false 
-                        ? "border-red-500 bg-red-50" 
-                        : "border-gray-300 focus:border-teal-500"}`}
-                    placeholder="Contoh: 1234567890123456" />
-                  {nikValid === true && <p className="text-sm text-green-600 mt-1">✓ NIK terdaftar</p>}
-                  {nikValid === false && <p className="text-sm text-red-600 mt-1">✗ NIK tidak terdaftar. Silakan hubungi perangkat desa.</p>}
-                </div>
-
-                <div>
-                  <label className={labelClass}>Nomor Kartu Keluarga (KK) <span className="text-red-500">*</span></label>
-                  <input type="text" name="no_kk" value={formData.no_kk} onChange={handleInputChange} readOnly={!!(wargaData?.no_kk)} maxLength={16}
-                    className={`${inputClass} ${wargaData?.no_kk ? 'bg-gray-50' : ''}`} placeholder="Akan terisi otomatis jika NIK terdaftar" />
-                </div>
-
-                <div>
-                  <label className={labelClass}>Nama Lengkap <span className="text-red-500">*</span></label>
-                  <input type="text" name="namaLengkap" value={formData.namaLengkap} onChange={handleInputChange} readOnly={!!(wargaData?.nama_lengkap)}
-                    className={`${inputClass} ${wargaData?.nama_lengkap ? 'bg-gray-50' : ''}`} placeholder="Akan terisi otomatis jika NIK terdaftar" />
-                </div>
-
-                {/* Info data dari Warga */}
-                {wargaData && (
-                  <div className="bg-teal-50 border border-teal-200 rounded-xl p-4 text-sm">
-                    <p className="font-semibold text-teal-700 mb-2">Data yang akan digunakan di surat:</p>
-                    <div className="grid grid-cols-2 gap-2 text-gray-700">
-                      <div><span className="text-gray-500">Tempat/Tgl Lahir:</span><br />{wargaData.tempat_lahir}, {wargaData.tanggal_lahir}</div>
-                      <div><span className="text-gray-500">Jenis Kelamin:</span><br />{wargaData.jenis_kelamin}</div>
-                      {wargaData.agama && <div><span className="text-gray-500">Agama:</span><br />{wargaData.agama}</div>}
-                      {wargaData.pekerjaan && <div><span className="text-gray-500">Pekerjaan:</span><br />{wargaData.pekerjaan}</div>}
-                    </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className={labelClass}>Nama Lengkap <span className="text-red-500">*</span></label>
+                    <input type="text" name="nama_lengkap" value={formData.nama_lengkap} onChange={handleInputChange} className={inputClass} placeholder="Nama sesuai KTP" />
                   </div>
-                )}
+                  <div>
+                    <label className={labelClass}>NIK <span className="text-red-500">*</span></label>
+                    <input type="text" name="no_nik" value={formData.no_nik} onChange={handleInputChange} maxLength={16} className={inputClass} placeholder="16 digit angka" />
+                  </div>
+                  <div>
+                    <label className={labelClass}>No. KK <span className="text-red-500">*</span></label>
+                    <input type="text" name="no_kk" value={formData.no_kk} onChange={handleInputChange} maxLength={16} className={inputClass} placeholder="16 digit angka" />
+                  </div>
+                  <div>
+                    <label className={labelClass}>Tempat Lahir <span className="text-red-500">*</span></label>
+                    <input type="text" name="tempat_lahir" value={formData.tempat_lahir} onChange={handleInputChange} className={inputClass} placeholder="Kota/Kabupaten" />
+                  </div>
+                  <div>
+                    <label className={labelClass}>Tanggal Lahir <span className="text-red-500">*</span></label>
+                    <input type="text" name="tanggal_lahir" value={formData.tanggal_lahir} onChange={handleInputChange} className={inputClass} placeholder="Contoh: 15 Agustus 1990" />
+                  </div>
+                  <div>
+                    <label className={labelClass}>Jenis Kelamin <span className="text-red-500">*</span></label>
+                    <select name="jenis_kelamin" value={formData.jenis_kelamin} onChange={handleInputChange} className={inputClass}>
+                      <option value="">Pilih</option>
+                      <option value="Laki-laki">Laki-laki</option>
+                      <option value="Perempuan">Perempuan</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className={labelClass}>Agama</label>
+                    <select name="agama" value={formData.agama} onChange={handleInputChange} className={inputClass}>
+                      <option value="">Pilih (opsional)</option>
+                      {["Islam", "Kristen", "Katolik", "Hindu", "Buddha", "Konghucu"].map((a) => <option key={a} value={a}>{a}</option>)}
+                    </select>
+                  </div>
+                  <div>
+                    <label className={labelClass}>Pekerjaan <span className="text-red-500">*</span></label>
+                    <input type="text" name="pekerjaan" value={formData.pekerjaan} onChange={handleInputChange} className={inputClass} placeholder="Contoh: Petani, Wiraswasta" />
+                  </div>
+                </div>
 
                 <div>
                   <label className={labelClass}>Alamat Lengkap <span className="text-red-500">*</span></label>
-                  <textarea
-                      name="alamat"
-                      value={formData.alamat}
-                      onChange={handleInputChange}
-                      readOnly={!!(wargaData?.alamat)}
-                      rows={3}
-                      className={`${inputClass} text-gray-800 ${wargaData?.alamat ? 'bg-gray-50' : ''}`}
-                      placeholder="-"
-                    />
+                  <textarea name="alamat" value={formData.alamat} onChange={handleInputChange} rows={3} className={inputClass} placeholder="Alamat lengkap sesuai KTP" />
                 </div>
 
                 <div className="flex justify-end pt-4">
@@ -385,7 +342,7 @@ export default function FormPengajuanSurat() {
                         ))}
                         <div>
                           <label className={labelClass}>Tanggal Lahir <span className="text-red-500">*</span></label>
-                          <input type="date" value={dataTambahan.orangtua?.tanggal_lahir || ""} onChange={(e) => handleDTNested("orangtua", "tanggal_lahir", e.target.value)} className={inputClass} />
+                          <input type="text" value={dataTambahan.orangtua?.tanggal_lahir || ""} onChange={(e) => handleDTNested("orangtua", "tanggal_lahir", e.target.value)} className={inputClass} placeholder="Contoh: 15 Agustus 1990" />
                         </div>
                         <div>
                           <label className={labelClass}>Jenis Kelamin <span className="text-red-500">*</span></label>
@@ -442,7 +399,7 @@ export default function FormPengajuanSurat() {
                         ))}
                         <div>
                           <label className={labelClass}>Tanggal Meninggal <span className="text-red-500">*</span></label>
-                          <input type="date" value={dataTambahan.tanggal || ""} onChange={(e) => handleDT("tanggal", e.target.value)} className={inputClass} />
+                          <input type="text" value={dataTambahan.tanggal || ""} onChange={(e) => handleDT("tanggal", e.target.value)} className={inputClass} placeholder="Contoh: 15 Agustus 1990"/>
                         </div>
 
                         <div className="border-t pt-4">
@@ -489,18 +446,18 @@ export default function FormPengajuanSurat() {
                 </div>
                 <div className="bg-gray-50 rounded-xl p-6 space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div><p className="text-sm text-gray-600">NIK</p><p className="font-medium">{formData.no_nik}</p></div>
-                    <div><p className="text-sm text-gray-600">Nomor KK</p><p className="font-medium">{formData.no_kk}</p></div>
-                    <div><p className="text-sm text-gray-600">Nama Lengkap</p><p className="font-medium">{formData.namaLengkap}</p></div>
-                    <div><p className="text-sm text-gray-600">Jenis Surat</p><p className="font-medium">{selectedLetter ? letterLabels[selectedLetter] : "-"}</p></div>
-                    {wargaData && <>
-                      <div><p className="text-sm text-gray-600">Tempat/Tgl Lahir</p><p className="font-medium">{wargaData.tempat_lahir}, {wargaData.tanggal_lahir}</p></div>
-                      <div><p className="text-sm text-gray-600">Jenis Kelamin</p><p className="font-medium">{wargaData.jenis_kelamin}</p></div>
-                      {wargaData.pekerjaan && <div><p className="text-sm text-gray-600">Pekerjaan</p><p className="font-medium">{wargaData.pekerjaan}</p></div>}
-                    </>}
+                    <div><p className="text-sm text-gray-900">Nama Lengkap</p><p className="font-medium text-gray-700">{formData.nama_lengkap}</p></div>
+                    <div><p className="text-sm text-gray-900">NIK</p><p className="font-medium text-gray-700">{formData.no_nik}</p></div>
+                    <div><p className="text-sm text-gray-900">No. KK</p><p className="font-medium text-gray-700">{formData.no_kk}</p></div>
+                    <div><p className="text-sm text-gray-900">Tempat Lahir</p><p className="font-medium text-gray-700">{formData.tempat_lahir}</p></div>
+                    <div><p className="text-sm text-gray-900">Tanggal Lahir</p><p className="font-medium text-gray-700">{formData.tanggal_lahir}</p></div>
+                    <div><p className="text-sm text-gray-900">Jenis Kelamin</p><p className="font-medium text-gray-700">{formData.jenis_kelamin}</p></div>
+                    {formData.agama && <div><p className="text-sm text-gray-900">Agama</p><p className="font-medium text-gray-700">{formData.agama}</p></div>}
+                    <div><p className="text-sm text-gray-900">Pekerjaan</p><p className="font-medium text-gray-700">{formData.pekerjaan}</p></div>
+                    <div className="col-span-2"><p className="text-sm text-gray-900">Jenis Surat</p><p className="font-medium text-gray-700">{selectedLetter ? letterLabels[selectedLetter] : "-"}</p></div>
                   </div>
-                  <div><p className="text-sm text-gray-600">Alamat</p><p className="font-medium">{formData.alamat}</p></div>
-                  <div><p className="text-sm text-gray-600">Foto KTP</p><p className="font-medium text-green-600">✓ Sudah diupload</p></div>
+                  <div><p className="text-sm text-gray-900">Alamat</p><p className="font-medium text-gray-700">{formData.alamat}</p></div>
+                  <div><p className="text-sm text-gray-900">Foto KTP</p><p className="font-medium text-green-600">✓ Sudah diupload</p></div>
                 </div>
                 <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-4">
                   <p className="text-sm text-blue-800">ℹ️ <strong>Informasi:</strong> Setelah pengajuan dikirim, perangkat desa akan memverifikasi data Anda.</p>

@@ -3,10 +3,6 @@ import { useState } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
-interface Warga {
-  no_kk: string;
-  alamat: string;
-}
 
 interface Pengajuan {
   id: number;
@@ -50,7 +46,7 @@ export default function LacakPengajuan() {
 
       if (response.ok) {
         // Filter hanya pengajuan dengan NIK yang sama persis
-        const filtered = data.data.filter((item: Pengajuan) => item.warga.no_nik === nik);
+        const filtered = data.data.filter((item: Pengajuan) => item.no_nik === nik);
         setPengajuanList(filtered);
         setFilteredList(filtered);
         setSelectedStatus("semua");
@@ -234,7 +230,7 @@ export default function LacakPengajuan() {
                       Ditemukan {pengajuanList.length} Pengajuan
                     </p>
                     <p className="text-sm text-gray-600">
-                      NIK: {nik} - {pengajuanList[0]?.warga.nama_lengkap}
+                      NIK: {nik} - {pengajuanList[0]?.nama_lengkap}
                     </p>
                   </div>
                 </div>
@@ -472,11 +468,11 @@ export default function LacakPengajuan() {
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4">
                   <p className="text-xs text-gray-600 mb-1">Nama Pemohon</p>
-                  <p className="font-semibold text-gray-800">{selectedPengajuan.warga.nama_lengkap}</p>
+                  <p className="font-semibold text-gray-800">{selectedPengajuan.nama_lengkap}</p>
                 </div>
                 <div className="bg-gray-50 rounded-lg p-4">
                   <p className="text-xs text-gray-600 mb-1">NIK</p>
-                  <p className="font-semibold text-gray-800">{selectedPengajuan.warga.no_nik}</p>
+                  <p className="font-semibold text-gray-800">{selectedPengajuan.no_nik}</p>
                 </div>
               </div>
 
@@ -544,8 +540,6 @@ export default function LacakPengajuan() {
                   <p className="text-sm text-red-800">{selectedPengajuan.catatan_penolakan}</p>
                 </div>
               )}
-
-
 
               {/* Button Close */}
               <button

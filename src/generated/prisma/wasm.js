@@ -120,7 +120,7 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.WargaScalarFieldEnum = {
+exports.Prisma.PengajuanSuratScalarFieldEnum = {
   id: 'id',
   nama_lengkap: 'nama_lengkap',
   no_nik: 'no_nik',
@@ -131,12 +131,7 @@ exports.Prisma.WargaScalarFieldEnum = {
   agama: 'agama',
   pekerjaan: 'pekerjaan',
   alamat: 'alamat',
-  createdAt: 'createdAt'
-};
-
-exports.Prisma.PengajuanSuratScalarFieldEnum = {
-  id: 'id',
-  wargaId: 'wargaId',
+  foto_ktp: 'foto_ktp',
   jenis_surat: 'jenis_surat',
   data_tambahan: 'data_tambahan',
   status: 'status',
@@ -175,20 +170,19 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
-};
-
 exports.Prisma.JsonNullValueFilter = {
   DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 
 exports.Prisma.ModelName = {
-  Warga: 'Warga',
   PengajuanSurat: 'PengajuanSurat',
   Admin: 'Admin'
 };

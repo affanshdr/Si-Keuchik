@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from 'uuid';
 
 const prisma = new PrismaClient();
 
-// Helper: Generate nomor pengajuan otomatis
 async function generateNomorPengajuan(jenisSurat: string): Promise<string> {
   const prefixes: Record<string, string> = {
     domisili: 'SKD',
@@ -19,7 +18,6 @@ async function generateNomorPengajuan(jenisSurat: string): Promise<string> {
   };
 
   const prefix = prefixes[jenisSurat] || 'SRT';
-
   const lastPengajuan = await prisma.pengajuanSurat.findFirst({
     where: { jenis_surat: jenisSurat },
     orderBy: { id: 'desc' },
@@ -35,12 +33,9 @@ async function generateNomorPengajuan(jenisSurat: string): Promise<string> {
 
   const year = new Date().getFullYear();
   const month = String(new Date().getMonth() + 1).padStart(2, '0');
-
-  // Format: 001/SKD/12/2025
   return `${String(nextNumber).padStart(3, '0')}/${prefix}/${month}/${year}`;
 }
 
-// Helper: Upload foto KTP ke Supabase
 async function uploadFotoKTP(file: File): Promise<string> {
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
@@ -58,36 +53,36 @@ async function uploadFotoKTP(file: File): Promise<string> {
   return urlData.publicUrl;
 }
 
-// POST - Buat pengajuan baru
+// POST - Buat pengajuan (data flat, no wargaId)
 export async function POST(request: Request) {
   try {
     const formData = await request.formData();
 
-    const wargaId = parseInt(formData.get('wargaId') as string);
+    // Ambil data warga (flat)
+    const nama_lengkap = formData.get('nama_lengkap') as string;
+    const no_nik = formData.get('no_nik') as string;
+    const no_kk = formData.get('no_kk') as string;
+    const tempat_lahir = formData.get('tempat_lahir') as string;
+    const tanggal_lahir = formData.get('tanggal_lahir') as string;
+    const jenis_kelamin = formData.get('jenis_kelamin') as string;
+    const agama = (formData.get('agama') as string) || null;
+    const pekerjaan = formData.get('pekerjaan') as string;
+    const alamat = formData.get('alamat') as string;
     const jenis_surat = formData.get('jenis_surat') as string;
 
-    if (!wargaId || isNaN(wargaId)) {
-      return NextResponse.json({ success: false, message: 'Data warga tidak valid' }, { status: 400 });
+    // Validasi field wajib
+    if (!nama_lengkap || !no_nik || !no_kk || !tempat_lahir || !tanggal_lahir || !jenis_kelamin || !pekerjaan || !alamat || !jenis_surat) {
+      return NextResponse.json({ success: false, message: 'Data wajib tidak lengkap' }, { status: 400 });
     }
 
-    if (!jenis_surat) {
-      return NextResponse.json({ success: false, message: 'Jenis surat wajib dipilih' }, { status: 400 });
-    }
-
-    // Pastikan warga ada di database
-    const warga = await prisma.warga.findUnique({ where: { id: wargaId } });
-    if (!warga) {
-      return NextResponse.json({ success: false, message: 'Data warga tidak ditemukan' }, { status: 404 });
-    }
-
-    // Upload foto KTP (wajib)
+    // Foto KTP - upload ke Supabase dan simpan URL ke DB
     const fotoKtpFile = formData.get('foto_ktp') as File | null;
     if (!fotoKtpFile || fotoKtpFile.size === 0) {
-      return NextResponse.json({ success: false, message: 'Foto KTP wajib diupload untuk validasi' }, { status: 400 });
+      return NextResponse.json({ success: false, message: 'Foto KTP wajib diupload' }, { status: 400 });
     }
-    const fotoKtpUrl = await uploadFotoKTP(fotoKtpFile);
+    const foto_ktp_url = await uploadFotoKTP(fotoKtpFile); // ✅ Tangkap URL
 
-    // Parse data tambahan (JSON)
+    // Data tambahan
     let dataTambahan = null;
     const dataTambahanStr = formData.get('data_tambahan') as string;
     if (dataTambahanStr) {
@@ -102,15 +97,22 @@ export async function POST(request: Request) {
 
     const pengajuan = await prisma.pengajuanSurat.create({
       data: {
-        wargaId,
+        nama_lengkap,
+        no_nik,
+        no_kk,
+        tempat_lahir,
+        tanggal_lahir,
+        jenis_kelamin,
+        agama,
+        pekerjaan,
+        alamat,
         jenis_surat,
         data_tambahan: dataTambahan,
-
+        foto_ktp: foto_ktp_url, // ✅ Simpan URL ke DB
         no_pengajuan,
         status: 'diajukan',
         tanggal_pengajuan: new Date(),
       },
-      include: { warga: true },
     });
 
     return NextResponse.json(
@@ -119,14 +121,11 @@ export async function POST(request: Request) {
     );
   } catch (error: any) {
     console.error('Error:', error);
-    return NextResponse.json(
-      { success: false, message: 'Terjadi kesalahan saat membuat pengajuan' },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: false, message: 'Terjadi kesalahan saat membuat pengajuan' }, { status: 500 });
   }
 }
 
-// GET - Ambil daftar pengajuan
+// GET - Ambil daftar pengajuan (no nested warga)
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -140,8 +139,8 @@ export async function GET(request: Request) {
     if (search) {
       whereClause.OR = [
         { no_pengajuan: { contains: search, mode: 'insensitive' } },
-        { warga: { no_nik: { contains: search } } },
-        { warga: { nama_lengkap: { contains: search, mode: 'insensitive' } } },
+        { no_nik: { contains: search } },
+        { nama_lengkap: { contains: search, mode: 'insensitive' } },
       ];
     }
 
@@ -153,7 +152,6 @@ export async function GET(request: Request) {
         orderBy: { tanggal_pengajuan: 'desc' },
         take: limit,
         skip: (page - 1) * limit,
-        include: { warga: true },
       }),
       prisma.pengajuanSurat.count({ where: whereClause }),
     ]);
@@ -169,41 +167,32 @@ export async function GET(request: Request) {
   }
 }
 
-// PUT - Update status pengajuan (untuk admin/keuchik)
+// PUT - Update status
 export async function PUT(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get('id');
     const body = await request.json();
 
-    if (!id) {
-      return NextResponse.json({ success: false, message: 'ID pengajuan diperlukan' }, { status: 400 });
-    }
+    if (!id) return NextResponse.json({ success: false, message: 'ID diperlukan' }, { status: 400 });
 
     const updateData: Record<string, any> = {};
-
     if (body.status) {
       updateData.status = body.status;
       if (body.status === 'selesai') updateData.tanggal_selesai = new Date();
     }
-
-    if (body.status === 'ditolak' && body.catatan_penolakan) {
-      updateData.catatan_penolakan = body.catatan_penolakan;
-    }
-
+    if (body.status === 'ditolak' && body.catatan_penolakan) updateData.catatan_penolakan = body.catatan_penolakan;
     if (body.nomor_surat) updateData.nomor_surat = body.nomor_surat;
     if (body.file_surat) updateData.file_surat = body.file_surat;
 
     const updated = await prisma.pengajuanSurat.update({
       where: { id: parseInt(id) },
       data: updateData,
-      include: { warga: true },
     });
 
-    return NextResponse.json({ success: true, data: updated, message: 'Pengajuan berhasil diperbarui' });
+    return NextResponse.json({ success: true, data: updated, message: 'Berhasil diperbarui' });
   } catch (error) {
-    console.error('Error updating pengajuan:', error);
-    return NextResponse.json({ success: false, message: 'Gagal memperbarui pengajuan' }, { status: 500 });
+    return NextResponse.json({ success: false, message: 'Gagal memperbarui' }, { status: 500 });
   }
 }
 
@@ -212,16 +201,11 @@ export async function DELETE(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get('id');
-
-    if (!id) {
-      return NextResponse.json({ success: false, message: 'ID pengajuan diperlukan' }, { status: 400 });
-    }
+    if (!id) return NextResponse.json({ success: false, message: 'ID diperlukan' }, { status: 400 });
 
     await prisma.pengajuanSurat.delete({ where: { id: parseInt(id) } });
-
-    return NextResponse.json({ success: true, message: 'Pengajuan berhasil dihapus' });
+    return NextResponse.json({ success: true, message: 'Berhasil dihapus' });
   } catch (error) {
-    console.error('Error deleting pengajuan:', error);
-    return NextResponse.json({ success: false, message: 'Gagal menghapus pengajuan' }, { status: 500 });
+    return NextResponse.json({ success: false, message: 'Gagal menghapus' }, { status: 500 });
   }
 }

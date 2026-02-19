@@ -9,42 +9,35 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-// Data Warga (Master Data)
-// Field yang muncul di hampir semua jenis surat
-model Warga {
-  id            Int      @id @default(autoincrement())
+// Pengajuan Surat - semua data warga disimpan langsung di sini (flat)
+model PengajuanSurat {
+  id Int @id @default(autoincrement())
+
+  // Data Pemohon (input manual dari form)
   nama_lengkap  String
-  no_nik        String   @unique
+  no_nik        String
   no_kk         String
   tempat_lahir  String
   tanggal_lahir String
   jenis_kelamin String
-  agama         String? // dipakai di: kurang_mampu, lanjut_usia, berkelakuan_baik
+  agama         String?
   pekerjaan     String
   alamat        String
-  createdAt     DateTime @default(now())
 
-  pengajuan PengajuanSurat[]
-}
+  // Foto KTP (URL dari Supabase Storage)
+  foto_ktp String? // ✅ Field baru
 
-// Pengajuan Surat
-// data_tambahan (Json?) berisi field unik per jenis surat:
-//   kehilangan    -> { alasan: "KTP hilang" }
-//   usaha         -> { jenis_usaha: "Usaha Nasi Ayam Geprek" }
-//   belum_menikah -> { keperluan: "Rekrutmen Nasional PLN Group 2025" }
-//   kurang_mampu  -> { orangtua: { nama, nik, tempat_lahir, tanggal_lahir, jenis_kelamin, agama, pekerjaan, alamat } }
-//   meninggal     -> { umur, hari, tanggal, pukul, tempat, pelapor: { nama, nik, jenis_kelamin, alamat, hubungan } }
-model PengajuanSurat {
-  id                Int       @id @default(autoincrement())
-  wargaId           Int
-  warga             Warga     @relation(fields: [wargaId], references: [id])
-  jenis_surat       String // domisili, kehilangan, kurang_mampu, lanjut_usia, usaha, belum_menikah, meninggal, berkelakuan_baik
-  data_tambahan     Json?
-  status            String    @default("diajukan") // diajukan, diproses, selesai, ditolak
-  no_pengajuan      String?   @unique
+  // Jenis Surat & Data Tambahan
+  jenis_surat   String // domisili, kehilangan, kurang_mampu, lanjut_usia, usaha, belum_menikah, meninggal, berkelakuan_baik
+  data_tambahan Json? // field unik per jenis surat
+
+  // Status & Output
+  status            String  @default("diajukan") // diajukan, diproses, selesai, ditolak
+  no_pengajuan      String? @unique
   catatan_penolakan String?
   nomor_surat       String?
   file_surat        String?
+
   tanggal_pengajuan DateTime  @default(now())
   tanggal_selesai   DateTime?
   createdAt         DateTime  @default(now())

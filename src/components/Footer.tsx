@@ -15,7 +15,7 @@ export default function Footer() {
                 </svg>
               </div>
               <div>
-                <h3 className="text-xl font-bold text-white">SIMAK</h3>
+                <h3 className="text-xl font-bold text-white">SI-Keuchik</h3>
                 <p className="text-xs text-gray-400">Desa Pulo Reudeup</p>
               </div>
             </div>
@@ -142,7 +142,7 @@ export default function Footer() {
         <div className="border-t border-gray-700 mt-10 pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
             <p className="text-center md:text-left">
-              © 2025 <span className="text-teal-400 font-semibold">SIMAK Desa Pulo Reudeup</span>. Dikembangkan oleh Mahasiswa Informatika KKN Tematik mahasiswa Berdampak
+              © 2025 <span className="text-teal-400 font-semibold">SI-Keuchik Desa Pulo Reudeup</span>. Dikembangkan oleh Mahasiswa Informatika KKN Tematik mahasiswa Berdampak
             </p>
             <div className="flex items-center gap-2 text-xs">
               <span>Dibuat dengan</span>

@@ -29,7 +29,7 @@ export default function Navbar() {
             </div>
             <div>
               <span className="text-2xl font-bold bg-gradient-to-r from-teal-600 to-teal-700 bg-clip-text text-transparent">
-                SIMAK
+                SI-Keuchik
               </span>
               <p className="text-xs text-gray-500 -mt-1">Desa Pulo Reudeup</p>
             </div>

@@ -8,10 +8,12 @@ const prisma = new PrismaClient();
 
 export async function GET(
   _req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id);
+    const { id: idStr } = await params;
+    const id = parseInt(idStr);
+    
     const pengajuan = await prisma.pengajuanSurat.findUnique({
       where: { id },
     });

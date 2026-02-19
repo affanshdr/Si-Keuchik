@@ -53,7 +53,7 @@ export default function FormPengajuanSurat() {
   const handleFotoKtpChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      if (file.size > 2 * 1024 * 1024) { toast.error("Ukuran file maksimal 2MB"); return; }
+      if (file.size > 20 * 1024 * 1024) { toast.error("Ukuran file maksimal 2MB"); return; }
       if (!file.type.startsWith("image/")) { toast.error("File harus berupa gambar"); return; }
       setFotoKtp(file);
       const reader = new FileReader();

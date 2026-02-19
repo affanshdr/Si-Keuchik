@@ -7,6 +7,8 @@ import Footer from "../../components/Footer";
 interface Pengajuan {
   id: number;
   no_pengajuan: string;
+  no_nik: string;        // ← tambah ini
+  nama_lengkap: string;  // ← tambah ini (dipakai di baris nama pemohon)
   jenis_surat: string;
   status: string;
   tanggal_pengajuan: string;
@@ -47,7 +49,7 @@ export default function LacakPengajuan() {
       if (response.ok) {
         // Filter hanya pengajuan dengan NIK yang sama persis
         // Jadi ini:
-        const filtered = data.data.filter((item: Pengajuan) => item.noNIK === nik);
+        const filtered = data.data.filter((item: Pengajuan) => item.no_nik === nik);
         setPengajuanList(filtered);
         setFilteredList(filtered);
         setSelectedStatus("semua");

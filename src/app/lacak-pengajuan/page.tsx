@@ -46,6 +46,7 @@ export default function LacakPengajuan() {
 
       if (response.ok) {
         // Filter hanya pengajuan dengan NIK yang sama persis
+        // Jadi ini:
         const filtered = data.data.filter((item: Pengajuan) => item.noNIK === nik);
         setPengajuanList(filtered);
         setFilteredList(filtered);
